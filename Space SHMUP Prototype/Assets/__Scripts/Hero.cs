@@ -13,7 +13,7 @@ public class Hero : MonoBehaviour
     public float rollMult = -45;
     public float pitchMult = 30;
 
-    void awake()
+    void Awake()
     {
         //Set the the singleton for the hero class
         if (Singleton == null)

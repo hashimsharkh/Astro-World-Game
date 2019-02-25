@@ -4,35 +4,35 @@ using UnityEngine;
 
 public class Enemy_1 : Enemy
 {
-    private Vector3 vec; //vector to control direction
-    private float x0; //used to find side the enemy is on
-    private bool mRight; //detirmes side for movement
+    private Vector3 _vec; //vector to control direction
+    private float _x0; //used to find side the enemy is on
+    private bool _mRight; //detirmes side for movement
     Rigidbody rb; //used to control movement
     void Start()
     {
-        x0 = pos.x;
+        _x0 = pos.x;
         //detirmine whether to move left or right
-        if (x0 < 0)
+        if (_x0 < 0)
         {
-            mRight = true;
-            vec = new Vector3(.2f, -.2f, 0); //the .2 controls the speed of the enemy
+            _mRight = true;
+            _vec = new Vector3(.2f, -.2f, 0); //the .2 controls the speed of the enemy
         }
         else
         {
-            mRight = false;
-            vec = new Vector3(-.2f, -.2f, 0);
+            _mRight = false;
+            _vec = new Vector3(-.2f, -.2f, 0);
         }
         rb = GetComponent<Rigidbody>();
     }
     public override void Move()
     {
-        if (mRight == true)
+        if (_mRight == true)
         {
-            transform.position = rb.position + vec; //moves the enemy along the vector specified
+            transform.position = rb.position + _vec; //moves the enemy along the vector specified
         }
         else
         {
-            transform.position = rb.position + vec;
+            transform.position = rb.position + _vec;
         }
     }
 
