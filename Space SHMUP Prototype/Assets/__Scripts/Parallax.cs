@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Parallax : MonoBehaviour
 {
+    // move stars background
 
     [Header("Set in Inspector")]
     public GameObject poi;
@@ -24,24 +25,25 @@ public class Parallax : MonoBehaviour
         panels[0].transform.position = new Vector3(0, 0, _depth);
         panels[1].transform.position = new Vector3(0, _panelHt, _depth);
     }
+
     void Update()
     {
-        float tY, tX = 0;
-        tY = Time.time * scrollSpeed % _panelHt + (_panelHt * 0.5f);
+        float _tY, _tX = 0;
+        _tY = Time.time * scrollSpeed % _panelHt + (_panelHt * 0.5f);
         if (poi != null)
         {
-            tX = -poi.transform.position.x * motionMult;
+            _tX = -poi.transform.position.x * motionMult;
         }
         
-        panels[0].transform.position = new Vector3(tX, tY, _depth);
+        panels[0].transform.position = new Vector3(_tX, _tY, _depth);
         
-        if (tY >= 0)
+        if (_tY >= 0)
         {
-            panels[1].transform.position = new Vector3(tX, tY - _panelHt, _depth);
+            panels[1].transform.position = new Vector3(_tX, _tY - _panelHt, _depth);
         }
         else
         {
-            panels[1].transform.position = new Vector3(tX, tY + _panelHt, _depth);
+            panels[1].transform.position = new Vector3(_tX, _tY + _panelHt, _depth);
         }
     }
 }

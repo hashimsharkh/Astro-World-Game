@@ -5,7 +5,7 @@ using UnityEngine;
 public class Hero : MonoBehaviour
 {
     //Singleton (Software Design pattern)
-    static public Hero Singleton;
+    static public Hero SINGLETON;
 
     //Set variables that will control the movement of the ship in inspector
     [Header("Set in Inspector")]
@@ -16,8 +16,8 @@ public class Hero : MonoBehaviour
     void Awake()
     {
         //Set the the singleton for the hero class
-        if (Singleton == null)
-            Singleton = this;
+        if (SINGLETON == null)
+            SINGLETON = this;
         else
             Debug.LogError("Another instance of hero tries to exist and assign itself to Singleton");
     }
@@ -26,15 +26,15 @@ public class Hero : MonoBehaviour
     void Update()
     {
         //Read key inputs
-        float y = Input.GetAxis("Vertical");
-        float x = Input.GetAxis("Horizontal");
+        float _yPos = Input.GetAxis("Vertical");
+        float _xPos = Input.GetAxis("Horizontal");
 
 
         Vector3 pos = transform.position;
-        pos.y = pos.y+( velocity * y * Time.deltaTime);
-        pos.x += velocity * x * Time.deltaTime;
+        pos.y = pos.y+( velocity *_yPos * Time.deltaTime);
+        pos.x += velocity * _xPos * Time.deltaTime;
         transform.position = pos;
 
-        transform.rotation = Quaternion.Euler(y * pitchMult, x * rollMult, 0);
+        transform.rotation = Quaternion.Euler(_yPos * pitchMult, _xPos * rollMult, 0);
     }
 }
