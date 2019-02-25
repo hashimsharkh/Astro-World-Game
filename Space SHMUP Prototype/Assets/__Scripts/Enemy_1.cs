@@ -11,7 +11,8 @@ public class Enemy_1 : Enemy
     void Start()
     {
         _x0 = pos.x;
-        //detirmine whether to move left or right
+
+        //determine whether to move left or right
         if (_x0 < 0)
         {
             _mRight = true;

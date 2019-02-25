@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
         _bndCheck = GetComponent<BoundsCheck>();
     }
 
+    //position property
     public Vector3 pos
     {
         get
@@ -29,6 +30,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    //Destroy enemy if out of bounds
     void Update()
     {
         Move();
@@ -38,6 +40,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    //Move the enemy
     public virtual void Move()
     {
         Vector3 tempPos = pos;

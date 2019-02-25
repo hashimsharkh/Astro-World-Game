@@ -25,9 +25,10 @@ public class Hero : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Read
+        //Read key inputs
         float y = Input.GetAxis("Vertical");
         float x = Input.GetAxis("Horizontal");
+
 
         Vector3 pos = transform.position;
         pos.y = pos.y+( velocity * y * Time.deltaTime);

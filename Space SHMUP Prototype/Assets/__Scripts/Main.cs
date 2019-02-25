@@ -16,6 +16,7 @@ public class Main : MonoBehaviour
 
     void Awake()
     {
+        //calling spawn enemy after rocket is created
         S = this;
         _bndCheck = GetComponent<BoundsCheck>();
         Invoke("SpawnEnemy", 1.5f / enemySpawnPerSecond);
@@ -23,9 +24,11 @@ public class Main : MonoBehaviour
 
     public void SpawnEnemy()
     {
+        //instatiate random enemy type
         int ndx = Random.Range(0, prefabEnemies.Length);
         GameObject go = Instantiate<GameObject>(prefabEnemies[ndx]);
 
+        //bounds check
         float enemyPadding = enemyDefaultPadding;
         if (go.GetComponent<BoundsCheck>() != null)
             enemyPadding = Mathf.Abs(go.GetComponent<BoundsCheck>().radius);
