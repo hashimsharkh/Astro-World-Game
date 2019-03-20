@@ -18,12 +18,14 @@ public class BoundsCheck : MonoBehaviour
 
     void Awake()
     {
+        //Sets up camera view 
         camHeight = Camera.main.orthographicSize;
         camWidth = camHeight * Camera.main.aspect;
     }
 
     void LateUpdate()
     {
+        //Transforms the rocket and checking bounds 
         Vector3 pos = transform.position;
         isOnScreen = true;
         offRight = offLeft = offUp = offDown = false;
@@ -68,6 +70,7 @@ public class BoundsCheck : MonoBehaviour
 
     void OnDrawGizmos()
     {
+        //Draw bounds on game console
         if (!Application.isPlaying) return;
         Vector3 boundSize = new Vector3(camWidth * 2, camHeight * 2, 0.1f);
         Gizmos.DrawWireCube(Vector3.zero, boundSize);

@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Main : MonoBehaviour
 {
-    static public Main S;
+    static public Main SINGLETON;
 
     [Header("Set in Inspector")]
     public GameObject[] prefabEnemies;
@@ -16,26 +16,29 @@ public class Main : MonoBehaviour
 
     void Awake()
     {
-        S = this;
+        //calling spawn enemy after rocket is created
+        SINGLETON = this;
         _bndCheck = GetComponent<BoundsCheck>();
         Invoke("SpawnEnemy", 1.5f / enemySpawnPerSecond);
     }
 
     public void SpawnEnemy()
     {
-        int ndx = Random.Range(0, prefabEnemies.Length);
-        GameObject go = Instantiate<GameObject>(prefabEnemies[ndx]);
+        //instatiate random enemy type
+        int _index = Random.Range(0, prefabEnemies.Length);
+        GameObject _enemy = Instantiate<GameObject>(prefabEnemies[_index]);
 
+        //bounds check
         float enemyPadding = enemyDefaultPadding;
-        if (go.GetComponent<BoundsCheck>() != null)
-            enemyPadding = Mathf.Abs(go.GetComponent<BoundsCheck>().radius);
+        if (_enemy.GetComponent<BoundsCheck>() != null)
+            enemyPadding = Mathf.Abs(_enemy.GetComponent<BoundsCheck>().radius);
 
-        Vector3 pos = Vector3.zero;
-        float xMin = -_bndCheck.camWidth + enemyPadding;
-        float xMax = _bndCheck.camWidth - enemyPadding;
-        pos.x = Random.Range(xMin, xMax);
-        pos.y = _bndCheck.camHeight + enemyPadding;
-        go.transform.position = pos;
+        Vector3 _pos = Vector3.zero;
+        float _xMin = -_bndCheck.camWidth + enemyPadding;
+        float _xMax = _bndCheck.camWidth - enemyPadding;
+       _pos.x = Random.Range(_xMin, _xMax);
+        _pos.y = _bndCheck.camHeight + enemyPadding;
+        _enemy.transform.position = _pos;
 
         Invoke("SpawnEnemy", 1.5f / enemySpawnPerSecond);
     }

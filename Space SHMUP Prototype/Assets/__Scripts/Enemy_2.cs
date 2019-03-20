@@ -10,33 +10,35 @@ public class Enemy_2 : Enemy
    
     public float waveWidth = 4;
     public float waveRotY = 45;
-    private float _x0;
+    private float _initialPosition;
      
     private float _birthTime;
     
     void Start()
     {     
-        _x0 = pos.x;
+        // assign intial position and time of object
+        _initialPosition = pos.x;
 
         _birthTime = Time.time;
     }                                        
 
     public override void Move()
     { 
-
-     Vector3 tempPos = pos;
+        // move object in sine wave in x direction
+        Vector3 _tempPos = pos;
     
-    float age = Time.time - _birthTime;
-    float theta = Mathf.PI * 2 * age / waveFrequency;
-    float sin = Mathf.Sin(theta);
-    tempPos.x = _x0 + waveWidth* sin;
-    pos = tempPos;  
+        float _age = Time.time - _birthTime;
+        float _theta = Mathf.PI * 2 * _age / waveFrequency;
+        float _sin = Mathf.Sin(_theta);
+        _tempPos.x = _initialPosition + waveWidth* _sin;
+        pos = _tempPos;  
      
-  Vector3 rot = new Vector3(0, sin * waveRotY, 0);     
-    this.transform.rotation = Quaternion.Euler(rot);  
+        Vector3 _rotation = new Vector3(0, _sin * waveRotY, 0);     
+        this.transform.rotation = Quaternion.Euler(_rotation);  
    
-  base.Move();
-}
+        // move object in sine wave in y direction
+        base.Move();
+    }
 }
 
 
