@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7406416741108054414}
   - component: {fileID: 7406416741108054415}
   - component: {fileID: 7406416741108054412}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 7406416741509270485}
   - component: {fileID: 7406416741509270490}
   - component: {fileID: 7406416741509270491}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cockpit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,7 +195,7 @@ GameObject:
   - component: {fileID: 7406416741579156269}
   - component: {fileID: 7406416741579156306}
   - component: {fileID: 7406416741579156307}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,7 +286,7 @@ GameObject:
   - component: {fileID: 7406416741680210453}
   - component: {fileID: 7406416741680210458}
   - component: {fileID: 7406416741680210459}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Quad (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -378,7 +378,7 @@ GameObject:
   - component: {fileID: 7406416741686501300}
   - component: {fileID: 7406416741686501301}
   - component: {fileID: 7406416741686501306}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Quad (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -470,7 +470,7 @@ GameObject:
   - component: {fileID: 7406416741880016878}
   - component: {fileID: 7406416741880016879}
   - component: {fileID: 7406416741880016876}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Quad (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -562,7 +562,7 @@ GameObject:
   - component: {fileID: 7406416741904456678}
   - component: {fileID: 7406416741904456679}
   - component: {fileID: 7406416741904456676}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Quad (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -654,7 +654,7 @@ GameObject:
   - component: {fileID: 7406416742009796055}
   - component: {fileID: 7406416742009796052}
   - component: {fileID: 7406416742009796053}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -746,7 +746,7 @@ GameObject:
   - component: {fileID: 7406416742162112454}
   - component: {fileID: 7406416742162112455}
   - component: {fileID: 7406416742162112452}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ram
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -838,7 +838,7 @@ GameObject:
   - component: {fileID: 7406416742280266921}
   - component: {fileID: 7406416742280266926}
   - component: {fileID: 7406416742280266927}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -929,7 +929,7 @@ GameObject:
   - component: {fileID: 7406416742323977889}
   - component: {fileID: 7406416742323977894}
   - component: {fileID: 7406416742323977895}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Teeth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1025,9 +1025,9 @@ GameObject:
   - component: {fileID: 7103192486722968283}
   - component: {fileID: 376387170542497333}
   - component: {fileID: 184347054096436677}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy_0
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1117,7 +1117,7 @@ GameObject:
   - component: {fileID: 7406416742768994285}
   - component: {fileID: 7406416742768994066}
   - component: {fileID: 7406416742768994067}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1208,7 +1208,7 @@ GameObject:
   - component: {fileID: 7406416742917569842}
   - component: {fileID: 7406416742917569843}
   - component: {fileID: 7406416742917569840}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Thrusters
   m_TagString: Untagged
   m_Icon: {fileID: 0}
