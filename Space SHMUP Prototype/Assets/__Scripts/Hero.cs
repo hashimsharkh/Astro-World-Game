@@ -85,7 +85,7 @@ public class Hero : MonoBehaviour
             if (value < 0)
             {
                 Destroy(this.gameObject);//If value passed is less than 0,_Hero is destroyed
-                Main.S.DelayedRestart(gameRestartDelay);//Tell Main.S to restart the game after a delay
+                Main.SINGLETON.DelayedRestart(gameRestartDelay);//Tell Main.S to restart the game after a delay
             }
         }
     }
