@@ -1102,12 +1102,18 @@ PrefabInstance:
     - target: {fileID: 3862774884299421842, guid: bf817b88e4ef942ecaf2cfcff6ebe798,
         type: 3}
       propertyPath: _weaponType
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3862774884299421842, guid: bf817b88e4ef942ecaf2cfcff6ebe798,
         type: 3}
       propertyPath: def.type
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3862774884299421842, guid: bf817b88e4ef942ecaf2cfcff6ebe798,
+        type: 3}
+      propertyPath: def.projectilePrefab
+      value: 
+      objectReference: {fileID: 5452886881202290645, guid: 81a5615e0011c4a489b86b095379d5e0,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf817b88e4ef942ecaf2cfcff6ebe798, type: 3}

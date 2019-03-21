@@ -50,7 +50,7 @@ public class Hero : MonoBehaviour
         transform.rotation = Quaternion.Euler(_yPos * pitchMult, _xPos * rollMult, 0);
         //if (Input.GetKeyDown(KeyCode.Space))
         //{
-        //    TempFire();
+        //    .Fire();
         //}
         if (Input.GetAxis("Jump") == 1 && fireDelegate != null)
         {
