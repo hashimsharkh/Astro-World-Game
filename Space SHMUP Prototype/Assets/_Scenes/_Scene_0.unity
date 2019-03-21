@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 257447767}
   - component: {fileID: 257447766}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Collar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -487,7 +487,15 @@ MonoBehaviour:
   - {fileID: 6405027922657149669, guid: 8de6cfddc5537e04a8d54ac622bd60ce, type: 3}
   enemySpawnPerSecond: 0.5
   enemyDefaultPadding: 1.5
-  weaponDefinitions: []
+  weaponDefinitions:
+  - type: 0
+    letter: B
+    color: {r: 1, g: 1, b: 1, a: 1}
+    projectilePrefab: {fileID: 1996987844}
+    projectileColor: {r: 1, g: 1, b: 1, a: 1}
+    damageOnHit: 1
+    delayBetweenShots: 0.2
+    velocity: 50
 --- !u!114 &1106936997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -989,7 +997,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1563657397}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
