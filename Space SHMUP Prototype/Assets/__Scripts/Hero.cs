@@ -57,19 +57,7 @@ public class Hero : MonoBehaviour
             fireDelegate();
         }
     }
-
-    //void TempFire()
-    //{
-    //    GameObject projectilePrefab = null;
-    //    GameObject projectileGO = Instantiate<GameObject>(projectilePrefab);
-    //    projectileGO.transform.position = transform.position;
-    //    Rigidbody rigidBody = projectileGO.GetComponent<Rigidbody>();
-
-    //    Projectile projectile = projectileGO.GetComponent<Projectile>();
-    //    projectile.weaponType = WeaponType.blaster;
-    //    float speed = Main.GetWeaponDefinition(projectile.weaponType).velocity;
-    //    rigidBody.velocity = Vector3.up * speed;
-    //}
+    
 
     void OnTriggerEnter(Collider other)
     {

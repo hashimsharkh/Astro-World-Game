@@ -54,6 +54,14 @@ public class Weapon : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.B))
+            SetWeaponType(WeaponType.blaster);
+        if (Input.GetKeyDown(KeyCode.S))
+            SetWeaponType(WeaponType.spread);
+    }
+
     public WeaponType weaponType
     {
         get
