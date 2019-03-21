@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
     [Header("Set in Inspector: Enemy")]
     public float speed = 10f;
     public float fireRate = 0.3f;
-    public float health = 10f;
+    public float health = 1f;
     public int score = 100;
 
     private BoundsCheck _bndCheck;
@@ -33,14 +33,16 @@ public class Enemy : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         GameObject otherObject = collision.gameObject;
-        switch (otherObject.tag)
+        if(otherObject.tag == "ProjectileHero")
+        //switch (otherObject.tag)
         {
-            case "ProjectileHero":
+            print("Collison between" + otherObject.name + " and " + name);
+            //case "ProjectileHero":
                 Projectile projectile = otherObject.GetComponent<Projectile>();
                 if (!_bndCheck.isOnScreen) // if enemy is not in the screen, don't damage it
                 {
                     Destroy(otherObject);
-                    break;
+                   // break;
                 }
 
                 health -= Main.GetWeaponDefinition(projectile.weaponType).damageOnHit;
@@ -49,11 +51,11 @@ public class Enemy : MonoBehaviour
                     Destroy(this.gameObject);
                 }
                 Destroy(otherObject);
-                break;
+               // break;
 
-            default:
+            //default:
                 print("Enemy hit by non-ProjectileHero: " + otherObject.name);
-                break;
+               // break;
         }
     }
 

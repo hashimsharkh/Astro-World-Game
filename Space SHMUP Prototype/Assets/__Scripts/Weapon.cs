@@ -119,9 +119,9 @@ public class Weapon : MonoBehaviour
 
     public Projectile MakeProjectile()
     {
-        print("trying to make projectile");
+        //print("trying to make projectile");
         GameObject gameobject = Instantiate<GameObject>(def.projectilePrefab);
-        print("instantiating");
+        //print("instantiating");
         if (transform.parent.gameObject.tag == "Hero")
         {
             gameobject.tag = "ProjectileHero";
@@ -139,13 +139,5 @@ public class Weapon : MonoBehaviour
         lastShotTime = Time.time;
         return (projectile);
     }
-
-
-
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    
 }

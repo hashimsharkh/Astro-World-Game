@@ -1025,6 +1025,7 @@ GameObject:
   - component: {fileID: 7103192486722968283}
   - component: {fileID: 376387170542497333}
   - component: {fileID: 184347054096436677}
+  - component: {fileID: 427599687473726884}
   m_Layer: 9
   m_Name: Enemy_0
   m_TagString: Enemy
@@ -1103,8 +1104,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   fireRate: 0.3
-  health: 10
+  health: 1
   score: 100
+--- !u!135 &427599687473726884
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7406416742483236537}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7406416742768994065
 GameObject:
   m_ObjectHideFlags: 0
