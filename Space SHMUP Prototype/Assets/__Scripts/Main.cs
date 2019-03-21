@@ -6,11 +6,14 @@ using UnityEngine.SceneManagement;
 public class Main : MonoBehaviour
 {
     static public Main SINGLETON;
+    static Dictionary<WeaponType, WeaponDefinition> WEAP_DICT; //dictionary of weapon types and their descriptions
 
     [Header("Set in Inspector")]
+    //weaponDefinitions variables
     public GameObject[] prefabEnemies;
-    public float enemySpawnPerSecond = 0.5f;
+    public float enemySpawnPerSecond = 0.5f; //# of enemies per second
     public float enemyDefaultPadding = 1.5f;
+    public WeaponDefinition[] weaponDefinitions;
 
     private BoundsCheck _bndCheck;
 
@@ -20,6 +23,12 @@ public class Main : MonoBehaviour
         SINGLETON = this;
         _bndCheck = GetComponent<BoundsCheck>();
         Invoke("SpawnEnemy", 1.5f / enemySpawnPerSecond);
+        //creating a dictionary with WeaponType as the key
+        WEAP_DICT = new Dictionary<WeaponType, WeaponDefinition>();
+        foreach(WeaponDefinition def in weaponDefinitions)
+        {
+            WEAP_DICT[def.type] = def;
+        }
     }
 
     public void SpawnEnemy()
@@ -55,4 +64,14 @@ public class Main : MonoBehaviour
         SceneManager.LoadScene("_Scene_0");
     }
 
+   static public WeaponDefinition GetWeaponDefinition(WeaponType weaponType)
+    {
+        //ensuring the key being retrieved exists to avoid error
+        if (WEAP_DICT.ContainsKey(weaponType))
+        {
+            return (WEAP_DICT[weaponType]);
+        }
+        //failed to find the right weapon, return WeaponType.none
+        return (new WeaponDefinition());
+    }
 }
