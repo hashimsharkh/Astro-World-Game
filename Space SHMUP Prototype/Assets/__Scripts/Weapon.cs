@@ -22,6 +22,7 @@ public enum WeaponType
     public GameObject projectilePrefab; //prefab for projectiles
     public Color projectileColor = Color.white; //color for prefab
     public float damageOnHit = 0; //amount of damage caused
+    public float continuousDamage = 0;//Damage per second
     public float delayBetweenShots = 0; //delay
     public float velocity = 20; //speed of projectiles
 }
