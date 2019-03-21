@@ -108,25 +108,30 @@ public class Weapon : MonoBehaviour
                 projectile.transform.rotation = Quaternion.AngleAxis(-30, Vector3.back);
                 projectile.rigidBody.velocity = projectile.transform.rotation * velocity;
                 break;
+
+            case WeaponType.spread:
+                projectile = MakeProjectile();
+                projectile.rigidBody.velocity = velocity;
+                break;
         }
     }
 
     public Projectile MakeProjectile()
     {
-        GameObject gameObject = Instantiate<GameObject>(def.projectilePrefab);
+        GameObject gameobject = Instantiate<GameObject>(def.projectilePrefab);
         if (transform.parent.gameObject.tag == "Hero")
         {
-            gameObject.tag = "ProjectileHero";
-            gameObject.layer = LayerMask.NameToLayer("ProjectileHero");
+            gameobject.tag = "ProjectileHero";
+            gameobject.layer = LayerMask.NameToLayer("ProjectileHero");
         }
         else
         {
-            gameObject.tag = "ProjectileEnemy";
-            gameObject.layer = LayerMask.NameToLayer("ProjectileHero");
+            gameobject.tag = "ProjectileEnemy";
+            gameobject.layer = LayerMask.NameToLayer("ProjectileHero");
         }
-        gameObject.transform.position = collar.transform.position;
-        gameObject.transform.SetParent(PROJECTILE_ANCHOR, true);
-        Projectile projectile = gameObject.GetComponent<Projectile>();
+        gameobject.transform.position = collar.transform.position;
+        gameobject.transform.SetParent(PROJECTILE_ANCHOR, true);
+        Projectile projectile = gameobject.GetComponent<Projectile>();
         projectile.weaponType = weaponType;
         lastShotTime = Time.time;
         return (projectile);

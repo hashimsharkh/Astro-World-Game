@@ -30,15 +30,43 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    //Destroy enemy if out of bounds
-    void Update()
+    private void OnCollisionEnter(Collision collision)
     {
-        Move();
-        if (_bndCheck != null && _bndCheck.offDown)
-        { 
-            Destroy(gameObject);
+        GameObject otherObject = collision.gameObject;
+        switch (otherObject.tag)
+        {
+            case "ProjectileHero":
+                Projectile projectile = otherObject.GetComponent<Projectile>();
+                if (!_bndCheck.isOnScreen) // if enemy is not in the screen, don't damage it
+                {
+                    Destroy(otherObject);
+                    break;
+                }
+
+                health -= Main.GetWeaponDefinition(projectile.weaponType).damageOnHit;
+                if (health <= 0)
+                {
+                    Destroy(this.gameObject);
+                }
+                Destroy(otherObject);
+                break;
+
+            default:
+                print("Enemy hit by non-ProjectileHero: " + otherObject.name);
+                break;
         }
     }
+
+        //Destroy enemy if out of bounds
+        void Update()
+        {
+            Move();
+            if (_bndCheck != null && _bndCheck.offDown)
+            {
+                Destroy(gameObject);
+            }
+        }
+
 
     //Move the enemy
     public virtual void Move()

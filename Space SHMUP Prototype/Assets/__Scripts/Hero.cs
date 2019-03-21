@@ -29,9 +29,9 @@ public class Hero : MonoBehaviour
         //Set the the singleton for the hero class
         if (SINGLETON == null)
             SINGLETON = this;
-               else
+        else
             Debug.LogError("Another instance of hero tries to exist and assign itself to Singleton");
-        fireDelegate += TempFire;
+        //fireDelegate += TempFire;
     }
 
     // Update is called once per frame
@@ -48,24 +48,28 @@ public class Hero : MonoBehaviour
         transform.position = pos;
 
         transform.rotation = Quaternion.Euler(_yPos * pitchMult, _xPos * rollMult, 0);
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    TempFire();
+        //}
         if (Input.GetAxis("Jump") == 1 && fireDelegate != null)
         {
             fireDelegate();
         }
     }
 
-    void TempFire()
-    {
-        GameObject projectilePrefab = null;
-        GameObject projectileGO = Instantiate<GameObject>(projectilePrefab);
-        projectileGO.transform.position = transform.position;
-        Rigidbody rigidBody = projectileGO.GetComponent<Rigidbody>();
+    //void TempFire()
+    //{
+    //    GameObject projectilePrefab = null;
+    //    GameObject projectileGO = Instantiate<GameObject>(projectilePrefab);
+    //    projectileGO.transform.position = transform.position;
+    //    Rigidbody rigidBody = projectileGO.GetComponent<Rigidbody>();
 
-        Projectile projectile = projectileGO.GetComponent<Projectile>();
-        projectile.weaponType = WeaponType.blaster;
-        float speed = Main.GetWeaponDefinition(projectile.weaponType).velocity;
-        rigidBody.velocity = Vector3.up * speed;
-    }
+    //    Projectile projectile = projectileGO.GetComponent<Projectile>();
+    //    projectile.weaponType = WeaponType.blaster;
+    //    float speed = Main.GetWeaponDefinition(projectile.weaponType).velocity;
+    //    rigidBody.velocity = Vector3.up * speed;
+    //}
 
     void OnTriggerEnter(Collider other)
     {
