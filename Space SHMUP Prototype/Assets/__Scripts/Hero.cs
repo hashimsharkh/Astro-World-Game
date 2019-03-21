@@ -14,20 +14,24 @@ public class Hero : MonoBehaviour
     public float pitchMult = 30;
     public float gameRestartDelay = 2f;//Restart delay of 2 seconds used after hero ship is destroyed
 
+
     [Header("Set Dynamically")]
     [SerializeField]
     private float _shieldLevel = 1;
 
     //This variable holds a reference to the last triggering GameObject
     private GameObject _lastTriggerGo = null;
+    public delegate void WeaponFireDelegate(); //new delegate type
+    public WeaponFireDelegate fireDelegate;
 
     void Awake()
     {
         //Set the the singleton for the hero class
         if (SINGLETON == null)
             SINGLETON = this;
-        else
+               else
             Debug.LogError("Another instance of hero tries to exist and assign itself to Singleton");
+        fireDelegate += TempFire;
     }
 
     // Update is called once per frame
@@ -44,6 +48,23 @@ public class Hero : MonoBehaviour
         transform.position = pos;
 
         transform.rotation = Quaternion.Euler(_yPos * pitchMult, _xPos * rollMult, 0);
+        if (Input.GetAxis("Jump") == 1 && fireDelegate != null)
+        {
+            fireDelegate();
+        }
+    }
+
+    void TempFire()
+    {
+        GameObject projectilePrefab = null;
+        GameObject projectileGO = Instantiate<GameObject>(projectilePrefab);
+        projectileGO.transform.position = transform.position;
+        Rigidbody rigidBody = projectileGO.GetComponent<Rigidbody>();
+
+        Projectile projectile = projectileGO.GetComponent<Projectile>();
+        projectile.weaponType = WeaponType.blaster;
+        float speed = Main.GetWeaponDefinition(projectile.weaponType).velocity;
+        rigidBody.velocity = Vector3.up * speed;
     }
 
     void OnTriggerEnter(Collider other)
