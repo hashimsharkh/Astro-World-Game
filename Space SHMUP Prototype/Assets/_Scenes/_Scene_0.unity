@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1124,7 +1124,7 @@ PrefabInstance:
         type: 3}
       propertyPath: def.projectilePrefab
       value: 
-      objectReference: {fileID: 5452886881202290645, guid: 81a5615e0011c4a489b86b095379d5e0,
+      objectReference: {fileID: 3396703358641262102, guid: bd25edb300c1af748bdc9fbb4858eb86,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf817b88e4ef942ecaf2cfcff6ebe798, type: 3}
