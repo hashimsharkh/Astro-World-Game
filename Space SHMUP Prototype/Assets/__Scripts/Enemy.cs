@@ -48,6 +48,10 @@ public class Enemy : MonoBehaviour
                 health -= Main.GetWeaponDefinition(projectile.weaponType).damageOnHit;
                 if (health <= 0)
                 {
+                    //change the score when the enemy is destroyed
+                    ScoreCounter sc = new ScoreCounter();
+                    sc.UpdateScore(this.gameObject.name);
+                    //destroy the object
                     Destroy(this.gameObject);
                 }
                 Destroy(otherObject);

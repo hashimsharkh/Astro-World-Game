@@ -60,6 +60,9 @@ public class Main : MonoBehaviour
 
     public void Restart()
     {
+        ScoreCounter sc = new ScoreCounter();
+        //reset the score when game is over
+        sc.ResetScore();
         //Reload _Scene_0 to restart the game
         SceneManager.LoadScene("_Scene_0");
     }
