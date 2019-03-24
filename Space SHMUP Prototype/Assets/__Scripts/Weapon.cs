@@ -37,6 +37,7 @@ public class Weapon : MonoBehaviour
     public GameObject collar;
     public float lastShotTime; //time last shot was fired
     private Renderer _collarRend;
+    private bool _spreadActive = true;
 
     void Start()
     {
@@ -56,10 +57,16 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B))
-            SetWeaponType(WeaponType.blaster);
-        if (Input.GetKeyDown(KeyCode.S))
-            SetWeaponType(WeaponType.spread);
+        
+        if (Input.GetKeyDown(KeyCode.X)) // switch weapon if x is pressed
+        {
+            _spreadActive = !_spreadActive;
+            if (_spreadActive)
+                SetWeaponType(WeaponType.spread); // if _spreadActive is true then use spread
+            else
+                SetWeaponType(WeaponType.blaster); // if _spreadActive is false then use blaster
+        }
+
     }
 
     public WeaponType weaponType
