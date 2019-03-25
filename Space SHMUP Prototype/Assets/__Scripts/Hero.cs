@@ -17,7 +17,7 @@ public class Hero : MonoBehaviour
 
     [Header("Set Dynamically")]
     [SerializeField]
-    private float _shieldLevel = 1;
+    private float _shieldLevel = 1; // default shield level is 1
 
     //This variable holds a reference to the last triggering GameObject
     private GameObject _lastTriggerGo = null;
@@ -37,16 +37,17 @@ public class Hero : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Read key inputs
+        //Read key inputs from horizontal and vertical axis
         float _yPos = Input.GetAxis("Vertical");
         float _xPos = Input.GetAxis("Horizontal");
 
-
+        //change position of x and y 
         Vector3 pos = transform.position;
-        pos.y = pos.y+( velocity *_yPos * Time.deltaTime);
+        pos.y = pos.y + (velocity *_yPos * Time.deltaTime);
         pos.x += velocity * _xPos * Time.deltaTime;
         transform.position = pos;
 
+        //change rotation of object when it is moving
         transform.rotation = Quaternion.Euler(_yPos * pitchMult, _xPos * rollMult, 0);
         
         if (Input.GetAxis("Jump") == 1 && fireDelegate != null)
