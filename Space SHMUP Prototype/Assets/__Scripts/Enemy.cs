@@ -9,13 +9,30 @@ public class Enemy : MonoBehaviour
     public float fireRate = 0.3f;
     public float health = 1f;
     public int score = 100;
+    public float showDamageDuration = 0.1f;
 
     private BoundsCheck _bndCheck;
+
+   [Header("Set Dynamically: Enemy")]    
+    public Color[] originalColors;
+    public Material[] materials;
+    // All the Materials of this & its children  
+    public bool showingDamage = false;
+    public float damageDoneTime; // Time to stop showing damage   
+    public bool notifiedOfDestruction = false;
 
     void Awake()
     {
         _bndCheck = GetComponent<BoundsCheck>();
+
+        // Get materials and colors for this GameObject and its children        
+        materials = Utils.GetAllMaterials(gameObject);
+        originalColors = new Color[materials.Length];   
+        for (int i = 0; i < materials.Length; i++)
+            originalColors[i] = materials[i].color;
+
     }
+
 
     //position property
     public Vector3 pos
@@ -52,10 +69,12 @@ public class Enemy : MonoBehaviour
                     ScoreCounter sc = new ScoreCounter();
                     sc.UpdateScore(this.gameObject.name);
                     //destroy the object
+                    
                     Destroy(this.gameObject);
                 }
                 Destroy(otherObject);
-               break;
+                ShowDamage();//Hurt this enemy
+                break;
 
             default:
                 print("Enemy hit by non-ProjectileHero: " + otherObject.name);
@@ -67,7 +86,10 @@ public class Enemy : MonoBehaviour
         void Update()
         {
             Move();
-            if (_bndCheck != null && _bndCheck.offDown)
+        if (showingDamage && Time.time > damageDoneTime)
+            UnShowDamage();       
+        
+        if (_bndCheck != null && _bndCheck.offDown)
             {
                 Destroy(gameObject);
             }
@@ -82,4 +104,26 @@ public class Enemy : MonoBehaviour
         pos = tempPos;
     }
 
+    //make the enemy blink red
+    void ShowDamage()
+    {    
+        foreach (Material m in materials)
+        {
+            m.color = Color.red;
+        }
+        showingDamage = true;
+        damageDoneTime = Time.time + showDamageDuration;
+    }
+    //stop making the enemy turn red/return enemy to original colour
+    void UnShowDamage()
+    {
+      
+        for (int i = 0; i < materials.Length; i++)
+        {
+            materials[i].color = originalColors[i];
+        }
+        showingDamage = false;
+    }
 }
+
+
