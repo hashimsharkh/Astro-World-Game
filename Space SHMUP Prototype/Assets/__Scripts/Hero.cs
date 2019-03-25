@@ -42,14 +42,15 @@ public class Hero : MonoBehaviour
         float _xPos = Input.GetAxis("Horizontal");
 
         //change position of x and y 
-        Vector3 pos = transform.position;
-        pos.y = pos.y + (velocity *_yPos * Time.deltaTime);
-        pos.x += velocity * _xPos * Time.deltaTime;
-        transform.position = pos;
+        Vector3 _pos = transform.position;
+        _pos.y = _pos.y + (velocity *_yPos * Time.deltaTime);
+        _pos.x += velocity * _xPos * Time.deltaTime;
+        transform.position = _pos;
 
         //change rotation of object when it is moving
         transform.rotation = Quaternion.Euler(_yPos * pitchMult, _xPos * rollMult, 0);
         
+        //call fireDelegate() if the delegate is not empty
         if (Input.GetAxis("Jump") == 1 && fireDelegate != null)
         {
             fireDelegate();
@@ -59,26 +60,26 @@ public class Hero : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Transform rootT = other.gameObject.transform.root;
-        GameObject go = rootT.gameObject;
+        Transform _rootTransform = other.gameObject.transform.root;
+        GameObject _gameObjectRoot = _rootTransform.gameObject;
         
         //Make sure it is not the same triggering go as last time 
         //if it is it will be ignored as a duplicate and function wil; exit
-        if (go == _lastTriggerGo)
+        if (_gameObjectRoot == _lastTriggerGo)
             return;
 
         //go, the enmy GameObject is destroyed by hitting the shield
-        _lastTriggerGo = go;
+        _lastTriggerGo = _gameObjectRoot;
 
         //If the shield was triggered by an enemy
-        if(go.tag =="Enemy")
+        if(_gameObjectRoot.tag =="Enemy")
         {
             shieldLevel--; //Decrease the level of the shield by 1
-            Destroy(go); //And destroy the enemy
+            Destroy(_gameObjectRoot); //And destroy the enemy
         }
         else
             ////Wont happen in our case but if a non enemy collides with the ship; it will be printed on console
-            print("Triggered by non-enemy: " + go.name);
+            print("Triggered by non-enemy: " + _gameObjectRoot.name);
 
     }
 

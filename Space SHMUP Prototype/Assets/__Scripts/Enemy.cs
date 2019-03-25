@@ -49,16 +49,16 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        GameObject otherObject = collision.gameObject;
+        GameObject _otherObject = collision.gameObject;
        
-        switch (otherObject.tag)
+        switch (_otherObject.tag)
         {
             //print("Collison between" + otherObject.name + " and " + name);
             case "ProjectileHero":
-                Projectile projectile = otherObject.GetComponent<Projectile>();
+                Projectile projectile = _otherObject.GetComponent<Projectile>();
                 if (!_bndCheck.isOnScreen) // if enemy is not in the screen, don't damage it
                 {
-                    Destroy(otherObject);
+                    Destroy(_otherObject);
                     break;
                 }
 
@@ -72,36 +72,37 @@ public class Enemy : MonoBehaviour
                     
                     Destroy(this.gameObject);
                 }
-                Destroy(otherObject);
+                Destroy(_otherObject);
                 ShowDamage();//Hurt this enemy
                 break;
 
             default:
-                print("Enemy hit by non-ProjectileHero: " + otherObject.name);
+                print("Enemy hit by non-ProjectileHero: " + _otherObject.name);
                 break;
         }
     }
 
-        //Destroy enemy if out of bounds
-        void Update()
-        {
-            Move();
+    //Destroy enemy if out of bounds
+    void Update()
+    {
+        Move();
+        //check damage and if the enemy should be blinking red
         if (showingDamage && Time.time > damageDoneTime)
-            UnShowDamage();       
-        
+            UnShowDamage();
+
         if (_bndCheck != null && _bndCheck.offDown)
-            {
-                Destroy(gameObject);
-            }
+        {
+            Destroy(gameObject);
         }
+    }
 
 
     //Move the enemy
     public virtual void Move()
     {
-        Vector3 tempPos = pos;
-        tempPos.y -= speed * Time.deltaTime;
-        pos = tempPos;
+        Vector3 _tempPos = pos;
+        _tempPos.y -= speed * Time.deltaTime;
+        pos = _tempPos;
     }
 
     //make the enemy blink red

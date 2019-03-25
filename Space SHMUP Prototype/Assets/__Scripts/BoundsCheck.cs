@@ -26,31 +26,31 @@ public class BoundsCheck : MonoBehaviour
     void LateUpdate()
     {
         //Transforms the rocket and checking bounds 
-        Vector3 pos = transform.position;
+        Vector3 _pos = transform.position;
         isOnScreen = true;
         offRight = offLeft = offUp = offDown = false;
 
-        if (pos.x > camWidth - radius)
+        if (_pos.x > camWidth - radius)
         {
-            pos.x = camWidth - radius;
+            _pos.x = camWidth - radius;
             offRight = true;
         }
 
-        if (pos.x < -camWidth + radius)
+        if (_pos.x < -camWidth + radius)
         {
-            pos.x = -camWidth + radius;
+            _pos.x = -camWidth + radius;
             offLeft = true;
         }
 
-        if (pos.y > camHeight - radius)
+        if (_pos.y > camHeight - radius)
         {
-            pos.y = camHeight - radius;
+            _pos.y = camHeight - radius;
             offUp = true;
         }
 
-        if (pos.y < -camHeight + radius)
+        if (_pos.y < -camHeight + radius)
         {
-            pos.y = -camHeight + radius;
+            _pos.y = -camHeight + radius;
             offDown = true;
         }
 
@@ -58,13 +58,13 @@ public class BoundsCheck : MonoBehaviour
 
         if (keepOnScreen && !isOnScreen)
         {
-            transform.position = pos;
+            transform.position = _pos;
             isOnScreen = true;
             offRight = offLeft = offUp = offDown = false;
         }
 
 
-        transform.position = pos;
+        transform.position = _pos;
 
     }
 
@@ -72,7 +72,7 @@ public class BoundsCheck : MonoBehaviour
     {
         //Draw bounds on game console
         if (!Application.isPlaying) return;
-        Vector3 boundSize = new Vector3(camWidth * 2, camHeight * 2, 0.1f);
-        Gizmos.DrawWireCube(Vector3.zero, boundSize);
+        Vector3 _boundSize = new Vector3(camWidth * 2, camHeight * 2, 0.1f);
+        Gizmos.DrawWireCube(Vector3.zero, _boundSize);
     }
 }

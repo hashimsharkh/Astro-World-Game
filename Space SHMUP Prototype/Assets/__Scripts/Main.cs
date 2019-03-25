@@ -38,15 +38,15 @@ public class Main : MonoBehaviour
         GameObject _enemy = Instantiate<GameObject>(prefabEnemies[_index]);
 
         //bounds check
-        float enemyPadding = enemyDefaultPadding;
+        float _enemyPadding = enemyDefaultPadding;
         if (_enemy.GetComponent<BoundsCheck>() != null)
-            enemyPadding = Mathf.Abs(_enemy.GetComponent<BoundsCheck>().radius);
+            _enemyPadding = Mathf.Abs(_enemy.GetComponent<BoundsCheck>().radius);
 
         Vector3 _pos = Vector3.zero;
-        float _xMin = -_bndCheck.camWidth + enemyPadding;
-        float _xMax = _bndCheck.camWidth - enemyPadding;
+        float _xMin = -_bndCheck.camWidth + _enemyPadding;
+        float _xMax = _bndCheck.camWidth - _enemyPadding;
        _pos.x = Random.Range(_xMin, _xMax);
-        _pos.y = _bndCheck.camHeight + enemyPadding;
+        _pos.y = _bndCheck.camHeight + _enemyPadding;
         _enemy.transform.position = _pos;
 
         Invoke("SpawnEnemy", 1.5f / enemySpawnPerSecond);
@@ -60,9 +60,9 @@ public class Main : MonoBehaviour
 
     public void Restart()
     {
-        ScoreCounter sc = new ScoreCounter();
+        ScoreCounter _scoreCounter = new ScoreCounter();
         //reset the score when game is over
-        sc.ResetScore();
+        _scoreCounter.ResetScore();
         //Reload _Scene_0 to restart the game
         SceneManager.LoadScene("_Scene_0");
     }

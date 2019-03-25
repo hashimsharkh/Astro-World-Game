@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    private BoundsCheck bndCheck;
+    private BoundsCheck _bndCheck;
     private Renderer _rend;
 
     [Header("Set Dynamically")]
     public Rigidbody rigidBody;
+
     [SerializeField]
     private WeaponType _weaponType;
 
@@ -28,14 +29,14 @@ public class Projectile : MonoBehaviour
 
     void Awake()
     {
-        bndCheck = GetComponent<BoundsCheck>(); // check bounds
+        _bndCheck = GetComponent<BoundsCheck>(); // check bounds
         _rend = GetComponent<Renderer>(); //configure renderer
         rigidBody = GetComponent<Rigidbody>(); //configure rigidbody
     }
 
     void Update()
     {
-        if (bndCheck.offUp) // if projectile is out of bounds, destroy object
+        if (_bndCheck.offUp) // if projectile is out of bounds, destroy object
         {
             Destroy(gameObject);
         }
