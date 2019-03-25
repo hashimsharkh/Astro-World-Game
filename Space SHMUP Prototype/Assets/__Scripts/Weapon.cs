@@ -69,6 +69,7 @@ public class Weapon : MonoBehaviour
 
     }
 
+    //property to set and get private _weaponType variable 
     public WeaponType weaponType
     {
         get
@@ -83,6 +84,7 @@ public class Weapon : MonoBehaviour
 
     public void SetWeaponType(WeaponType wType)
     {
+        //sets value of _weaponType to wType
         _weaponType = wType;
         if(weaponType == WeaponType.none)
         {

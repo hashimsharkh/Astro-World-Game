@@ -31,7 +31,7 @@ public class Hero : MonoBehaviour
             SINGLETON = this;
         else
             Debug.LogError("Another instance of hero tries to exist and assign itself to Singleton");
-        //fireDelegate += TempFire;
+       
     }
 
     // Update is called once per frame
@@ -48,10 +48,7 @@ public class Hero : MonoBehaviour
         transform.position = pos;
 
         transform.rotation = Quaternion.Euler(_yPos * pitchMult, _xPos * rollMult, 0);
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    .Fire();
-        //}
+        
         if (Input.GetAxis("Jump") == 1 && fireDelegate != null)
         {
             fireDelegate();
@@ -63,8 +60,7 @@ public class Hero : MonoBehaviour
     {
         Transform rootT = other.gameObject.transform.root;
         GameObject go = rootT.gameObject;
-        //print("Triggered : " + go.name); used to print when an object collides with hero ship
-
+        
         //Make sure it is not the same triggering go as last time 
         //if it is it will be ignored as a duplicate and function wil; exit
         if (go == _lastTriggerGo)
