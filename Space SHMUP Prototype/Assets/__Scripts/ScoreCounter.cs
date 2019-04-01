@@ -9,6 +9,8 @@ public class ScoreCounter : MonoBehaviour
     static private int CURR_SCORE; //store current score
     public Text curScore;
     public Text highscore;
+    private int levelcount;
+    LevelProgression lp;
 
     //updates the score depending on the enemy killed
     public void UpdateScore(string name){
@@ -35,6 +37,7 @@ public class ScoreCounter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        lp = new LevelProgression();
         //set the score to 0
         CURR_SCORE = 0;
         //set the score text
@@ -43,6 +46,8 @@ public class ScoreCounter : MonoBehaviour
         HIGH_SCORE = PlayerPrefs.GetInt("highscore", HIGH_SCORE);
         //set the highscore text
         highscore.text = "Highscore: " + HIGH_SCORE;
+
+        levelcount = 0;
     }
 
     // Update is called once per frame
@@ -56,6 +61,11 @@ public class ScoreCounter : MonoBehaviour
             HIGH_SCORE = CURR_SCORE;
             //set the highscore in database
             PlayerPrefs.SetInt("highscore", HIGH_SCORE);
+        }
+        if (CURR_SCORE >= levelcount) //if the score reaches a 1000 point threshold, the level will change
+        {
+            levelcount = levelcount + 1000;
+            lp.incLevel();
         }
     }
 }
