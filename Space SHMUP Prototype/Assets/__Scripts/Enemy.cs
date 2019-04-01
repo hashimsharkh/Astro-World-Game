@@ -63,6 +63,7 @@ public class Enemy : MonoBehaviour
                 }
 
                 health -= Main.GetWeaponDefinition(projectile.weaponType).damageOnHit;
+                health -= Main.GetWeaponDefinition(projectile.weaponType).continuousDamage;
                 if (health <= 0)
                 {
                     //change the score when the enemy is destroyed

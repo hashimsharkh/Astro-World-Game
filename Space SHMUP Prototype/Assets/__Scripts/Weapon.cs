@@ -8,6 +8,7 @@ public enum WeaponType
     none, //no weapon
     blaster, //simple blaster
     spread, //two simultaneous shots
+    laser, //[NI] Damage over time
     shield //adds shields
 }
 
@@ -133,6 +134,14 @@ public class Weapon : MonoBehaviour
                 _projectile = MakeProjectile();
                 _projectile.rigidBody.velocity = _velocity;
                 break;
+            case WeaponType.laser:
+                _projectile = MakeProjectile();
+                _projectile.rigidBody.velocity = _velocity;
+                
+
+                break;
+
+
         }
     }
 

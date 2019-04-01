@@ -77,12 +77,23 @@ public class Hero : MonoBehaviour
             shieldLevel--; //Decrease the level of the shield by 1
             Destroy(_gameObjectRoot); //And destroy the enemy
         }
+        else if(_gameObjectRoot.tag == "PowerUp")
+            AbsorbPowerUp(_gameObjectRoot);
+        
         else
-            ////Wont happen in our case but if a non enemy collides with the ship; it will be printed on console
             print("Triggered by non-enemy: " + _gameObjectRoot.name);
 
     }
+    public void AbsorbPowerUp(GameObject go)
+    {
+        PowerUp pu = go.GetComponent<PowerUp>();
 
+        switch (pu.type)
+        {
+
+        }
+        pu.AbsorbedBy(this.gameObject);
+    }
     //shieldLevel property
     public float shieldLevel
     {
