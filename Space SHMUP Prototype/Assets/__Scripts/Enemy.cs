@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [Header("Set in Inspector: Enemy")]
-    public float speed = 10f;
+    static public float speed = 10f;
     public float fireRate = 0.3f;
     public float health = 1f;
     public int score = 100;
@@ -67,8 +67,7 @@ public class Enemy : MonoBehaviour
                 if (health <= 0)
                 {
                     //change the score when the enemy is destroyed
-                    ScoreCounter sc = new ScoreCounter();
-                    sc.UpdateScore(this.gameObject.name);
+                    ScoreCounter.UpdateScore(this.gameObject.name);
                     //destroy the object
                     
                     Destroy(this.gameObject);
@@ -125,6 +124,10 @@ public class Enemy : MonoBehaviour
             materials[i].color = originalColors[i];
         }
         showingDamage = false;
+    }
+    static public void ChangeSpeed() //when level changes, makes enemies faster
+    {
+        Enemy.speed += 5f; //makes enemies 1.5x faster
     }
 }
 

@@ -14,7 +14,7 @@ public class ScoreCounter : MonoBehaviour
     LevelProgression lp; //counts levels from score
 
     //updates the score depending on the enemy killed
-    public void UpdateScore(string name){
+    public static void UpdateScore(string name){
         //first easy enemy gives 25
         if (name == "Enemy_0(Clone)") //first enemy
         {
@@ -29,7 +29,7 @@ public class ScoreCounter : MonoBehaviour
             CURR_SCORE += 100;
         }
     }
-    public void ResetScore()
+    public static void ResetScore()
     {
         //resets the score when the game is over
         CURR_SCORE = 0;
@@ -47,11 +47,11 @@ public class ScoreCounter : MonoBehaviour
         //set the highscore text
         highscore.text = "Highscore: " + HIGH_SCORE;
         //set a new instance of levelprogression
-        lp = new LevelProgression();
+        //lp = new LevelProgression();
         //set the tracker to send a signal every 50
         pbTracker = 50;
-        //sets the level count to send the level to 1
-        levelCount = 0;
+        //sets the level count to change when score reaches 1000
+        levelCount = 1000;
     }
 
     // Update is called once per frame
@@ -60,21 +60,22 @@ public class ScoreCounter : MonoBehaviour
         //updates current score
         curScore.text = "Score: " + CURR_SCORE;
         //updates highscore when needed
-        if (CURR_SCORE > HIGH_SCORE)
+        if (CURR_SCORE >= HIGH_SCORE)
         {
             HIGH_SCORE = CURR_SCORE;
             //set the highscore in database
             PlayerPrefs.SetInt("highscore", HIGH_SCORE);
+            highscore.text = "Highscore: " + HIGH_SCORE;
         }
         if (CURR_SCORE >= levelCount) //if the score reaches a 1000 point threshold, the level will change
         {
             levelCount = levelCount + 1000; //sets the next level 1000 points away
-            lp.IncLevel(); //increases the level
-            lp.ResetSlider(); //resets the progress bar for the next level
+            LevelProgression.IncLevel(); //increases the level
+            LevelProgression.ResetSlider(); //resets the progress bar for the next level
         }
         if (CURR_SCORE >= pbTracker)
         {
-            lp.UpdateSlider(); //updates slider 
+            LevelProgression.UpdateSlider(); //updates slider 
             pbTracker += 50; //sets the next update 50 points ahead
         }
     }

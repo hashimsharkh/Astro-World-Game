@@ -14,9 +14,9 @@ public class LevelProgression : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {//presets
-        _curLevel = 0; //set level to 0...increases right away
+        _curLevel = 1; //set level to 1 at start
         _nextLevel = false; 
-        level.text = "";
+        level.text = "Level "+_curLevel;
         _counter = 0f;
     }
 
@@ -31,16 +31,18 @@ public class LevelProgression : MonoBehaviour
         }
         slider.value = _counter; //keeps slider updated in real time
     }
-    public void IncLevel() //increases the level by one
+    public static void IncLevel() //increases the level by one
     {
         _nextLevel = true; //condition to detirmine whether or not to change level
+        Enemy.ChangeSpeed(); //makes enemies faster
+        Main.SpawnFaster(); //makes more enemies spawn
     }
-    public void ResetSlider()
+    public static void ResetSlider()
     {
-        _counter = 0f; //set the slider to 0 when next level starts
+        LevelProgression._counter = 0f; //set the slider to 0 when next level starts
     }
-    public void UpdateSlider()
+    public static void UpdateSlider()
     {
-        _counter += .05f; //adds 5% to the bar 
+        LevelProgression._counter += .05f; //adds 5% to the bar 
     }
 }

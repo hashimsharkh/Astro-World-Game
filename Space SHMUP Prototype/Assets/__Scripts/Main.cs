@@ -11,7 +11,7 @@ public class Main : MonoBehaviour
     [Header("Set in Inspector")]
     //weaponDefinitions variables
     public GameObject[] prefabEnemies;
-    public float enemySpawnPerSecond = 0.5f; //# of enemies per second
+    static public float enemySpawnPerSecond = 0.5f; //# of enemies per second
     public float enemyDefaultPadding = 1.5f;
     public WeaponDefinition[] weaponDefinitions;
 
@@ -60,14 +60,13 @@ public class Main : MonoBehaviour
 
     public void Restart()
     {
-        ScoreCounter _scoreCounter = new ScoreCounter();
         //reset the score when game is over
-        _scoreCounter.ResetScore();
+        ScoreCounter.ResetScore();
         //Reload _Scene_0 to restart the game
         SceneManager.LoadScene("_Scene_0");
     }
 
-   static public WeaponDefinition GetWeaponDefinition(WeaponType weaponType)
+    static public WeaponDefinition GetWeaponDefinition(WeaponType weaponType)
     {
         //ensuring the key being retrieved exists to avoid error
         if (WEAP_DICT.ContainsKey(weaponType))
@@ -76,5 +75,9 @@ public class Main : MonoBehaviour
         }
         //failed to find the right weapon, return WeaponType.none
         return (new WeaponDefinition());
+    }
+    static public void SpawnFaster() //makes enemies spawn faster when level changes
+    {
+        Main.enemySpawnPerSecond += .5f;
     }
 }
