@@ -128,16 +128,18 @@ public class Weapon : MonoBehaviour
                 _projectile = MakeProjectile(); //make left projectile
                 _projectile.transform.rotation = Quaternion.AngleAxis(-30, Vector3.back);
                 _projectile.rigidBody.velocity = _projectile.transform.rotation * _velocity;
+                print("This is a bitxh");
                 break;
 
             case WeaponType.spread:
                 _projectile = MakeProjectile();
                 _projectile.rigidBody.velocity = _velocity;
+                print("This is the shit");
                 break;
             case WeaponType.laser:
                 _projectile = MakeProjectile();
                 _projectile.rigidBody.velocity = _velocity;
-                
+                print("This is a laser");
 
                 break;
 
