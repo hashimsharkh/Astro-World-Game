@@ -866,11 +866,12 @@ MonoBehaviour:
     velocity: 50
   - type: 3
     letter: O
-    color: {r: 0, g: 1, b: 0, a: 1}
-    projectilePrefab: {fileID: 0}
+    color: {r: 0.8396226, g: 0.059407253, b: 0.059407253, a: 1}
+    projectilePrefab: {fileID: 3396703358641262102, guid: bd25edb300c1af748bdc9fbb4858eb86,
+      type: 3}
     projectileColor: {r: 1, g: 1, b: 1, a: 1}
     damageOnHit: 1
-    continuousDamage: 0
+    continuousDamage: 0.25
     delayBetweenShots: 0
     velocity: 0
 --- !u!114 &1106936997
