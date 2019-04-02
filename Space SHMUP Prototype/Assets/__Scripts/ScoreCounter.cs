@@ -7,10 +7,11 @@ public class ScoreCounter : MonoBehaviour
 {
     static private int HIGH_SCORE; //store high score
     static private int CURR_SCORE; //store current score
-    public Text curScore;
-    public Text highscore;
-    private int levelcount;
-    LevelProgression lp;
+    public Text curScore; //text displaying the current score
+    public Text highscore; //text displaying the high score
+    private int levelCount; //this int is compared to score to detirmine level switches
+    private int pbTracker; //this int tracks when the progress bar is updated
+    LevelProgression lp; //counts levels from score
 
     //updates the score depending on the enemy killed
     public void UpdateScore(string name){
@@ -37,7 +38,6 @@ public class ScoreCounter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        lp = new LevelProgression();
         //set the score to 0
         CURR_SCORE = 0;
         //set the score text
@@ -46,8 +46,12 @@ public class ScoreCounter : MonoBehaviour
         HIGH_SCORE = PlayerPrefs.GetInt("highscore", HIGH_SCORE);
         //set the highscore text
         highscore.text = "Highscore: " + HIGH_SCORE;
-
-        levelcount = 0;
+        //set a new instance of levelprogression
+        lp = new LevelProgression();
+        //set the tracker to send a signal every 50
+        pbTracker = 50;
+        //sets the level count to send the level to 1
+        levelCount = 0;
     }
 
     // Update is called once per frame
@@ -62,10 +66,16 @@ public class ScoreCounter : MonoBehaviour
             //set the highscore in database
             PlayerPrefs.SetInt("highscore", HIGH_SCORE);
         }
-        if (CURR_SCORE >= levelcount) //if the score reaches a 1000 point threshold, the level will change
+        if (CURR_SCORE >= levelCount) //if the score reaches a 1000 point threshold, the level will change
         {
-            levelcount = levelcount + 1000;
-            lp.incLevel();
+            levelCount = levelCount + 1000; //sets the next level 1000 points away
+            lp.IncLevel(); //increases the level
+            lp.ResetSlider(); //resets the progress bar for the next level
+        }
+        if (CURR_SCORE >= pbTracker)
+        {
+            lp.UpdateSlider(); //updates slider 
+            pbTracker += 50; //sets the next update 50 points ahead
         }
     }
 }
