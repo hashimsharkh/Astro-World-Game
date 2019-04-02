@@ -3,7 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Hero
+  - Enemy
+  - ProjectileHero
+  - highscore
+  - curScore
+  - ProjectileEnemy
+  - PowerUp
+  - PowerUpBox
   layers:
   - Default
   - TransparentFX
@@ -13,11 +21,11 @@ TagManager:
   - UI
   - 
   - 
-  - PostProcessing
-  - 
-  - 
-  - 
-  - 
+  - Hero
+  - Enemy
+  - ProjectileHero
+  - ProjectileEnemy
+  - PowerUp
   - 
   - 
   - 

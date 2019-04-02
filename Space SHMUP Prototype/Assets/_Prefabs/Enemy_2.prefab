@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2738700912848987263}
   - component: {fileID: 1257148345461780103}
   - component: {fileID: 6457809237001956633}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 1203117396294333115}
   - component: {fileID: 2754288592485233265}
   - component: {fileID: 5289832454565479339}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 3691779657145148345}
   - component: {fileID: 1228361654499489093}
   - component: {fileID: 4990329058488528236}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sphere (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -285,7 +285,7 @@ GameObject:
   - component: {fileID: 6476989946434286000}
   - component: {fileID: 3553965670606496490}
   - component: {fileID: 5936456627452873812}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -376,7 +376,7 @@ GameObject:
   - component: {fileID: 1538993668796833756}
   - component: {fileID: 4766501831567336347}
   - component: {fileID: 2456514988585434108}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -467,7 +467,7 @@ GameObject:
   - component: {fileID: 175146822730081024}
   - component: {fileID: 8484452631675460672}
   - component: {fileID: 4269874966013904291}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sphere (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -557,9 +557,11 @@ GameObject:
   - component: {fileID: 948197828375037133}
   - component: {fileID: 8134332742656571227}
   - component: {fileID: 7086521194196918480}
-  m_Layer: 0
+  - component: {fileID: 5142692644217860791}
+  - component: {fileID: 45591824559912923}
+  m_Layer: 9
   m_Name: Enemy_2
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -596,6 +598,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef751dc9ddb967f4fa566de12efc2364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 10
+  fireRate: 0.3
+  health: 5
+  score: 100
+  showDamageDuration: 0.1
+  originalColors: []
+  materials: []
+  showingDamage: 0
+  damageDoneTime: 0
+  notifiedOfDestruction: 0
+  waveFrequency: 2
+  waveWidth: 4
+  waveRotY: 45
 --- !u!54 &7086521194196918480
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -610,5 +625,39 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!114 &5142692644217860791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6405027922657149669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b100086dc262a8419a79945d65f62e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: -2.5
+  keepOnScreen: 0
+  isOnScreen: 1
+  camWidth: 0
+  camHeight: 0
+  offRight: 0
+  offLeft: 0
+  offUp: 0
+  offDown: 0
+--- !u!135 &45591824559912923
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6405027922657149669}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 12.417373
+  m_Center: {x: 0, y: -0.75775146, z: 11.159623}

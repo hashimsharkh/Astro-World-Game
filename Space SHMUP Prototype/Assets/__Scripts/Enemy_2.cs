@@ -1,38 +1,43 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine; 
+ 
+public class Enemy_2 : Enemy
+{ 
+    [Header("Set in Inspector: Enemy_2")]
+    
+    public float waveFrequency = 2;
+    public float waveWidth = 4;
+    public float waveRotY = 45; //rotation of wave in the y direction
 
-public class Enemy_2 : MonoBehaviour
-{
-    float speed=.2f;
-    int direction;
-    float timeCount=0;
-    // Start is called before the first frame update
+    private float _initialPosition;
+    private float _birthTime; //stores time of instatiation 
+    
     void Start()
-    {
-        direction = Random.Range(0, 2);
-    }
+    {     
+        // assign intial position and time of object
+        _initialPosition = pos.x;
 
-    // Update is called once per frame
-    void Update()
-    {
-        timeCount += Time.deltaTime;
-        if (direction == 0)
-        {
-            float x=(float)Mathf.Sin(timeCount);
-            float y=-.5f;
-            float z=0;
-            Vector3 vec = new Vector3(x, y, z);
-            transform.position += vec * speed;
-        }
-        else if (direction == 1)
-        {
-            float x = (float)Mathf.Sin(timeCount);
-            float y = -.5f;
-            float z = 0;
-            Vector3 vec = new Vector3(-x,y,z);
-            transform.position += vec * speed;
-        }
-        transform.Rotate(new Vector3(0, 0, 45) * Time.deltaTime);
+        _birthTime = Time.time;
+    }                                        
+
+    public override void Move()
+    { 
+        // move object in sine wave in x direction
+        Vector3 _tempPos = pos;
+    
+        float _age = Time.time - _birthTime;
+        float _theta = Mathf.PI * 2 * _age / waveFrequency;
+        float _sin = Mathf.Sin(_theta);
+        _tempPos.x = _initialPosition + waveWidth* _sin;
+        pos = _tempPos;  
+     
+        Vector3 _rotation = new Vector3(0, _sin * waveRotY, 0);     
+        this.transform.rotation = Quaternion.Euler(_rotation);  
+   
+        // move object in sine wave in y direction
+        base.Move();
     }
 }
+
+
