@@ -17,7 +17,7 @@ public class Hero : MonoBehaviour
 
     [Header("Set Dynamically")]
     [SerializeField]
-    private float _shieldLevel = 1;
+    private float _shieldLevel = 1; // default shield level is 1
 
     //This variable holds a reference to the last triggering GameObject
     private GameObject _lastTriggerGo = null;
@@ -31,72 +31,69 @@ public class Hero : MonoBehaviour
             SINGLETON = this;
         else
             Debug.LogError("Another instance of hero tries to exist and assign itself to Singleton");
-        //fireDelegate += TempFire;
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Read key inputs
+        //Read key inputs from horizontal and vertical axis
         float _yPos = Input.GetAxis("Vertical");
         float _xPos = Input.GetAxis("Horizontal");
 
+        //change position of x and y 
+        Vector3 _pos = transform.position;
+        _pos.y = _pos.y + (velocity *_yPos * Time.deltaTime);
+        _pos.x += velocity * _xPos * Time.deltaTime;
+        transform.position = _pos;
 
-        Vector3 pos = transform.position;
-        pos.y = pos.y+( velocity *_yPos * Time.deltaTime);
-        pos.x += velocity * _xPos * Time.deltaTime;
-        transform.position = pos;
-
+        //change rotation of object when it is moving
         transform.rotation = Quaternion.Euler(_yPos * pitchMult, _xPos * rollMult, 0);
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    .Fire();
-        //}
+        
+        //call fireDelegate() if the delegate is not empty
         if (Input.GetAxis("Jump") == 1 && fireDelegate != null)
         {
             fireDelegate();
         }
     }
-
-    //void TempFire()
-    //{
-    //    GameObject projectilePrefab = null;
-    //    GameObject projectileGO = Instantiate<GameObject>(projectilePrefab);
-    //    projectileGO.transform.position = transform.position;
-    //    Rigidbody rigidBody = projectileGO.GetComponent<Rigidbody>();
-
-    //    Projectile projectile = projectileGO.GetComponent<Projectile>();
-    //    projectile.weaponType = WeaponType.blaster;
-    //    float speed = Main.GetWeaponDefinition(projectile.weaponType).velocity;
-    //    rigidBody.velocity = Vector3.up * speed;
-    //}
+    
 
     void OnTriggerEnter(Collider other)
     {
-        Transform rootT = other.gameObject.transform.root;
-        GameObject go = rootT.gameObject;
-        //print("Triggered : " + go.name); used to print when an object collides with hero ship
-
+        Transform _rootTransform = other.gameObject.transform.root;
+        GameObject _gameObjectRoot = _rootTransform.gameObject;
+        
         //Make sure it is not the same triggering go as last time 
         //if it is it will be ignored as a duplicate and function wil; exit
-        if (go == _lastTriggerGo)
+        if (_gameObjectRoot == _lastTriggerGo)
             return;
 
         //go, the enmy GameObject is destroyed by hitting the shield
-        _lastTriggerGo = go;
+        _lastTriggerGo = _gameObjectRoot;
 
         //If the shield was triggered by an enemy
-        if(go.tag =="Enemy")
+        if(_gameObjectRoot.tag =="Enemy")
         {
             shieldLevel--; //Decrease the level of the shield by 1
-            Destroy(go); //And destroy the enemy
+            Destroy(_gameObjectRoot); //And destroy the enemy
         }
+        else if(_gameObjectRoot.tag == "PowerUp")
+            AbsorbPowerUp(_gameObjectRoot);
+        
         else
-            ////Wont happen in our case but if a non enemy collides with the ship; it will be printed on console
-            print("Triggered by non-enemy: " + go.name);
+            print("Triggered by non-enemy: " + _gameObjectRoot.name);
 
     }
+    public void AbsorbPowerUp(GameObject go)
+    {
+        PowerUp pu = go.GetComponent<PowerUp>();
 
+        switch (pu.type)
+        {
+
+        }
+        pu.AbsorbedBy(this.gameObject);
+    }
     //shieldLevel property
     public float shieldLevel
     {

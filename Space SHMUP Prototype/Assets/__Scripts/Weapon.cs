@@ -8,13 +8,14 @@ public enum WeaponType
     none, //no weapon
     blaster, //simple blaster
     spread, //two simultaneous shots
+    laser, //[NI] Damage over time
     shield //adds shields
 }
 
 //allows setting the weapons' properties in the Inspector
 
-    [System.Serializable]
-    public class WeaponDefinition
+[System.Serializable]
+public class WeaponDefinition
 {
     public WeaponType type = WeaponType.none;
     public string letter; //letter to show up on power-up
@@ -37,23 +38,41 @@ public class Weapon : MonoBehaviour
     public GameObject collar;
     public float lastShotTime; //time last shot was fired
     private Renderer _collarRend;
+    private bool _spreadActive = true; //default weapon is spread
 
     void Start()
     {
         collar = transform.Find("Collar").gameObject;
         _collarRend = collar.GetComponent<Renderer>();
         SetWeaponType(_weaponType); //call for deafault _weaponType WeaponType.none
-        if(PROJECTILE_ANCHOR == null){
-            GameObject gameobject = new GameObject("_ProjectileAnchor");
-            PROJECTILE_ANCHOR = gameobject.transform;
+
+        if (PROJECTILE_ANCHOR == null){
+            GameObject _gameobject = new GameObject("_ProjectileAnchor");
+            PROJECTILE_ANCHOR = _gameobject.transform;
         }
-        GameObject rootGameObject = transform.root.gameObject;
-        if (rootGameObject.GetComponent<Hero>() != null)
+
+        GameObject _rootGameObject = transform.root.gameObject;
+        if (_rootGameObject.GetComponent<Hero>() != null)
         {
-            rootGameObject.GetComponent<Hero>().fireDelegate += Fire;
+            _rootGameObject.GetComponent<Hero>().fireDelegate += Fire;
         }
     }
 
+    void Update()
+    {
+        
+        if (Input.GetKeyDown(KeyCode.X)) // switch weapon if x is pressed
+        {
+            _spreadActive = !_spreadActive;
+            if (_spreadActive)
+                SetWeaponType(WeaponType.spread); // if _spreadActive is true then use spread
+            else
+                SetWeaponType(WeaponType.blaster); // if _spreadActive is false then use blaster
+        }
+
+    }
+
+    //property to set and get private _weaponType variable 
     public WeaponType weaponType
     {
         get
@@ -68,6 +87,7 @@ public class Weapon : MonoBehaviour
 
     public void SetWeaponType(WeaponType wType)
     {
+        //sets value of _weaponType to wType
         _weaponType = wType;
         if(weaponType == WeaponType.none)
         {
@@ -90,62 +110,61 @@ public class Weapon : MonoBehaviour
         {
             return;
         }
-        Projectile projectile;
-        Vector3 velocity = Vector3.up * def.velocity;
+        Projectile _projectile;
+        Vector3 _velocity = Vector3.up * def.velocity;
         if (transform.up.y < 0)
         {
-            velocity.y = -velocity.y;
+            _velocity.y = -_velocity.y;
         }
 
         switch (weaponType)
         {
             case WeaponType.blaster:
-                projectile = MakeProjectile(); //make middle projectile
-                projectile.rigidBody.velocity = velocity;
-                projectile = MakeProjectile(); //make right projectile
-                projectile.transform.rotation = Quaternion.AngleAxis(30, Vector3.back);
-                projectile.rigidBody.velocity = projectile.transform.rotation * velocity;
-                projectile = MakeProjectile(); //make left projectile
-                projectile.transform.rotation = Quaternion.AngleAxis(-30, Vector3.back);
-                projectile.rigidBody.velocity = projectile.transform.rotation * velocity;
+                _projectile = MakeProjectile(); //make middle projectile
+                _projectile.rigidBody.velocity = _velocity;
+                _projectile = MakeProjectile(); //make right projectile
+                _projectile.transform.rotation = Quaternion.AngleAxis(30, Vector3.back);
+                _projectile.rigidBody.velocity = _projectile.transform.rotation * _velocity;
+                _projectile = MakeProjectile(); //make left projectile
+                _projectile.transform.rotation = Quaternion.AngleAxis(-30, Vector3.back);
+                _projectile.rigidBody.velocity = _projectile.transform.rotation * _velocity;
                 break;
 
             case WeaponType.spread:
-                projectile = MakeProjectile();
-                projectile.rigidBody.velocity = velocity;
+                _projectile = MakeProjectile();
+                _projectile.rigidBody.velocity = _velocity;
                 break;
+            case WeaponType.laser:
+                _projectile = MakeProjectile();
+                _projectile.rigidBody.velocity = _velocity;
+                break;
+
+
         }
     }
 
     public Projectile MakeProjectile()
     {
-        print("trying to make projectile");
-        GameObject gameobject = Instantiate<GameObject>(def.projectilePrefab);
-        print("instantiating");
+        
+        GameObject _gameobject = Instantiate<GameObject>(def.projectilePrefab);
+        
         if (transform.parent.gameObject.tag == "Hero")
         {
-            gameobject.tag = "ProjectileHero";
-            gameobject.layer = LayerMask.NameToLayer("ProjectileHero");
+            _gameobject.tag = "ProjectileHero";
+            _gameobject.layer = LayerMask.NameToLayer("ProjectileHero");
         }
         else
         {
-            gameobject.tag = "ProjectileEnemy";
-            gameobject.layer = LayerMask.NameToLayer("ProjectileHero");
+            _gameobject.tag = "ProjectileEnemy";
+            _gameobject.layer = LayerMask.NameToLayer("ProjectileHero");
         }
-        gameobject.transform.position = collar.transform.position;
-        gameobject.transform.SetParent(PROJECTILE_ANCHOR, true);
-        Projectile projectile = gameobject.GetComponent<Projectile>();
-        projectile.weaponType = weaponType;
+        _gameobject.transform.position = collar.transform.position;
+        _gameobject.transform.SetParent(PROJECTILE_ANCHOR, true);
+
+        Projectile _projectile = _gameobject.GetComponent<Projectile>();
+        _projectile.weaponType = weaponType;
         lastShotTime = Time.time;
-        return (projectile);
+        return (_projectile);
     }
-
-
-
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    
 }

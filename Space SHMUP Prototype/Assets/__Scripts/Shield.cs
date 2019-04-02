@@ -11,13 +11,13 @@ public class Shield : MonoBehaviour
     public int levelShown = 0;
 
     //this non public variable will appear in the inspector and will no be accessed outside the shield class
-    Material mat;
+    private Material _mat;
 
     // Start is called before the first frame update
     void Start()
     {
         //mat is defined as the material of the renderer component on this GameObject.
-        mat = GetComponent<Renderer>().material;
+        _mat = GetComponent<Renderer>().material;
 
     }
 
@@ -29,10 +29,10 @@ public class Shield : MonoBehaviour
         //If this is different from the level shown
         if(levelShown !=currLevel)
         {
-            levelShown = currLevel;
+            levelShown = currLevel; //assign the level to the current level
 
             //Adjust the texture offset to show different shield level
-            mat.mainTextureOffset = new Vector2(0.2f * levelShown, 0);
+            _mat.mainTextureOffset = new Vector2(0.2f * levelShown, 0);
 
         }
 

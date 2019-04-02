@@ -11,7 +11,7 @@ public class Main : MonoBehaviour
     [Header("Set in Inspector")]
     //weaponDefinitions variables
     public GameObject[] prefabEnemies;
-    public float enemySpawnPerSecond = 0.5f; //# of enemies per second
+    static public float enemySpawnPerSecond = 0.5f; //# of enemies per second
     public float enemyDefaultPadding = 1.5f;
     public WeaponDefinition[] weaponDefinitions;
 
@@ -38,15 +38,15 @@ public class Main : MonoBehaviour
         GameObject _enemy = Instantiate<GameObject>(prefabEnemies[_index]);
 
         //bounds check
-        float enemyPadding = enemyDefaultPadding;
+        float _enemyPadding = enemyDefaultPadding;
         if (_enemy.GetComponent<BoundsCheck>() != null)
-            enemyPadding = Mathf.Abs(_enemy.GetComponent<BoundsCheck>().radius);
+            _enemyPadding = Mathf.Abs(_enemy.GetComponent<BoundsCheck>().radius);
 
         Vector3 _pos = Vector3.zero;
-        float _xMin = -_bndCheck.camWidth + enemyPadding;
-        float _xMax = _bndCheck.camWidth - enemyPadding;
+        float _xMin = -_bndCheck.camWidth + _enemyPadding;
+        float _xMax = _bndCheck.camWidth - _enemyPadding;
        _pos.x = Random.Range(_xMin, _xMax);
-        _pos.y = _bndCheck.camHeight + enemyPadding;
+        _pos.y = _bndCheck.camHeight + _enemyPadding;
         _enemy.transform.position = _pos;
 
         Invoke("SpawnEnemy", 1.5f / enemySpawnPerSecond);
@@ -60,11 +60,13 @@ public class Main : MonoBehaviour
 
     public void Restart()
     {
+        //reset the score when game is over
+        ScoreCounter.ResetScore();
         //Reload _Scene_0 to restart the game
         SceneManager.LoadScene("_Scene_0");
     }
 
-   static public WeaponDefinition GetWeaponDefinition(WeaponType weaponType)
+    static public WeaponDefinition GetWeaponDefinition(WeaponType weaponType)
     {
         //ensuring the key being retrieved exists to avoid error
         if (WEAP_DICT.ContainsKey(weaponType))
@@ -73,5 +75,9 @@ public class Main : MonoBehaviour
         }
         //failed to find the right weapon, return WeaponType.none
         return (new WeaponDefinition());
+    }
+    static public void SpawnFaster() //makes enemies spawn faster when level changes
+    {
+        Main.enemySpawnPerSecond += .5f;
     }
 }
