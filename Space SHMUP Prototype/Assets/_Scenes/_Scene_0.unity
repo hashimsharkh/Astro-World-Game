@@ -841,7 +841,6 @@ MonoBehaviour:
   - {fileID: 7406416742483236537, guid: 659f767663c588442853f1116b85029c, type: 3}
   - {fileID: 5295351443784810183, guid: e9b2a406a1cad1a42a223e4fdb1563c0, type: 3}
   - {fileID: 6405027922657149669, guid: 8de6cfddc5537e04a8d54ac622bd60ce, type: 3}
-  enemySpawnPerSecond: 0.5
   enemyDefaultPadding: 1.5
   weaponDefinitions:
   - type: 1
@@ -864,16 +863,25 @@ MonoBehaviour:
     continuousDamage: 0
     delayBetweenShots: 0.4
     velocity: 50
-  - type: 3
+  - type: 4
     letter: O
-    color: {r: 0.8396226, g: 0.059407253, b: 0.059407253, a: 1}
+    color: {r: 0.14696549, g: 0.8584906, b: 0.13363297, a: 1}
+    projectilePrefab: {fileID: 0}
+    projectileColor: {r: 1, g: 1, b: 1, a: 1}
+    damageOnHit: 0
+    continuousDamage: 0
+    delayBetweenShots: 0
+    velocity: 0
+  - type: 3
+    letter: L
+    color: {r: 0.9433962, g: 0.13794944, b: 0.13794944, a: 1}
     projectilePrefab: {fileID: 3396703358641262102, guid: bd25edb300c1af748bdc9fbb4858eb86,
       type: 3}
     projectileColor: {r: 1, g: 1, b: 1, a: 1}
-    damageOnHit: 1
+    damageOnHit: 0
     continuousDamage: 0.25
     delayBetweenShots: 0
-    velocity: 0
+    velocity: 50
 --- !u!114 &1106936997
 MonoBehaviour:
   m_ObjectHideFlags: 0

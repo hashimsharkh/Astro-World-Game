@@ -137,7 +137,6 @@ public class Weapon : MonoBehaviour
             case WeaponType.laser:
                 _projectile = MakeProjectile();
                 _projectile.rigidBody.velocity = _velocity;
-
                 break;
 
 

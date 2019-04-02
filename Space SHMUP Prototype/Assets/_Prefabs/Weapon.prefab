@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51ef47624d87a453c9400e8516e2cea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weaponType: 3
+  _weaponType: 2
   def:
     type: 3
     letter: L
