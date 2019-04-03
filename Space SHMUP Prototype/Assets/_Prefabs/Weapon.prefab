@@ -49,10 +49,6 @@ MonoBehaviour:
   def:
     type: 3
     letter: 
-  _weaponType: 3
-  def:
-    type: 3
-    letter: L
     color: {r: 1, g: 1, b: 1, a: 1}
     projectilePrefab: {fileID: 0}
     projectileColor: {r: 1, g: 1, b: 1, a: 1}
