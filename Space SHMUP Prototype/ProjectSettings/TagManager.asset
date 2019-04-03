@@ -12,6 +12,7 @@ TagManager:
   - ProjectileEnemy
   - PowerUp
   - PowerUpBox
+  - ShowOnFinish
   layers:
   - Default
   - TransparentFX
