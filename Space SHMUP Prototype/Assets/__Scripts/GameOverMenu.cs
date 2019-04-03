@@ -18,11 +18,8 @@ public class GameOverMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        while (!GAME_OVER)
-        {
-            if (Hero.SINGLETON.shieldLevel < 0)
+        if (Hero.SINGLETON.shieldLevel < 0)
                 ShowFinished();
-        }
             ManualQuit();
 
     }
@@ -43,7 +40,7 @@ public class GameOverMenu : MonoBehaviour
     {
         foreach (GameObject go in finishObjects)
             go.SetActive(true);
-        Time.timeScale = 0f;
+       Time.timeScale = 1f;
     }
 
     void HideFinished()
