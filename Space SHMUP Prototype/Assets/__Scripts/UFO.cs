@@ -9,13 +9,17 @@ public class UFO : Enemy
     private float _initialPosition;
     private float _birthTime; //stores time of instatiation
     bool _moveRight = true;
+    public GameObject bulletPrefab;
+    public float timeBetweenBullets = 2f;
 
     void Start()
     {
         _initialPosition = pos.x;
-
         _birthTime = Time.time;
+        Invoke("DropBullet", timeBetweenBullets);
+       
     }
+
 
     public override void Move()
     {
@@ -48,16 +52,26 @@ public class UFO : Enemy
             pos = _tempPos;
         }
 
+        // if hit right bound, move left
         if (_tempPos.x >= 24)
             {
                 _moveRight = false;
             }
             
+        // if hit left bound, move right
         if (_tempPos.x <= -25)
             {
                 _moveRight = true;
             }
 
+
+    }
+
+    void DropBullet()
+    {
+            GameObject bullet = Instantiate<GameObject>(bulletPrefab);
+            bullet.transform.position = transform.position;
+            Invoke("DropBullet", timeBetweenBullets);
     }
 
 
