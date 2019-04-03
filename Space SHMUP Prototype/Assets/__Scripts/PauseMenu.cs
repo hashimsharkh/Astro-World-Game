@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -55,7 +56,7 @@ public class PauseMenu : MonoBehaviour
     // quits game and restarts it
     public void QuitGame()
     {
-        Main.SINGLETON.Restart();
-        Resume();
+        //returns to main menu
+        SceneManager.LoadScene("_Main_Menu");
     }
 }
