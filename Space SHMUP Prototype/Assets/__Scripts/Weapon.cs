@@ -67,7 +67,7 @@ public class Weapon : MonoBehaviour
         {
             _spreadActive = !_spreadActive;
             if (_spreadActive)
-                SetWeaponType(WeaponType.spread); // if _spreadActive is true then use spread
+                SetWeaponType(WeaponType.destroyer); // if _spreadActive is true then use spread
             else
                 SetWeaponType(WeaponType.blaster); // if _spreadActive is false then use blaster
         }
@@ -182,6 +182,7 @@ public class Weapon : MonoBehaviour
 
         foreach(GameObject enemy in enemyArray)
         {
+            ScoreCounter.UpdateScore(this.gameObject.name);
             Destroy(enemy);
         }
     }
