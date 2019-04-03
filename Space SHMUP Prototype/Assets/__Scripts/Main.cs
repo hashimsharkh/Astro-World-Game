@@ -11,14 +11,17 @@ public class Main : MonoBehaviour
     [Header("Set in Inspector")]
     //weaponDefinitions variables
     public GameObject[] prefabEnemies;
+    public GameObject[] prefabHeros;
     static public float enemySpawnPerSecond = 0.5f; //# of enemies per second
     public float enemyDefaultPadding = 1.5f;
     public WeaponDefinition[] weaponDefinitions;
-
+    
+    static private int heroNumber;
     private BoundsCheck _bndCheck;
 
     void Awake()
     {
+        SpawnHero(); //spawns the hero
         //calling spawn enemy after rocket is created
         SINGLETON = this;
         _bndCheck = GetComponent<BoundsCheck>();
@@ -28,6 +31,22 @@ public class Main : MonoBehaviour
         foreach(WeaponDefinition def in weaponDefinitions)
         {
             WEAP_DICT[def.type] = def;
+        }
+    }
+    public void SpawnHero() //spawns in the hero depending on the one chosen in main menu
+    {
+        heroNumber = MainMenu.chosenHero;
+        if (heroNumber == 1) //ship #2
+        {//code to spawn hero
+            GameObject _hero = Instantiate<GameObject>(prefabHeros[heroNumber]);
+        }
+        else if (heroNumber == 2) //ship #3
+        {
+            GameObject _hero = Instantiate<GameObject>(prefabHeros[heroNumber]);
+        }
+        else //regular ship
+        {
+            GameObject _hero = Instantiate<GameObject>(prefabHeros[heroNumber]); 
         }
     }
 
