@@ -70,6 +70,9 @@ public class Main : MonoBehaviour
     {
         //reset the score when game is over
         ScoreCounter.ResetScore();
+        //reset enemies
+        Enemy.ResetEnemies();
+        ResetEnemySpawnRate();
         //Reload _Scene_0 to restart the game
         SceneManager.LoadScene("_Scene_0");
     }
@@ -87,5 +90,9 @@ public class Main : MonoBehaviour
     static public void SpawnFaster() //makes enemies spawn faster when level changes
     {
         Main.enemySpawnPerSecond += .5f;
+    }
+    static public void ResetEnemySpawnRate()
+    {
+        Main.enemySpawnPerSecond = 0.5f;
     }
 }

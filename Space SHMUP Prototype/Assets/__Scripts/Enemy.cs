@@ -129,6 +129,10 @@ public class Enemy : MonoBehaviour
     {
         Enemy.speed += 5f; //makes enemies 1.5x faster
     }
+    static public void ResetEnemies()
+    {
+        Enemy.speed = 10f;
+    }
 }
 
 
