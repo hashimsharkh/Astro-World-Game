@@ -36,7 +36,7 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
-        if (_bndCheck.offUp) // if projectile is out of bounds, destroy object
+        if (_bndCheck.offUp || _bndCheck.offLeft || _bndCheck.offRight) // if projectile is out of bounds, destroy object
         {
             Destroy(gameObject);
         }
