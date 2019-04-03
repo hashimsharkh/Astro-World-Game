@@ -20,6 +20,7 @@ public class Main : MonoBehaviour
 
     void Awake()
     {
+        //spawn in the selected hero
         SpawnHero();
         //calling spawn enemy after rocket is created
         SINGLETON = this;
@@ -69,6 +70,9 @@ public class Main : MonoBehaviour
     {
         //reset the score when game is over
         ScoreCounter.ResetScore();
+        //reset enemies for speed and spawning rate
+        Enemy.ResetSpeed();
+        enemySpawnPerSecond = .5f;
         //Reload _Scene_0 to restart the game
         SceneManager.LoadScene("_Scene_0");
     }

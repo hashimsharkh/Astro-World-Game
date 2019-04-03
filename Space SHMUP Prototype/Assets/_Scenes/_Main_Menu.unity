@@ -1288,6 +1288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42550136fa978204bbc481fa5be55d65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropdown: {fileID: 1964190049}
 --- !u!1 &735291761
 GameObject:
   m_ObjectHideFlags: 0
