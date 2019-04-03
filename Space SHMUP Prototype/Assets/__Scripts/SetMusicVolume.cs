@@ -13,9 +13,4 @@ public class SetMusicVolume : MonoBehaviour
         myMusic.volume = _volume;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
