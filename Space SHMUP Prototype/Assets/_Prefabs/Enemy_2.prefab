@@ -598,11 +598,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef751dc9ddb967f4fa566de12efc2364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
   fireRate: 0.3
   health: 5
   score: 100
   showDamageDuration: 0.1
+  powerUpDropChance: 1
   originalColors: []
   materials: []
   showingDamage: 0

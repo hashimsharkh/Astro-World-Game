@@ -2,19 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class PowerUpDefinition
+{
+    public PowerUpType powerUpType = PowerUpType.none;
+    public string letter; //letter to show up on power-up
+    public Color color = Color.white; //color of  power-up
+    public Color letterColor = Color.white; //Color of letter on power-up
+}
 public class PowerUp : MonoBehaviour
 {
+
     [Header("Set in Inspector")]
     //Vector2s.x holds a min value and y a max for a Random.Range() that will be called later
     public Vector2 rotMinMax = new Vector2(15, 90);
     public Vector2 driftMinMax = new Vector2(.25f, 2);
     public float lifeTime = 6f;//Seconds the powerup exists
     public float fadeTime = 4f; //Seconds it will then fade
+    public float duration = 3f;//Duration before powerup effect is gone
+    public GameObject pickUpEffect;//Pickup effect used after picking up powerup
+    public static int multiplier=1;//Used for points multiplier
 
     [Header("Set Dynamically")]
-    public WeaponType type; //The type of the powerup
-
-
+    public PowerUpType powerUpType; //The type of the powerup
+    public WeaponType type;
     public GameObject cube; //Reference to the Cube child
 
     public TextMesh letter; //Reference to the text mesh
@@ -26,6 +37,11 @@ public class PowerUp : MonoBehaviour
     private BoundsCheck _bndCheck;
     private Renderer _cubeRend;
 
+    //Getter functions
+    public Rigidbody getRigid()
+    {
+        return _rigid;
+    }
     void Awake()
     {
         //Find the cube reference
@@ -34,8 +50,8 @@ public class PowerUp : MonoBehaviour
         letter = GetComponent<TextMesh>();
         _rigid = GetComponent<Rigidbody>();
         _bndCheck = GetComponent<BoundsCheck>();
-        _cubeRend = GetComponent<Renderer>();
-
+        _cubeRend = cube.GetComponent<Renderer>();
+        
         //Set a random velocity
         Vector3 vel = Random.onUnitSphere; //get Random XYZ velocity
         //Random.onUnisSphere gives you a vector point that is somewhere on 
@@ -101,16 +117,16 @@ public class PowerUp : MonoBehaviour
         }
     }
     
-    public void setType(WeaponType wt)
+    public void SetType(PowerUpType powerUpType)
     {
         //Grab the WeaponDefinition from main
-        WeaponDefinition def = Main.GetWeaponDefinition(wt);
+        PowerUpDefinition def = Main.GetPowerUpDefinition(powerUpType);
         //Set the color of the Cube Child 
         _cubeRend.material.color = def.color;
 
-        //Letter.color = def.color; //We could colarize the letter too
+        letter.color = def.letterColor; //We could colarize the letter too
         letter.text = def.letter;//Set the letter that is shown
-        type = wt;//Finally actually set the type
+        this.powerUpType = powerUpType;//Finally actually set the type
     
     }
 

@@ -119,7 +119,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5295351443784810183}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.996805, y: 1.5226907, z: 0}
+  m_LocalPosition: {x: 9.31, y: 1.24, z: -0.93}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 5295351444189183416}
@@ -163,6 +163,7 @@ MonoBehaviour:
   health: 2
   score: 100
   showDamageDuration: 0.1
+  powerUpDropChance: 0.3
   originalColors: []
   materials: []
   showingDamage: 0
@@ -200,8 +201,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 7.1657414
-  m_Center: {x: 0, y: 3.0976038, z: 9.9986105}
+  m_Radius: 7
+  m_Center: {x: 3, y: 2.3, z: 10.456}
 --- !u!1 &5295351444111031855
 GameObject:
   m_ObjectHideFlags: 0

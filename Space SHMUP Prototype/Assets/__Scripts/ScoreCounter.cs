@@ -18,15 +18,15 @@ public class ScoreCounter : MonoBehaviour
         //first easy enemy gives 25
         if (name == "Enemy_0(Clone)") //first enemy
         {
-            CURR_SCORE += 25;
+            CURR_SCORE += 25*PowerUp.multiplier;
         }
         else if(name == "Enemy_1(Clone)") //second enemy
         {
-            CURR_SCORE += 50;
+            CURR_SCORE += 50*PowerUp.multiplier;
         }
         else //third enemy
         {
-            CURR_SCORE += 100;
+            CURR_SCORE += 100 * PowerUp.multiplier;
         }
     }
     public static void ResetScore()

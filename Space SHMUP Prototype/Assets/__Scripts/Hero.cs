@@ -78,21 +78,65 @@ public class Hero : MonoBehaviour
             Destroy(_gameObjectRoot); //And destroy the enemy
         }
         else if(_gameObjectRoot.tag == "PowerUp")
-            AbsorbPowerUp(_gameObjectRoot);
+            StartCoroutine(AbsorbPowerUp(_gameObjectRoot));
         
         else
             print("Triggered by non-enemy: " + _gameObjectRoot.name);
 
     }
-    public void AbsorbPowerUp(GameObject go)
+    IEnumerator AbsorbPowerUp(GameObject go)
     {
-        PowerUp pu = go.GetComponent<PowerUp>();
+        int flag = 0; //used to indicate which powerup was used so effect can be reverted immediately afterwards
+        PowerUp _powerUp = go.GetComponent<PowerUp>();
 
-        switch (pu.type)
+        ////Instantiate a smoke puff when user collides with powerup and destroy it after 1.5 seconds
+        GameObject smokePuff = Instantiate(_powerUp.pickUpEffect, transform.position, transform.rotation) as GameObject;
+
+        //Turn off mesh renderer/ colliders of powerup and its child so it does not appear on the screen
+        Renderer[] rend = _powerUp.GetComponentsInChildren<Renderer>();
+        foreach (Renderer r in rend)
+            r.enabled = false;
+
+        //Turning off rigidbody collisions
+        _powerUp.getRigid().detectCollisions = false;
+        Collider[] coll = _powerUp.GetComponentsInChildren<Collider>();
+
+        //Turning off box collider for cube
+        foreach (Collider c in coll)
+            c.enabled = false;
+
+
+        switch (_powerUp.powerUpType)
         {
+            case PowerUpType.doublePoints:
+                flag = 1;
+                Destroy(smokePuff, 1.5f);
+                PowerUp.multiplier = 2;
+                break;
+
+            case PowerUpType.invincibility:
+                flag = 2;
+                Collider[] collider = GetComponentsInChildren<Collider>();
+                foreach (Collider c in collider)
+                    c.enabled = false;
+                break;
+                
+               
 
         }
-        pu.AbsorbedBy(this.gameObject);
+        yield return new WaitForSeconds(_powerUp.duration);
+
+        if(flag ==1)
+             PowerUp.multiplier = 1;
+        if (flag ==2)
+        {
+            Collider[] collider = GetComponentsInChildren<Collider>();
+            foreach (Collider c in collider)
+                c.enabled = true;
+        }
+        //Destroy the powerup
+        if (_powerUp != null)
+            _powerUp.AbsorbedBy(this.gameObject);
     }
     //shieldLevel property
     public float shieldLevel

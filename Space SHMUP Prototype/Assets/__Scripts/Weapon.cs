@@ -19,7 +19,7 @@ public class WeaponDefinition
 {
     public WeaponType type = WeaponType.none;
     public string letter; //letter to show up on power-up
-    public Color color = Color.white; //coler of collar and power-up
+    public Color color = Color.white; //color of collar and power-up
     public GameObject projectilePrefab; //prefab for projectiles
     public Color projectileColor = Color.white; //color for prefab
     public float damageOnHit = 0; //amount of damage caused

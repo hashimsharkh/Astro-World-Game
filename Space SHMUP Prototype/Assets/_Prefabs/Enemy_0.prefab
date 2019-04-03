@@ -1102,11 +1102,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d152fa2fa5b575f41908d54fa1356179, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
   fireRate: 0.3
   health: 1
   score: 100
   showDamageDuration: 0.1
+  powerUpDropChance: 0.25
   originalColors: []
   materials: []
   showingDamage: 0
