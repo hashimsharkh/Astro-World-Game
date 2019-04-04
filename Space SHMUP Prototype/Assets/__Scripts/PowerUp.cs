@@ -37,6 +37,8 @@ public class PowerUp : MonoBehaviour
     private BoundsCheck _bndCheck;
     private Renderer _cubeRend;
 
+    
+    
     //Getter functions
     public Rigidbody getRigid()
     {
@@ -80,6 +82,7 @@ public class PowerUp : MonoBehaviour
         
     }
 
+    
     // Update is called once per frame
     void Update()
     {
@@ -115,6 +118,8 @@ public class PowerUp : MonoBehaviour
             //If the powerup has drifted entirely off the screen,destroy it
             Destroy(gameObject);
         }
+
+      
     }
     
     public void SetType(PowerUpType powerUpType)

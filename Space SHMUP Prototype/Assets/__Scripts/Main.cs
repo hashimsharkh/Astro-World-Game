@@ -12,6 +12,7 @@ public enum PowerUpType
     invincibility //gives invincibility to user
 }
 
+
 public class Main : MonoBehaviour
 {
    

@@ -52,6 +52,8 @@ public class ScoreCounter : MonoBehaviour
         pbTracker = 50;
         //sets the level count to change when score reaches 1000
         levelCount = 1000;
+
+        
     }
 
     // Update is called once per frame
@@ -78,5 +80,6 @@ public class ScoreCounter : MonoBehaviour
             LevelProgression.UpdateSlider(); //updates slider 
             pbTracker += 50; //sets the next update 50 points ahead
         }
+
     }
 }
