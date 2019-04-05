@@ -1,17 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-<<<<<<< HEAD
 using UnityEngine.UI;
-=======
 using UnityEngine.SceneManagement;
->>>>>>> master
 
 public class Hero : MonoBehaviour
 {
     //Singleton (Software Design pattern)
     static public Hero SINGLETON;
 
+    //Variables used to change color of in
     public GameObject Hero1;
     private GameObject barrel;
     private GameObject collar;
@@ -45,10 +43,10 @@ public class Hero : MonoBehaviour
     public delegate void WeaponFireDelegate(); //new delegate type
     public WeaponFireDelegate fireDelegate;
 
-<<<<<<< HEAD
+
     private bool _invincibility = false;//invincibility is a variable that will be used to determine if ship is invincible
     
-=======
+
     [Header("Audio Effects")]
     public AudioClip shootingSound1;
     public AudioClip shootingSound2;
@@ -59,15 +57,7 @@ public class Hero : MonoBehaviour
     public AudioClip destroySound1;
     public AudioSource destroySource1;
 
-    void Start()
-    {
-        //attach a sound to each source
-        shootingSource1.clip = shootingSound1;
-        shootingSource2.clip = shootingSound2;
-        shootingSource3.clip = shootingSound3;
-        destroySource1.clip = destroySound1;
-    }
->>>>>>> master
+
     void Awake()
     {
         //Set the the singleton for the hero class
@@ -98,6 +88,12 @@ public class Hero : MonoBehaviour
     }
     void Start()
     {
+        //attach a sound to each source
+        shootingSource1.clip = shootingSound1;
+        shootingSource2.clip = shootingSound2;
+        shootingSource3.clip = shootingSound3;
+        destroySource1.clip = destroySound1;
+
         GameObject go = GameObject.Find("DoublePoints");
 
         if (go != null)
@@ -148,18 +144,12 @@ public class Hero : MonoBehaviour
         //If the shield was triggered by an enemy
         if(_gameObjectRoot.tag =="Enemy")
         {
-<<<<<<< HEAD
             if (_invincibility == false)
             {
                 shieldLevel--; //Decrease the level of the shield by 1
                 Destroy(_gameObjectRoot); //And destroy the enemy
             }
-=======
             
-            shieldLevel--; //Decrease the level of the shield by 1
-            Destroy(_gameObjectRoot); //And destroy the enemy
-            
->>>>>>> master
         }
         else if(_gameObjectRoot.tag == "PowerUp")
             StartCoroutine(AbsorbPowerUp(_gameObjectRoot));
@@ -170,7 +160,7 @@ public class Hero : MonoBehaviour
     }
     IEnumerator AbsorbPowerUp(GameObject go)
     {
-<<<<<<< HEAD
+
         int _flag = 0; //used to indicate which powerup was used so effect can be reverted immediately afterwards
         PowerUp _powerUp = go.GetComponent<PowerUp>();
 
@@ -193,11 +183,6 @@ public class Hero : MonoBehaviour
         Destroy(smokePuff, 1.5f);
         
         switch (_powerUp.powerUpType)
-=======
-        PowerUp _powerUp= go.GetComponent<PowerUp>();
-
-        switch (_powerUp.type)
->>>>>>> master
         {
             case PowerUpType.doublePoints:
                 _flag = 1;
@@ -227,7 +212,6 @@ public class Hero : MonoBehaviour
         {
             _invincibility = false;
         }
-<<<<<<< HEAD
         //Destroy the powerup
         if (_powerUp != null)
             _powerUp.AbsorbedBy(this.gameObject);
@@ -246,10 +230,6 @@ public class Hero : MonoBehaviour
                 material.color = _colors[index % 2];
             index++;
         }
-
-=======
-        _powerUp.AbsorbedBy(this.gameObject);
->>>>>>> master
     }
     //shieldLevel property
     public float shieldLevel
