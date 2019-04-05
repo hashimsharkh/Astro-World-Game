@@ -10,27 +10,27 @@ public class GameOverMenu : MonoBehaviour
     public GameObject gameOverMenuUI;
     public GameObject[] finishObjects;
     public Text scoreText;
-    public Button mainMenuBtn, shareScoreBtn;
-    private bool isButtonPressed = false;
+    //public Button mainMenuBtn, shareScoreBtn;
+    //private bool isButtonPressed = false;
 
     void Start()
     {
         //all objects with this tag will be added
-        //finishObjects = GameObject.FindGameObjectsWithTag("ShowOnFinish");
-        //HideFinished();
-        gameOverMenuUI.SetActive(false);
+        finishObjects = GameObject.FindGameObjectsWithTag("ShowOnFinish");
+        HideFinished();
+        //gameOverMenuUI.SetActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Hero.SINGLETON.shieldLevel < 0 && !isButtonPressed)
+        if (Hero.SINGLETON.shieldLevel < 0)
         {
-            //ShowFinished();
-            gameOverMenuUI.SetActive(true);
-            //Main.SINGLETON.DelayedRestart(10f);
+        ShowFinished();
+        gameOverMenuUI.SetActive(true);
+        //    //Main.SINGLETON.DelayedRestart(10f);
         }
-        ManualQuit();
+        //ManualQuit();
 
     }
 
@@ -51,7 +51,8 @@ public class GameOverMenu : MonoBehaviour
         gameOverMenuUI.SetActive(true);
         foreach (GameObject go in finishObjects)
             go.SetActive(true);
-        Time.timeScale = 1f;
+        //Time.timeScale = 1f;
+        //Main.SINGLETON.DelayedRestart(10f);
         scoreText.text = "YOUR SCORE IS: " + ScoreCounter.CURR_SCORE;
     }
 

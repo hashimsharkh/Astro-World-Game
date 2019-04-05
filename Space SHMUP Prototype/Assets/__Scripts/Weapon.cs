@@ -130,15 +130,18 @@ public class Weapon : MonoBehaviour
                 _projectile = MakeProjectile(); //make left projectile
                 _projectile.transform.rotation = Quaternion.AngleAxis(-30, Vector3.back);
                 _projectile.rigidBody.velocity = _projectile.transform.rotation * _velocity;
+                Hero.SINGLETON.shootingSource1.Play();
                 break;
 
             case WeaponType.spread:
                 _projectile = MakeProjectile();
                 _projectile.rigidBody.velocity = _velocity;
+                Hero.SINGLETON.shootingSource2.Play();
                 break;
             case WeaponType.laser:
                 _projectile = MakeProjectile();
                 _projectile.rigidBody.velocity = _velocity;
+                Hero.SINGLETON.shootingSource3.Play();
                 break;
             case WeaponType.destroyer:
                 DestroyAllEnemies();

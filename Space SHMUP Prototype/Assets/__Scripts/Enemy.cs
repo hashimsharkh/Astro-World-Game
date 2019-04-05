@@ -69,7 +69,8 @@ public class Enemy : MonoBehaviour
                     //change the score when the enemy is destroyed
                     ScoreCounter.UpdateScore(this.gameObject.name);
                     //destroy the object
-                    
+                    Hero.SINGLETON.destroySource1.Play();
+
                     Destroy(this.gameObject);
                 }
                 Destroy(_otherObject);
