@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ScoreCounter : MonoBehaviour
 {
     static private int HIGH_SCORE; //store high score
-    static private int CURR_SCORE; //store current score
+    static public int CURR_SCORE; //store current score
     public Text curScore; //text displaying the current score
     public Text highscore; //text displaying the high score
     private int levelCount; //this int is compared to score to detirmine level switches

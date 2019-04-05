@@ -47,10 +47,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weaponType: 4
   def:
-    type: 3
+    type: 2
     letter: 
     color: {r: 1, g: 1, b: 1, a: 1}
-    projectilePrefab: {fileID: 0}
+    projectilePrefab: {fileID: 3396703358641262102, guid: bd25edb300c1af748bdc9fbb4858eb86,
+      type: 3}
     projectileColor: {r: 1, g: 1, b: 1, a: 1}
     damageOnHit: 0
     continuousDamage: 0

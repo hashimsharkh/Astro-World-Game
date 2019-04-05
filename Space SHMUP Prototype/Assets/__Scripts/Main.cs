@@ -24,6 +24,7 @@ public class Main : MonoBehaviour
     [Header("Set in Inspector")]
     //weaponDefinitions variables
     public GameObject[] prefabEnemies;
+    public GameObject[] prefabHeros;
     static public float enemySpawnPerSecond = 0.5f; //# of enemies per second
     public float enemyDefaultPadding = 1.5f;
     public WeaponDefinition[] weaponDefinitions;
@@ -67,6 +68,8 @@ public class Main : MonoBehaviour
 }
     void Awake()
     {
+        //spawn in the selected hero
+        SpawnHero();
         //calling spawn enemy after rocket is created
         SINGLETON = this;
         _bndCheck = GetComponent<BoundsCheck>();
@@ -82,6 +85,11 @@ public class Main : MonoBehaviour
         POWERUP_DICT = new Dictionary<PowerUpType, PowerUpDefinition>();
         foreach (PowerUpDefinition def in powerUpDefinitions)
             POWERUP_DICT[def.powerUpType] = def;
+    }
+
+    public void SpawnHero()
+    {
+        GameObject _hero = Instantiate<GameObject>(prefabHeros[MainMenu.chosenHero]);
     }
 
     public void SpawnEnemy()
@@ -116,6 +124,9 @@ public class Main : MonoBehaviour
 
         //reset the score when game is over
         ScoreCounter.ResetScore();
+        //reset enemies for speed and spawning rate
+        Enemy.ResetSpeed();
+        enemySpawnPerSecond = .5f;
         //Reload _Scene_0 to restart the game
         SceneManager.LoadScene("_Scene_0");
 

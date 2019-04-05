@@ -9,8 +9,10 @@ public enum WeaponType
     blaster, //simple blaster
     spread, //two simultaneous shots
     laser, //[NI] Damage over time
-    shield //adds shields
+    shield, //adds shields
+    destroyer // destorys all enemies on screen
 }
+
 
 //allows setting the weapons' properties in the Inspector
 
@@ -128,17 +130,22 @@ public class Weapon : MonoBehaviour
                 _projectile = MakeProjectile(); //make left projectile
                 _projectile.transform.rotation = Quaternion.AngleAxis(-30, Vector3.back);
                 _projectile.rigidBody.velocity = _projectile.transform.rotation * _velocity;
+                Hero.SINGLETON.shootingSource1.Play();
                 break;
 
             case WeaponType.spread:
                 _projectile = MakeProjectile();
                 _projectile.rigidBody.velocity = _velocity;
+                Hero.SINGLETON.shootingSource2.Play();
                 break;
             case WeaponType.laser:
                 _projectile = MakeProjectile();
                 _projectile.rigidBody.velocity = _velocity;
+                Hero.SINGLETON.shootingSource3.Play();
                 break;
-
+            case WeaponType.destroyer:
+                DestroyAllEnemies();
+                break;
 
         }
     }
@@ -166,5 +173,21 @@ public class Weapon : MonoBehaviour
         lastShotTime = Time.time;
         return (_projectile);
     }
-    
+
+    // function to destroy all enemies on screen
+    public void DestroyAllEnemies()
+    {
+        // array that contains all enemies
+        GameObject[] enemyArray; 
+
+        // finding all gameObjects that are enemies
+        enemyArray = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach(GameObject enemy in enemyArray)
+        {
+            ScoreCounter.UpdateScore(this.gameObject.name);
+            Destroy(enemy);
+        }
+    }
+
 }

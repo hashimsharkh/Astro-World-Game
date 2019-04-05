@@ -76,7 +76,8 @@ public class Enemy : MonoBehaviour
                     //change the score when the enemy is destroyed
                     ScoreCounter.UpdateScore(this.gameObject.name);
                     //destroy the object
-                    
+                    Hero.SINGLETON.destroySource1.Play();
+
                     Destroy(this.gameObject);
                 }
                 Destroy(_otherObject);
@@ -135,6 +136,10 @@ public class Enemy : MonoBehaviour
     static public void ChangeSpeed() //when level changes, makes enemies faster
     {
         Enemy.speed += 5f; //makes enemies 1.5x faster
+    }
+    static public void ResetSpeed() //reset enemies speed for level 1 on restart
+    {
+        Enemy.speed = 10f;
     }
 }
 
