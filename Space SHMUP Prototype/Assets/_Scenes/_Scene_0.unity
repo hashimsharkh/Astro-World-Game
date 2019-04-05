@@ -1811,7 +1811,6 @@ GameObject:
   - component: {fileID: 1151167209}
   - component: {fileID: 1151167208}
   - component: {fileID: 1151167212}
-  - component: {fileID: 1151167213}
   - component: {fileID: 1151167215}
   m_Layer: 5
   m_Name: Canvas
@@ -1913,21 +1912,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PauseMenuUI: {fileID: 848854618}
---- !u!114 &1151167213
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1151167207}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa5fee4b0a2f4bd40a58c378ac82845f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameOverMenuUI: {fileID: 0}
-  finishObjects: []
-  scoreText: {fileID: 0}
 --- !u!114 &1151167214
 MonoBehaviour:
   m_ObjectHideFlags: 0
