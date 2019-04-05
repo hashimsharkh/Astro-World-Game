@@ -21,13 +21,14 @@ public class PowerUp : MonoBehaviour
     public float fadeTime = 4f; //Seconds it will then fade
     public float duration = 3f;//Duration before powerup effect is gone
     public GameObject pickUpEffect;//Pickup effect used after picking up powerup
+    public GameObject powerUpPrefab;//Prefab of powerup icon
     public static int multiplier=1;//Used for points multiplier
+    
 
     [Header("Set Dynamically")]
     public PowerUpType powerUpType; //The type of the powerup
     public WeaponType type;
     public GameObject cube; //Reference to the Cube child
-
     public TextMesh letter; //Reference to the text mesh
 
     public Vector3 rotPerSecond; //Euler rotation speed

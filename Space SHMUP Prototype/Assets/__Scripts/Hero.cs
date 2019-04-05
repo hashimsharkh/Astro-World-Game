@@ -8,8 +8,19 @@ public class Hero : MonoBehaviour
     //Singleton (Software Design pattern)
     static public Hero SINGLETON;
 
-    private Material _material;
-    private Color[] _colors = new Color[] { Color.green, Color.black };
+    public GameObject Hero1;
+    private GameObject barrel;
+    private GameObject collar;
+    private GameObject cube;
+    private GameObject wing;
+    private Material b;
+    private Material cu;
+    private Material co;
+    private Material w;
+    private int size = 4;
+    private Material[] _material;
+    private Color[] _colors = new Color[] { Color.cyan, Color.black };
+    private Color[] _originalColors;
     private int index = 0;
     public RawImage doublePoints, inv;//Declare 2 images for powerups
 
@@ -40,11 +51,25 @@ public class Hero : MonoBehaviour
         else
             Debug.LogError("Another instance of hero tries to exist and assign itself to Singleton");
 
-        _material = GetComponent<Renderer>().material;
+        //Find the child game objects of hero and their renderers
+        barrel = Hero1.transform.Find("Weapon/Barrel").gameObject;
+        collar = Hero1.transform.Find("Weapon/Collar").gameObject;
+        cube = Hero1.transform.Find("Cockpit/Cube").gameObject;
+        wing = Hero1.transform.Find("Wing").gameObject;
 
-    
+        //find materials of the children
+        b = barrel.GetComponent<Renderer>().material;
+        co = collar.GetComponent<Renderer>().material;
+        cu = cube.GetComponent<Renderer>().material;
+        w = wing.GetComponent<Renderer>().material;
 
-        
+        //find the colors of these children so they are not changed
+        _originalColors = new Color[] { b.color, co.color, cu.color, w.color };
+
+        //assign the materials to the _material array
+        _material = new Material[] { b, co, cu, w };
+
+       
     }
     void Start()
     {
@@ -139,15 +164,12 @@ public class Hero : MonoBehaviour
             case PowerUpType.doublePoints:
                 _flag = 1;
                 PowerUp.multiplier = 2;
-                doublePoints.gameObject.SetActive(true);
+                //Instantiate(PowerUp.powerUpPrefab, transform.position, Quaternion.identity);
                 break;
 
             case PowerUpType.invincibility:
+                //Invincibility is true
                 _flag = 2;
-                /*Collider[] collider = GetComponentsInChildren<Collider>();
-                foreach (Collider c in collider)
-                    c.enabled = false; //Disabling colliders is not a good idea after all
-                 */
                 _invincibility = true;
 
                 break;
@@ -165,7 +187,7 @@ public class Hero : MonoBehaviour
         }
         if (_flag == 2)
         {
-            _invincibility = true;
+            _invincibility = false;
         }
         //Destroy the powerup
         if (_powerUp != null)
@@ -175,8 +197,17 @@ public class Hero : MonoBehaviour
 
     public void FixedUpdate()
     {
-        _material.color = _colors[index % 2];
-        index++;
+        //Make color of ship flash if invincibility powerup is picked up
+        for (int i = 0; i < size; i++)
+            _material[i].color = _originalColors[i];
+
+        if (_invincibility)
+        {
+            foreach (Material material in _material)
+                material.color = _colors[index % 2];
+            index++;
+        }
+
     }
     //shieldLevel property
     public float shieldLevel
