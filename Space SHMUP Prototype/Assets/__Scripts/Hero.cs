@@ -37,6 +37,7 @@ public class Hero : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1f;
         //attach a sound to each source
         shootingSource1.clip = shootingSound1;
         shootingSource2.clip = shootingSound2;
@@ -129,7 +130,8 @@ public class Hero : MonoBehaviour
             {
                 destroySource1.Play();
                 Destroy(this.gameObject);//If value passed is less than 0,_Hero is destroyed
-                
+                Time.timeScale = 0f;
+                SceneManager.LoadScene("_Game_Over_Menu", LoadSceneMode.Additive);
                 //Main.SINGLETON.DelayedRestart(gameRestartDelay);//Tell Main.S to restart the game after a delay
             }
         }

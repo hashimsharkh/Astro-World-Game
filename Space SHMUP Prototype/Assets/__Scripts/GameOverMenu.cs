@@ -17,19 +17,19 @@ public class GameOverMenu : MonoBehaviour
     {
         //all objects with this tag will be added
         finishObjects = GameObject.FindGameObjectsWithTag("ShowOnFinish");
-        HideFinished();
+        //HideFinished();
         //gameOverMenuUI.SetActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Hero.SINGLETON.shieldLevel < 0)
-        {
+        //if (Hero.SINGLETON.shieldLevel < 0)
+        //{
         ShowFinished();
-        gameOverMenuUI.SetActive(true);
-        //    //Main.SINGLETON.DelayedRestart(10f);
-        }
+        //gameOverMenuUI.SetActive(true);
+        ////    //Main.SINGLETON.DelayedRestart(10f);
+        //}
         //ManualQuit();
 
     }
@@ -48,7 +48,7 @@ public class GameOverMenu : MonoBehaviour
 
     void ShowFinished()
     {
-        gameOverMenuUI.SetActive(true);
+        //gameOverMenuUI.SetActive(true);
         foreach (GameObject go in finishObjects)
             go.SetActive(true);
         //Time.timeScale = 1f;
