@@ -34,13 +34,21 @@ public class LevelProgression : MonoBehaviour
             _curLevel++; //increase the level
             _nextLevel = false; //reset the condition
             level.text = "Level " + _curLevel; //update text
+            if(_curLevel > 5)
+            {
+                SceneManager.LoadScene("_Game_Over_Menu");
+            }
         }
         slider.value = _counter; //keeps slider updated in real time
+        
     }
     public static void IncLevel() //increases the level by one
     {
         _nextLevel = true; //condition to detirmine whether or not to change level
-        Enemy.ChangeSpeed(); //makes enemies faster
+        if (_curLevel % 2 == 0)
+        {
+            Enemy.ChangeSpeed(); //makes enemies faster every two levels
+        }
         Main.SpawnFaster(); //makes more enemies spawn
     }
     public static void ResetSlider()
