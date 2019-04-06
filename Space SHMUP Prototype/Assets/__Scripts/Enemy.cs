@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     public float health = 1f;
     public int score = 100;
     public float showDamageDuration = 0.1f;
+    public float powerUpDropChance = 1f;//chance to drop a power-up
 
     private BoundsCheck _bndCheck;
 
@@ -66,6 +67,13 @@ public class Enemy : MonoBehaviour
                 health -= Main.GetWeaponDefinition(projectile.weaponType).continuousDamage;
                 if (health <= 0)
                 {
+                    //Immediately before this enemy is destroyed , it notifies the Main singleton by calling ShipDestroyed()
+                    //this only happens once for each enemy ship which is enforced by the nothifiedOfDestruction bool
+                    if (!notifiedOfDestruction)
+                        Main.SINGLETON.shipDestroyed(this);
+
+                    notifiedOfDestruction = true;
+
                     //change the score when the enemy is destroyed
                     ScoreCounter.UpdateScore(this.gameObject.name);
                     //destroy the object

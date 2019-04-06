@@ -12,6 +12,11 @@ public class LevelProgression : MonoBehaviour
     public Slider slider; //the progress bar
     static private float _counter; //a counter to hold values for the progress bar
 
+    //Getter function to return current level
+    public static int getCurLevel()
+    {
+        return _curLevel;
+    }
     // Start is called before the first frame update
     void Start()
     {//presets

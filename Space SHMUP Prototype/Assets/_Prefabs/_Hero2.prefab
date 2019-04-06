@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 5735815758858178410}
   - component: {fileID: 8173344134980953550}
   m_Layer: 0
-  m_Name: wing
+  m_Name: Wing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -626,17 +626,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e11c7aeee6b34449b1552909099857e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ship: {fileID: 0}
   velocity: 30
   rollMult: -45
   pitchMult: 30
   gameRestartDelay: 2
   _shieldLevel: 4
+  _invincibility: 0
   shootingSound1: {fileID: 8300000, guid: 5af221bb43f4aef4aaec36efa4cb2540, type: 3}
   shootingSound2: {fileID: 8300000, guid: 3d82ec190b9a31349ab937843dcdb4dc, type: 3}
   shootingSound3: {fileID: 8300000, guid: 5af221bb43f4aef4aaec36efa4cb2540, type: 3}
   shootingSource1: {fileID: 3079054425950100}
   shootingSource2: {fileID: 4579625673546429588}
   shootingSource3: {fileID: 3079054425950100}
+  destroySound1: {fileID: 0}
+  destroySource1: {fileID: 0}
 --- !u!54 &973647267370660940
 Rigidbody:
   m_ObjectHideFlags: 0

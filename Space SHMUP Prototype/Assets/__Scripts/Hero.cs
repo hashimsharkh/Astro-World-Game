@@ -14,12 +14,12 @@ public class Hero : MonoBehaviour
     public float rollMult = -45;
     public float pitchMult = 30;
     public float gameRestartDelay = 2f;//Restart delay of 2 seconds used after hero ship is destroyed
-
-
+    public Weapon[] weapons;
     [Header("Set Dynamically")]
     [SerializeField]
     private float _shieldLevel = 1; // default shield level is 1
-
+    public static bool invincibility = false;//invincibility is a variable that will be used to determine if ship is invincible
+    public static bool nuke = false;
     //This variable holds a reference to the last triggering GameObject
     private GameObject _lastTriggerGo = null;
     public delegate void WeaponFireDelegate(); //new delegate type
@@ -43,6 +43,7 @@ public class Hero : MonoBehaviour
         shootingSource2.clip = shootingSound2;
         shootingSource3.clip = shootingSound3;
         destroySource1.clip = destroySound1;
+
     }
     void Awake()
     {
@@ -51,7 +52,9 @@ public class Hero : MonoBehaviour
             SINGLETON = this;
         else
             Debug.LogError("Another instance of hero tries to exist and assign itself to Singleton");
-       
+
+        
+        
     }
 
     // Update is called once per frame
@@ -94,28 +97,84 @@ public class Hero : MonoBehaviour
         //If the shield was triggered by an enemy
         if(_gameObjectRoot.tag =="Enemy")
         {
-            
-            shieldLevel--; //Decrease the level of the shield by 1
-            Destroy(_gameObjectRoot); //And destroy the enemy
-            
+            if (!invincibility)
+            {
+                shieldLevel--; //Decrease the level of the shield by 1
+                Destroy(_gameObjectRoot); //And destroy the enemy
+            }
         }
         else if(_gameObjectRoot.tag == "PowerUp")
-            AbsorbPowerUp(_gameObjectRoot);
-        
+            StartCoroutine(AbsorbPowerUp(_gameObjectRoot));
+
         else
             print("Triggered by non-enemy: " + _gameObjectRoot.name);
 
     }
-    public void AbsorbPowerUp(GameObject go)
+    IEnumerator AbsorbPowerUp(GameObject go)
     {
-        PowerUp _powerUp= go.GetComponent<PowerUp>();
 
-        switch (_powerUp.type)
+        int _flag = 0; //used to indicate which powerup was used so effect can be reverted immediately afterwards
+        PowerUp _powerUp = go.GetComponent<PowerUp>();
+
+        ////Instantiate a smoke puff when user collides with powerup and destroy it after 1.5 seconds
+        GameObject smokePuff = Instantiate(_powerUp.pickUpEffect, transform.position, transform.rotation) as GameObject;
+
+        //Turn off mesh renderer/ colliders of powerup and its child so it does not appear on the screen
+        Renderer[] rend = _powerUp.GetComponentsInChildren<Renderer>();
+        foreach (Renderer r in rend)
+            r.enabled = false;
+
+        //Turning off rigidbody collisions
+        _powerUp.getRigid().detectCollisions = false;
+        Collider[] coll = _powerUp.GetComponentsInChildren<Collider>();
+
+        //Turning off box collider for cube
+        foreach (Collider c in coll)
+            c.enabled = false;
+
+        Destroy(smokePuff, 1.5f);
+
+        switch (_powerUp.powerUpType)
         {
+            case PowerUpType.doublePoints:
+                _flag = 1;
+                PowerUp.multiplier = 2;
+                //Instantiate(PowerUp.powerUpPrefab, transform.position, Quaternion.identity);
+                break;
+
+            case PowerUpType.invincibility:
+                //Invincibility is true
+                _flag = 2;
+                invincibility = true;
+
+                break;
+
+            case PowerUpType.nuke:
+                nuke = true;
+                yield return new WaitForSeconds(0);
+                break;
 
         }
-        _powerUp.AbsorbedBy(this.gameObject);
+
+        yield return new WaitForSeconds(_powerUp.duration);
+
+
+        if (_flag == 1)
+        {
+            PowerUp.multiplier = 1;
+            //doublePoints.gameObject.SetActive(false);
+        }
+        if (_flag == 2)
+        {
+            invincibility = false;
+        }
+            
+        //Destroy the powerup
+        if (_powerUp != null)
+            _powerUp.AbsorbedBy(this.gameObject);
+
     }
+   
     //shieldLevel property
     public float shieldLevel
     {
@@ -136,4 +195,23 @@ public class Hero : MonoBehaviour
             }
         }
     }
+    Weapon GetEmptyWeaponSlot()
+    {
+        for(int i=0;i<weapons.Length;i++)
+        {
+            if(weapons[i].weaponType==WeaponType.none)
+            {
+                return (weapons[i]);
+            }
+        }
+        return (null);
+
+    }
+
+    void ClearWeapons()
+    {
+        foreach (Weapon w in weapons)
+            w.SetWeaponType(WeaponType.none);
+    }
+    
 }

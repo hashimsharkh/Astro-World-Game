@@ -40,7 +40,7 @@ public class Weapon : MonoBehaviour
     public GameObject collar;
     public float lastShotTime; //time last shot was fired
     private Renderer _collarRend;
-    private bool _spreadActive = true; //default weapon is spread
+    private int _weaponChange = 0; //default weapon is spread
 
     void Start()
     {
@@ -62,18 +62,33 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
-        
+        //If nuke powerup is activated user has the chance to press space bar to destroy everything around him/her to save himself/herself
+        //Then resets to default weapon in hero class
+        if(Hero.nuke)
+        {
+            SetWeaponType(WeaponType.destroyer);
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                Hero.nuke = false;
+                SetWeaponType(WeaponType.spread);//Resets weapon to default weapon
+            }
+        }
+ 
         if (Input.GetKeyDown(KeyCode.X)) // switch weapon if x is pressed
         {
-            _spreadActive = !_spreadActive;
-            if (_spreadActive)
-                SetWeaponType(WeaponType.spread); // if _spreadActive is true then use spread
+            _weaponChange++;
+            if (_weaponChange % 3 == 0)
+                SetWeaponType(WeaponType.spread); // if there is no remainder when divided by 3,spread is active
+            else if (_weaponChange % 3 == 1 || (_weaponChange % 3 == 2 && LevelProgression.getCurLevel() < 10))
+                SetWeaponType(WeaponType.blaster); // if the remainder when divided by 3 is 2 then use blaster
             else
-                SetWeaponType(WeaponType.blaster); // if _spreadActive is false then use blaster
+            {
+                _weaponChange = -1;
+                SetWeaponType(WeaponType.laser);//Otherwise use blaster if it is above level 10
+            }
         }
 
     }
-
     //property to set and get private _weaponType variable 
     public WeaponType weaponType
     {
