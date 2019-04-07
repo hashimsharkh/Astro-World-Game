@@ -41,6 +41,7 @@ public class Main : MonoBehaviour
     [SerializeField]
     public GameObject Canvas;//Canvas on hierarchy
     public Text levelText;
+    static public int spawnUFO=1;
 
    
     private Image _radialTimer;//to show progress of powerUp icon
@@ -169,8 +170,10 @@ public class Main : MonoBehaviour
     public void SpawnEnemy()
     {
         //instatiate random enemy type
-        int _index = Random.Range(0, prefabEnemies.Length);
-        GameObject _enemy = Instantiate<GameObject>(prefabEnemies[_index]);
+        int _index;
+        if (spawnUFO < 3 ) { _index = Random.Range(0, prefabEnemies.Length-1); } //if less than level 3, dont spawn UFOs
+        else { _index = Random.Range(0, prefabEnemies.Length); } //spawn UFOs if level is at least 3
+        GameObject _enemy = Instantiate<GameObject>(prefabEnemies[_index]); //spawn the enemy
 
         //bounds check
         float _enemyPadding = enemyDefaultPadding;
@@ -197,9 +200,10 @@ public class Main : MonoBehaviour
     {
         //reset the score when game is over
         ScoreCounter.ResetScore();
-        //reset enemies for speed and spawning rate
+        //reset enemies for speed and spawning rate and UFO spawning
         Enemy.ResetSpeed();
         enemySpawnPerSecond = .5f;
+        spawnUFO = 1; //reset count for level of the ufos
         //Reload _Scene_0 to restart the game
         SceneManager.LoadScene("_Scene_0");
     }
