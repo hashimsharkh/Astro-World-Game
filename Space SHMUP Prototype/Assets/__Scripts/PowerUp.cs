@@ -128,12 +128,12 @@ public class PowerUp : MonoBehaviour
     public void SetType(PowerUpType powerUpType)
     {
         //Grab the WeaponDefinition from main
-        PowerUpDefinition def = Main.GetPowerUpDefinition(powerUpType);
+        PowerUpDefinition _def = Main.GetPowerUpDefinition(powerUpType);
         //Set the color of the Cube Child 
-        _cubeRend.material.color = def.color;
+        _cubeRend.material.color = _def.color;
 
-        letter.color = def.letterColor; //We could colarize the letter too
-        letter.text = def.letter;//Set the letter that is shown
+        letter.color = _def.letterColor; //We could colarize the letter too
+        letter.text = _def.letter;//Set the letter that is shown
         this.powerUpType = powerUpType;//Finally actually set the type
 
     }
