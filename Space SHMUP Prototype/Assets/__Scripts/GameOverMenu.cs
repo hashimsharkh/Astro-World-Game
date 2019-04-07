@@ -8,7 +8,12 @@ public class GameOverMenu : MonoBehaviour
 {
     public Text scoreText; //display score
     public Text gameOverText; // display game over message
+    public AudioSource gameOverSource; // indicate game is over
 
+    void Start()
+    {
+        gameOverSource.Play();
+    }
     void Update()
     {
         scoreText.text = "YOUR SCORE IS: " + ScoreCounter.CURR_SCORE; //update score text with current score

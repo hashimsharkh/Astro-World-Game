@@ -48,6 +48,7 @@ public class Weapon : MonoBehaviour
     public float lastShotTime; //time last shot was fired
     private Renderer _collarRend;
     private int _weaponChange = 0; //default weapon is spread
+    public AudioSource explosionSound;
 
     void Start()
     {
@@ -79,7 +80,8 @@ public class Weapon : MonoBehaviour
                 Hero.nuke = false;
                 //Instantiating a big explosion effect
                 GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-                AudioSource.PlayClipAtPoint(explosionClip, transform.position);
+                //AudioSource.PlayClipAtPoint(explosionClip, transform.position);
+                explosionSound.Play();
                 Destroy(explosion, 4f);
                 
                 SetWeaponType(WeaponType.spread);//Resets weapon to default weapon

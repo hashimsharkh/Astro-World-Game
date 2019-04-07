@@ -39,6 +39,7 @@ public class Main : MonoBehaviour
     public GameObject[] powerUpIcon;//powerup icons in an array
     [SerializeField]
     public GameObject Canvas;//Canvas on hierarchy
+    public Text levelText;
 
    
     private Image _radialTimer;//to show progress of powerUp icon
@@ -86,6 +87,7 @@ public class Main : MonoBehaviour
         //calling spawn enemy after rocket is created
         SINGLETON = this;
         _bndCheck = GetComponent<BoundsCheck>();
+        Invoke("DisableText", 3f);
         Invoke("SpawnEnemy", 1.5f / enemySpawnPerSecond);
         //creating a dictionary with WeaponType as the key
         WEAP_DICT = new Dictionary<WeaponType, WeaponDefinition>();
@@ -102,6 +104,11 @@ public class Main : MonoBehaviour
         POWERUP_DICT = new Dictionary<PowerUpType, PowerUpDefinition>();
         foreach (PowerUpDefinition def in powerUpDefinitions)
             POWERUP_DICT[def.powerUpType] = def;
+    }
+
+    void DisableText()
+    {
+        levelText.enabled = false;
     }
     /*public void FixedUpdate()
     {

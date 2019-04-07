@@ -11,6 +11,7 @@ public class LevelProgression : MonoBehaviour
     public Text level; //text displaying current level
     public Slider slider; //the progress bar
     static private float _counter; //a counter to hold values for the progress bar
+    public Text levelText;
 
     //Getter function to return current level
     public static int getCurLevel()
@@ -32,6 +33,9 @@ public class LevelProgression : MonoBehaviour
         if (_nextLevel == true) //if a change level is requested
         {
             _curLevel++; //increase the level
+            levelText.enabled = true;
+            levelText.text = "LEVEL " + _curLevel;
+            Invoke("DisableText", 3f);
             _nextLevel = false; //reset the condition
             level.text = "Level " + _curLevel; //update text
             if(_curLevel > 5)
@@ -41,6 +45,10 @@ public class LevelProgression : MonoBehaviour
         }
         slider.value = _counter; //keeps slider updated in real time
         
+    }
+    void DisableText()
+    {
+        levelText.enabled = false;
     }
     public static void IncLevel() //increases the level by one
     {

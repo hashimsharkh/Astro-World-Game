@@ -29,24 +29,15 @@ public class Hero : MonoBehaviour
     public WeaponFireDelegate fireDelegate;
 
     [Header("Audio Effects")]
-    public AudioClip shootingSound1;
-    public AudioClip shootingSound2;
-    public AudioClip shootingSound3;
     public AudioSource shootingSource1;
     public AudioSource shootingSource2;
     public AudioSource shootingSource3;
-    public AudioClip destroySound1;
     public AudioSource destroySource1;
+    public AudioSource powerDownSource;
 
     void Start()
     {
         Time.timeScale = 1f;
-        //attach a sound to each source
-        shootingSource1.clip = shootingSound1;
-        shootingSource2.clip = shootingSound2;
-        shootingSource3.clip = shootingSound3;
-        destroySource1.clip = destroySound1;
-
     }
     void Awake()
     {
@@ -104,6 +95,7 @@ public class Hero : MonoBehaviour
             if (!invincibility)
             {
                 shieldLevel--; //Decrease the level of the shield by 1
+                powerDownSource.Play();
                 Destroy(_gameObjectRoot); //And destroy the enemy
             }
         }
@@ -201,7 +193,7 @@ public class Hero : MonoBehaviour
             _shieldLevel = Mathf.Min(value, 4);//Ensures that _shieldLevel is never higher than 4
             if (value < 0)
             {
-                destroySource1.Play();
+                
                 Destroy(this.gameObject);//If value passed is less than 0,_Hero is destroyed
                 Time.timeScale = 0f;
                 SceneManager.LoadScene("_Game_Over_Menu", LoadSceneMode.Additive);
