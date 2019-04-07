@@ -14,7 +14,7 @@ public class GameOverMenu : MonoBehaviour
     void Start()
     {
         gameOverSource.Play();
-        GAME_OVER_ACTIVE = true;
+        GAME_OVER_ACTIVE = true; //set that the game over menu is active
     }
     void Update()
     {

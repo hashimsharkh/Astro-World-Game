@@ -13,7 +13,7 @@ public class MainMenu : MonoBehaviour
     public Text instructionsText;
     public GameObject mainMenuUI;
     private static int FIRST_TIME = 1; // determine whether game is being played for the first time
-
+    public static bool MAIN_MENU_ACTIVE; //check if main menu is active
 
     void Awake()
     {
@@ -24,6 +24,7 @@ public class MainMenu : MonoBehaviour
         chosenHero = 0; //default ship is the first 
         Enemy.speed = 10f;
         instructionsText.enabled = false;
+        MAIN_MENU_ACTIVE = true; //set the main menu as active
     }
 
     void Update()
