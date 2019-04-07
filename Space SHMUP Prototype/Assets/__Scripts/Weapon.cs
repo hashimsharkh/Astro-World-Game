@@ -22,7 +22,7 @@ public class WeaponDefinition
     public WeaponType type = WeaponType.none;
     public string letter; //letter to show up on power-up
     public Color color = Color.white; //coler of collar and power-up
-    public GameObject projectilePrefab; //prefab for projectiles 
+    public GameObject projectilePrefab; //prefab for projectiles
     public Color projectileColor = Color.white; //color for prefab
     public float damageOnHit = 0; //amount of damage caused
     public float continuousDamage = 0;//Damage per second
@@ -44,11 +44,14 @@ public class Weapon : MonoBehaviour
     [SerializeField]
     private WeaponType _weaponType = WeaponType.none;
     public WeaponDefinition def;
-    public GameObject collar; 
+    public GameObject collar;
     public float lastShotTime; //time last shot was fired
     private Renderer _collarRend;
     private int _weaponChange = 0; //default weapon is spread
     public AudioSource explosionSound;
+    private int _weaponChange = 0; //default weapon is spread
+
+    WeaponType currentWeapon; //keeps track of which weapon is currently in use
 
     void Start()
     {
@@ -68,6 +71,7 @@ public class Weapon : MonoBehaviour
         }
     }
 
+
     void Update()
     {
         //If nuke powerup is activated user has the chance to press space bar to destroy everything around him/her to save himself/herself
@@ -83,27 +87,33 @@ public class Weapon : MonoBehaviour
                 //AudioSource.PlayClipAtPoint(explosionClip, transform.position);
                 explosionSound.Play();
                 Destroy(explosion, 4f);
-                
-                SetWeaponType(WeaponType.spread);//Resets weapon to default weapon
+
+                SetWeaponType(currentWeapon);//Resets weapon to previous weapon used
             }
         }
- 
+
         if (Input.GetKeyDown(KeyCode.X)) // switch weapon if x is pressed
         {
             _weaponChange++;
-            if (_weaponChange % 3 == 0)
+            if (_weaponChange % 3 == 0) {
                 SetWeaponType(WeaponType.spread); // if there is no remainder when divided by 3,spread is active
+                currentWeapon = WeaponType.spread; //keep track that the current weapon is spread
+            }
             else if (_weaponChange % 3 == 1 || (_weaponChange % 3 == 2 && LevelProgression.getCurLevel() < 3))
+            {
                 SetWeaponType(WeaponType.blaster); // if the remainder when divided by 3 is 2 then use blaster
+                currentWeapon = WeaponType.blaster; // keep track that the current weapon is blaster
+            }
             else
             {
                 _weaponChange = -1;
                 SetWeaponType(WeaponType.laser);//Otherwise use blaster if it is above level 10
+                currentWeapon = WeaponType.laser; //keep track that the current weapon is laser
             }
         }
 
     }
-    //property to set and get private _weaponType variable 
+    //property to set and get private _weaponType variable
     public WeaponType weaponType
     {
         get
@@ -181,9 +191,9 @@ public class Weapon : MonoBehaviour
 
     public Projectile MakeProjectile()
     {
-        
+
         GameObject _gameobject = Instantiate<GameObject>(def.projectilePrefab);
-        
+
         if (transform.parent.gameObject.tag == "Hero")
         {
             _gameobject.tag = "ProjectileHero";
@@ -207,7 +217,7 @@ public class Weapon : MonoBehaviour
     public void DestroyAllEnemies()
     {
         // array that contains all enemies
-        GameObject[] enemyArray; 
+        GameObject[] enemyArray;
 
         // finding all gameObjects that are enemies
         enemyArray = GameObject.FindGameObjectsWithTag("Enemy");
