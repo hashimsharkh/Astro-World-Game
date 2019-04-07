@@ -19,10 +19,12 @@ public class Hero : MonoBehaviour
     [SerializeField]
     private float _shieldLevel = 1; // default shield level is 1
     public static bool invincibility = false;//invincibility is a variable that will be used to determine if ship is invincible
-    public static bool nuke = false;
-    private static bool _doublePoints = false;
+    public static bool nuke = false;//shows nuke power up is active
+    public static bool doublePointsActive = false;//double points show that power up is active
+    private static bool _doublePoints = true;//Double points power up icon
     private static bool _enemySlow = false;
     private float _currentEnemySpeed;
+    private float _timer = 0;
     //This variable holds a reference to the last triggering GameObject
     private GameObject _lastTriggerGo = null;
     public delegate void WeaponFireDelegate(); //new delegate type
@@ -63,7 +65,17 @@ public class Hero : MonoBehaviour
 
         //change rotation of object when it is moving
         transform.rotation = Quaternion.Euler(_yPos * pitchMult, _xPos * rollMult, 0);
-        
+
+        _timer += Time.deltaTime;
+        if (_timer > 7f)
+        {
+            _timer = 0;
+            PowerUp.multiplier = 1;
+            invincibility = false;
+            Enemy.speed = _currentEnemySpeed;
+            doublePointsActive = false;
+            _doublePoints = true;
+        }
         //call fireDelegate() if the delegate is not empty
         if (Input.GetAxis("Jump") == 1 && fireDelegate != null)
         {
@@ -90,7 +102,7 @@ public class Hero : MonoBehaviour
         _lastTriggerGo = _gameObjectRoot;
 
         //If the shield was triggered by an enemy
-        if(_gameObjectRoot.tag =="Enemy")
+        if (_gameObjectRoot.tag == "Enemy")
         {
             if (!invincibility)
             {
@@ -99,84 +111,47 @@ public class Hero : MonoBehaviour
                 Destroy(_gameObjectRoot); //And destroy the enemy
             }
         }
-        else if(_gameObjectRoot.tag == "PowerUp")
-            StartCoroutine(AbsorbPowerUp(_gameObjectRoot));
+        else if (_gameObjectRoot.tag == "PowerUp") 
+            AbsorbPowerUp(_gameObjectRoot);
 
         else
             print("Triggered by non-enemy: " + _gameObjectRoot.name);
 
     }
-    IEnumerator AbsorbPowerUp(GameObject go)
+    public void AbsorbPowerUp(GameObject go)
     {
-
-        int _flag = 0; //used to indicate which powerup was used so effect can be reverted immediately afterwards
         PowerUp _powerUp = go.GetComponent<PowerUp>();
+        _timer = 0;
 
-        ////Instantiate a smoke puff when user collides with powerup and destroy it after 1.5 seconds
-        GameObject smokePuff = Instantiate(_powerUp.pickUpEffect, transform.position, transform.rotation) as GameObject;
-
-        //Turn off mesh renderer/ colliders of powerup and its child so it does not appear on the screen
-        Renderer[] rend = _powerUp.GetComponentsInChildren<Renderer>();
-        foreach (Renderer r in rend)
-            r.enabled = false;
-
-        //Turning off rigidbody collisions
-        _powerUp.getRigid().detectCollisions = false;
-        Collider[] coll = _powerUp.GetComponentsInChildren<Collider>();
-
-        //Turning off box collider for cube
-        foreach (Collider c in coll)
-            c.enabled = false;
-
-        Destroy(smokePuff, 1.5f);
+        //Instantiate a smoke puff when user collides with powerup and destroy it after 1.5 seconds
+        GameObject _smokePuff = Instantiate(_powerUp.pickUpEffect, transform.position, transform.rotation) as GameObject;
+        Destroy(_smokePuff, 1.5f);
 
         switch (_powerUp.powerUpType)
         {
             case PowerUpType.doublePoints:
-                _flag = 1;
-                _doublePoints = true;
+                //these variables show that double points is active
                 PowerUp.multiplier = 2;
-                //Instantiate(PowerUp.powerUpPrefab, transform.position, Quaternion.identity);
+                doublePointsActive = true ;
+                
                 break;
 
             case PowerUpType.invincibility:
                 //Invincibility is true
-                _flag = 2;
                 invincibility = true;
-
                 break;
 
             case PowerUpType.nuke:
                 nuke = true;
-                yield return new WaitForSeconds(0);
                 break;
 
             case PowerUpType.slowTime:
-                _enemySlow = true;
-                _flag = 3;
                 Enemy.speed = 2f;
                 break;
         }
-
-        yield return new WaitForSeconds(_powerUp.duration);
-
-
-        if (_flag == 1)
-        {
-            PowerUp.multiplier = 1;
-            //doublePoints.gameObject.SetActive(false);
-        }
-        if (_flag == 2)
-        {
-            invincibility = false;
-        }
-         if(_flag == 3)
-        {
-            _enemySlow = false;
-            Enemy.speed = _currentEnemySpeed;
-        }
+  
         //Destroy the powerup
-        if (_powerUp != null)
+        if(_powerUp!=null)
             _powerUp.AbsorbedBy(this.gameObject);
 
     }
@@ -201,29 +176,9 @@ public class Hero : MonoBehaviour
             }
         }
     }
-    Weapon GetEmptyWeaponSlot()
-    {
-        for(int i=0;i<weapons.Length;i++)
-        {
-            if(weapons[i].weaponType==WeaponType.none)
-            {
-                return (weapons[i]);
-            }
-        }
-        return (null);
-
-    }
-
-    void ClearWeapons()
-    {
-        foreach (Weapon w in weapons)
-            w.SetWeaponType(WeaponType.none);
-
-    }
-
 
     //Check if double points is active
-    public static bool shouldSpawn()
+    public static bool shouldSpawnDoublePoints()
     {
         return _doublePoints;
     }

@@ -34,6 +34,7 @@ public class Main : MonoBehaviour
     public WeaponDefinition[] weaponDefinitions;
     public PowerUpDefinition[] powerUpDefinitions;
     public GameObject prefabPowerUp;
+    private GameObject _powerUp;//powerUp icon
     private Vector3[] positions= new Vector3[]{ new Vector3( 11, 1, 0) };//positions of power up icons
     [SerializeField]
     public GameObject[] powerUpIcon;//powerup icons in an array
@@ -126,24 +127,39 @@ public class Main : MonoBehaviour
 
      public void SpawnPowerUpIcons()
     {
+        if (Hero.shouldSpawnDoublePoints())
+        {
+            _powerUp = Instantiate(powerUpIcon[0], Camera.main.ViewportToWorldPoint(positions[0]), Quaternion.identity) as GameObject;
+            _powerUp.transform.SetParent(Canvas.transform);
+            _radialTimer = GameObject.Find("RadialTimer").GetComponent<Image>();
 
-        GameObject _powerUp = Instantiate(powerUpIcon[0], Camera.main.ViewportToWorldPoint(positions[0]), Quaternion.identity) as GameObject;
-        _powerUp.transform.SetParent(Canvas.transform);
-        _radialTimer = GameObject.Find("RadialTimer").GetComponent<Image>();
-        Destroy(_powerUp, 7f);//Destroy after 7 seconds
 
+            Hero.SetDoublePoints(false);
+            Hero.doublePointsActive = true;
+        }
 
     }
     void Update()
     {
-        if (Hero.shouldSpawn())
-        {
-            SpawnPowerUpIcons();
-            Hero.SetDoublePoints(false);
+        if (Hero.doublePointsActive && Hero.shouldSpawnDoublePoints())
+        {  SpawnPowerUpIcons();
+
         }
-        if(_radialTimer!=null)
-            //Reduce fill amount over 30 secondsx    
+        if (Hero.doublePointsActive)
+        {
+            _radialTimer.fillAmount = 1f;
+            Hero.doublePointsActive = false;
+        }
+        if (_radialTimer != null)
+        {
+            //Reduce fill amount over 30 seconds   
             _radialTimer.fillAmount -= 1.0f / 7f * Time.deltaTime;
+
+        }
+        if(_radialTimer.fillAmount<=0f)
+        {
+            Destroy(_powerUp);//Destroy 
+        }
     }
     public void SpawnHero()
     {
