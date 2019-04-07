@@ -22,7 +22,7 @@ public class WeaponDefinition
     public WeaponType type = WeaponType.none;
     public string letter; //letter to show up on power-up
     public Color color = Color.white; //coler of collar and power-up
-    public GameObject projectilePrefab; //prefab for projectiles
+    public GameObject projectilePrefab; //prefab for projectiles 
     public Color projectileColor = Color.white; //color for prefab
     public float damageOnHit = 0; //amount of damage caused
     public float continuousDamage = 0;//Damage per second
@@ -33,11 +33,18 @@ public class WeaponDefinition
 public class Weapon : MonoBehaviour
 {
     static public Transform PROJECTILE_ANCHOR;
+    [Header("Set In Inspector")]
+    [SerializeField]
+    public GameObject explosionPrefab;//prefab for explosion effect;
+
+    [SerializeField]
+    public AudioClip explosionClip;//explosion sound
+
     [Header("Set Dynamically")]
     [SerializeField]
     private WeaponType _weaponType = WeaponType.none;
     public WeaponDefinition def;
-    public GameObject collar;
+    public GameObject collar; 
     public float lastShotTime; //time last shot was fired
     private Renderer _collarRend;
     private int _weaponChange = 0; //default weapon is spread
@@ -70,6 +77,11 @@ public class Weapon : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.Space))
             {
                 Hero.nuke = false;
+                //Instantiating a big explosion effect
+                GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+                AudioSource.PlayClipAtPoint(explosionClip, transform.position);
+                Destroy(explosion, 4f);
+                
                 SetWeaponType(WeaponType.spread);//Resets weapon to default weapon
             }
         }

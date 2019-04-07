@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1778,6 +1778,9 @@ MonoBehaviour:
     letterColor: {r: 1, g: 1, b: 1, a: 1}
   prefabPowerUp: {fileID: 2877139617930375309, guid: 26703c441bb778c42b9d7ff69156e58c,
     type: 3}
+  powerUpIcon:
+  - {fileID: 1642759142322372286, guid: d35eaa7c724b11645b808a99a3bcc893, type: 3}
+  Canvas: {fileID: 658016440}
   powerUpFrequency: 010000000400000002000000
 --- !u!114 &1106936997
 MonoBehaviour:

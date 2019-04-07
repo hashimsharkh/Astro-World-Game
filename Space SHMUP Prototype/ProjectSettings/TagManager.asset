@@ -13,6 +13,7 @@ TagManager:
   - PowerUp
   - PowerUpBox
   - ShowOnFinish
+  - Canvas
   layers:
   - Default
   - TransparentFX
