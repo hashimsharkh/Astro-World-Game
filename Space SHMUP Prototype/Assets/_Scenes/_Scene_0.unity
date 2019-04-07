@@ -1766,8 +1766,8 @@ MonoBehaviour:
     letterColor: {r: 1, g: 0.84313726, b: 0, a: 1}
   - powerUpType: 4
     letter: I
-    color: {r: 0.990566, g: 0.06074228, b: 0.7226122, a: 1}
-    letterColor: {r: 1, g: 1, b: 1, a: 1}
+    color: {r: 0.20633909, g: 0.9245283, b: 0.056692798, a: 1}
+    letterColor: {r: 0.9150943, g: 0.038848326, b: 0.83063483, a: 1}
   - powerUpType: 2
     letter: N
     color: {r: 1, g: 1, b: 1, a: 1}
