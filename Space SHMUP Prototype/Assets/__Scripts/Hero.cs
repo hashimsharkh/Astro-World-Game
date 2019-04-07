@@ -156,6 +156,10 @@ public class Hero : MonoBehaviour
                 yield return new WaitForSeconds(0);
                 break;
 
+            case PowerUpType.slowTime:
+                _flag = 3;
+
+                break;
         }
 
         yield return new WaitForSeconds(_powerUp.duration);
@@ -170,7 +174,10 @@ public class Hero : MonoBehaviour
         {
             invincibility = false;
         }
-            
+         if(_flag=3)
+        {
+
+        }
         //Destroy the powerup
         if (_powerUp != null)
             _powerUp.AbsorbedBy(this.gameObject);

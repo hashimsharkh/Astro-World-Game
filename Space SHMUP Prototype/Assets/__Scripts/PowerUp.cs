@@ -101,14 +101,18 @@ public class PowerUp : MonoBehaviour
             Destroy(this.gameObject);
             return;
         }
-
+         
         //use u to determine the alpha value of the Cube and letter
         if (u > 0)
         {
-            Color c = _cubeRend.material.color;
-            c.a = 1f - u;
-            _cubeRend.material.color = c;
-
+            Color c;//temporary variable
+            //If double point is not the powerup then fade cube
+            if (_cubeRend.material.color != null)
+            {
+                 c = _cubeRend.material.color;//store material color
+                c.a = 1f - u;//reduce alpha value of color variable(makes it transparent)
+                _cubeRend.material.color = c;//assign it to the cube
+            }
            
             //Fade the letter too just not as much
             c = letter.color;
