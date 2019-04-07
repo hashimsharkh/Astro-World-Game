@@ -6,59 +6,24 @@ using UnityEngine.UI;
 
 public class GameOverMenu : MonoBehaviour
 {
-    public static bool GAME_OVER = false;
-    public GameObject gameOverMenuUI;
-    public GameObject[] finishObjects;
-    public Text scoreText;
-    //public Button mainMenuBtn, shareScoreBtn;
-    //private bool isButtonPressed = false;
+    public Text scoreText; //display score
+    public Text gameOverText; // display game over message
 
-    void Start()
-    {
-        //all objects with this tag will be added
-        finishObjects = GameObject.FindGameObjectsWithTag("ShowOnFinish");
-        //HideFinished();
-        //gameOverMenuUI.SetActive(true);
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        //if (Hero.SINGLETON.shieldLevel < 0)
-        //{
-        ShowFinished();
-        //gameOverMenuUI.SetActive(true);
-        ////    //Main.SINGLETON.DelayedRestart(10f);
-        //}
-        //ManualQuit();
-
+        scoreText.text = "YOUR SCORE IS: " + ScoreCounter.CURR_SCORE; //update score text with current score
+        if(LevelProgression.getCurLevel() > 5)
+        {
+            gameOverText.text = "GAME OVER. YOU WIN!"; //player wins at level 5
+        }
+        else
+        {
+            gameOverText.text = "GAME OVER. YOU LOSE."; //player loses if less than level 5
+        }
     }
 
     public void Restart()
     {
-        SceneManager.LoadScene("_Main_Menu");
-    }
-
-    void ManualQuit()
-    {
-        //If Q is clicked 
-        if (Input.GetKeyDown(KeyCode.Q))
-            ShowFinished();
-    }
-
-    void ShowFinished()
-    {
-        //gameOverMenuUI.SetActive(true);
-        foreach (GameObject go in finishObjects)
-            go.SetActive(true);
-        //Time.timeScale = 1f;
-        //Main.SINGLETON.DelayedRestart(10f);
-        scoreText.text = "YOUR SCORE IS: " + ScoreCounter.CURR_SCORE;
-    }
-
-    void HideFinished()
-    {
-        foreach (GameObject go in finishObjects)
-            go.SetActive(false);
+        SceneManager.LoadScene("_Main_Menu"); //reload main menu when restart
     }
 }

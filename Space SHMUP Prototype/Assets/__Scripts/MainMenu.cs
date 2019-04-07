@@ -12,6 +12,7 @@ public class MainMenu : MonoBehaviour
     void Start()
     {
         chosenHero = 0; //default ship is the first 
+        Enemy.speed = 10f;
     }
     public void PlayGame() //button for starting the game
     {

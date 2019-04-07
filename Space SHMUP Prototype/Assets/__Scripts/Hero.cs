@@ -20,10 +20,13 @@ public class Hero : MonoBehaviour
     private float _shieldLevel = 1; // default shield level is 1
     public static bool invincibility = false;//invincibility is a variable that will be used to determine if ship is invincible
     public static bool nuke = false;
+    public static bool slowTime = false; //determine if enemies are slowed down or not 
     //This variable holds a reference to the last triggering GameObject
     private GameObject _lastTriggerGo = null;
     public delegate void WeaponFireDelegate(); //new delegate type
     public WeaponFireDelegate fireDelegate;
+
+    private float _tempSpeed; //hold current enemy speed
 
     [Header("Audio Effects")]
     public AudioClip shootingSound1;
@@ -78,6 +81,12 @@ public class Hero : MonoBehaviour
         {
             fireDelegate();
         }
+
+        if (slowTime == false)
+        {
+            _tempSpeed = Enemy.speed;
+        }
+
     }
     
 
@@ -154,6 +163,12 @@ public class Hero : MonoBehaviour
                 yield return new WaitForSeconds(0);
                 break;
 
+            case PowerUpType.slowTime:
+                _flag = 3;
+                slowTime = true;
+                Enemy.speed = 2f;
+                break;
+
         }
 
         yield return new WaitForSeconds(_powerUp.duration);
@@ -167,6 +182,11 @@ public class Hero : MonoBehaviour
         if (_flag == 2)
         {
             invincibility = false;
+        }
+        if (_flag == 3)
+        {
+            Enemy.speed = _tempSpeed;
+            slowTime = false;
         }
             
         //Destroy the powerup
