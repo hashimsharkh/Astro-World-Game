@@ -48,7 +48,7 @@ public class Main : MonoBehaviour
     {
         PowerUpType.doublePoints,
         PowerUpType.invincibility,
-        //,PowerUpType.slowTime,
+        PowerUpType.slowTime,
         PowerUpType.nuke
      };
 

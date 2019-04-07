@@ -21,6 +21,8 @@ public class Hero : MonoBehaviour
     public static bool invincibility = false;//invincibility is a variable that will be used to determine if ship is invincible
     public static bool nuke = false;
     private static bool _doublePoints = false;
+    private static bool _enemySlow = false;
+    private float _currentEnemySpeed;
     //This variable holds a reference to the last triggering GameObject
     private GameObject _lastTriggerGo = null;
     public delegate void WeaponFireDelegate(); //new delegate type
@@ -53,9 +55,6 @@ public class Hero : MonoBehaviour
             SINGLETON = this;
         else
             Debug.LogError("Another instance of hero tries to exist and assign itself to Singleton");
-
-        
-        
     }
 
     // Update is called once per frame
@@ -78,6 +77,10 @@ public class Hero : MonoBehaviour
         if (Input.GetAxis("Jump") == 1 && fireDelegate != null)
         {
             fireDelegate();
+        }
+        if (!_enemySlow)
+        {
+            _currentEnemySpeed = Enemy.speed;
         }
     }
     
@@ -157,8 +160,9 @@ public class Hero : MonoBehaviour
                 break;
 
             case PowerUpType.slowTime:
+                _enemySlow = true;
                 _flag = 3;
-
+                Enemy.speed = 2f;
                 break;
         }
 
@@ -174,9 +178,10 @@ public class Hero : MonoBehaviour
         {
             invincibility = false;
         }
-         if(_flag=3)
+         if(_flag == 3)
         {
-
+            _enemySlow = false;
+            Enemy.speed = _currentEnemySpeed;
         }
         //Destroy the powerup
         if (_powerUp != null)
