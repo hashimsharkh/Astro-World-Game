@@ -196,7 +196,7 @@ public class Hero : MonoBehaviour
                 
                 Destroy(this.gameObject);//If value passed is less than 0,_Hero is destroyed
                 Time.timeScale = 0f;
-                SetMusicVolume.zeroVolume();
+                SetMusicVolume.zeroVolume(); //stops the game volume
                 SceneManager.LoadScene("_Game_Over_Menu", LoadSceneMode.Additive);
                 //Main.SINGLETON.DelayedRestart(gameRestartDelay);//Tell Main.S to restart the game after a delay
             }
