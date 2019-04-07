@@ -49,7 +49,7 @@ public class Weapon : MonoBehaviour
     private Renderer _collarRend;
     private int _weaponChange = 0; //default weapon is spread
     public AudioSource explosionSound;
-    private int _weaponChange = 0; //default weapon is spread
+
 
     WeaponType currentWeapon; //keeps track of which weapon is currently in use
 

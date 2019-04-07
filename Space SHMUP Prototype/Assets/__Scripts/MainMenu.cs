@@ -10,12 +10,15 @@ public class MainMenu : MonoBehaviour
     public Dropdown dropdown; //options of heros
     public Image background; //holds background image
     private float _backgroundSpeed = 0.001f; //controls speed of background
+    public Text instructionsText;
+    public GameObject mainMenuUI;
     
 
    void Start()
     {
         chosenHero = 0; //default ship is the first 
         Enemy.speed = 10f;
+        instructionsText.enabled = false;
     }
 
     void Update()
@@ -27,7 +30,15 @@ public class MainMenu : MonoBehaviour
     }
     public void PlayGame() //button for starting the game
     {
+        instructionsText.enabled = true;
+        mainMenuUI.SetActive(false);
+        Invoke("DisplayScene", 5f);
+        //SceneManager.LoadScene("_Scene_0");
+    }
+    void DisplayScene()
+    {
         SceneManager.LoadScene("_Scene_0");
+        instructionsText.enabled = false;
     }
 
     public void QuitGame() //quits the application

@@ -38,7 +38,7 @@ public class LevelProgression : MonoBehaviour
             Invoke("DisableText", 3f);
             _nextLevel = false; //reset the condition
             level.text = "Level " + _curLevel; //update text
-            if(_curLevel > 5)
+            if(_curLevel > 10)
             {
                 SceneManager.LoadScene("_Game_Over_Menu");
             }

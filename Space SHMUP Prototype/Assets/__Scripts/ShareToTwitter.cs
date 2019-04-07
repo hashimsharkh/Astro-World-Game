@@ -7,7 +7,7 @@ public class ShareToTwitter : MonoBehaviour
     // Call send tweet function when button is clicked
     public void OnClick()
     {
-        SendTweet("I just played SHMUP! I scored " + ScoreCounter.CURR_SCORE);
+        SendTweet("I just played Astroworld! I scored " + ScoreCounter.CURR_SCORE + " points!");
     }
     private string _twitterAddress = "http://twitter.com/intent/tweet";
     private string _tweetLanguage = "en";
