@@ -36,10 +36,7 @@ public class Weapon : MonoBehaviour
     [Header("Set In Inspector")]
     [SerializeField]
     public GameObject explosionPrefab;//prefab for explosion effect;
-
-    [SerializeField]
-    public AudioClip explosionClip;//explosion sound
-
+    
     [Header("Set Dynamically")]
     [SerializeField]
     private WeaponType _weaponType = WeaponType.none;
@@ -84,7 +81,7 @@ public class Weapon : MonoBehaviour
                 Hero.nuke = false;
                 //Instantiating a big explosion effect
                 GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-                //AudioSource.PlayClipAtPoint(explosionClip, transform.position);
+                
                 explosionSound.Play();
                 Destroy(explosion, 4f);
 

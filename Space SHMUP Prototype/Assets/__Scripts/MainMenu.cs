@@ -12,9 +12,14 @@ public class MainMenu : MonoBehaviour
     private float _backgroundSpeed = 0.001f; //controls speed of background
     public Text instructionsText;
     public GameObject mainMenuUI;
-    
+    private static int FIRST_TIME = 1; // determine whether game is being played for the first time
 
-   void Start()
+
+    void Awake()
+    {
+        //FIRST_TIME = 1;
+    }
+    void Start()
     {
         chosenHero = 0; //default ship is the first 
         Enemy.speed = 10f;
@@ -25,20 +30,27 @@ public class MainMenu : MonoBehaviour
     {
         RectTransform _rectTransform = background.GetComponent<RectTransform>();
         _rectTransform.Rotate(new Vector3(0, 0, 45) * _backgroundSpeed);
-        
-        
     }
     public void PlayGame() //button for starting the game
     {
-        instructionsText.enabled = true;
+        if (FIRST_TIME == 1)
+        {
+            instructionsText.enabled = true;
+            Invoke("DisplayScene", 5f);
+        }
+        else
+        {
+            DisplayScene();
+        }
         mainMenuUI.SetActive(false);
-        Invoke("DisplayScene", 5f);
+        
         //SceneManager.LoadScene("_Scene_0");
     }
     void DisplayScene()
     {
         SceneManager.LoadScene("_Scene_0");
         instructionsText.enabled = false;
+        FIRST_TIME++;
     }
 
     public void QuitGame() //quits the application
