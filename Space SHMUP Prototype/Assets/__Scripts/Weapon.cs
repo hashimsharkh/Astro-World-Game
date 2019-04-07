@@ -49,6 +49,8 @@ public class Weapon : MonoBehaviour
     private Renderer _collarRend;
     private int _weaponChange = 0; //default weapon is spread
 
+    WeaponType currentWeapon; //keeps track of which weapon is currently in use
+
     void Start()
     {
         collar = transform.Find("Collar").gameObject;
@@ -67,6 +69,7 @@ public class Weapon : MonoBehaviour
         }
     }
 
+
     void Update()
     {
         //If nuke powerup is activated user has the chance to press space bar to destroy everything around him/her to save himself/herself
@@ -82,21 +85,27 @@ public class Weapon : MonoBehaviour
                 AudioSource.PlayClipAtPoint(explosionClip, transform.position);
                 Destroy(explosion, 4f);
                 
-                SetWeaponType(WeaponType.spread);//Resets weapon to default weapon
+                SetWeaponType(currentWeapon);//Resets weapon to previous weapon used
             }
         }
- 
+
         if (Input.GetKeyDown(KeyCode.X)) // switch weapon if x is pressed
         {
             _weaponChange++;
-            if (_weaponChange % 3 == 0)
+            if (_weaponChange % 3 == 0) { 
                 SetWeaponType(WeaponType.spread); // if there is no remainder when divided by 3,spread is active
+                currentWeapon = WeaponType.spread; //keep track that the current weapon is spread
+            }
             else if (_weaponChange % 3 == 1 || (_weaponChange % 3 == 2 && LevelProgression.getCurLevel() < 3))
+            {
                 SetWeaponType(WeaponType.blaster); // if the remainder when divided by 3 is 2 then use blaster
+                currentWeapon = WeaponType.blaster; // keep track that the current weapon is blaster
+            }
             else
             {
                 _weaponChange = -1;
                 SetWeaponType(WeaponType.laser);//Otherwise use blaster if it is above level 10
+                currentWeapon = WeaponType.laser; //keep track that the current weapon is laser 
             }
         }
 
