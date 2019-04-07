@@ -9,10 +9,12 @@ public class GameOverMenu : MonoBehaviour
     public Text scoreText; //display score
     public Text gameOverText; // display game over message
     public AudioSource gameOverSource; // indicate game is over
+    public static bool GAME_OVER_ACTIVE; //check whether game over screen is active
 
     void Start()
     {
         gameOverSource.Play();
+        GAME_OVER_ACTIVE = true;
     }
     void Update()
     {
@@ -30,5 +32,6 @@ public class GameOverMenu : MonoBehaviour
     public void Restart()
     {
         SceneManager.LoadScene("_Main_Menu"); //reload main menu when restart
+        GAME_OVER_ACTIVE = false;
     }
 }

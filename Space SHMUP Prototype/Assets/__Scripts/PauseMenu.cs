@@ -13,7 +13,11 @@ public class PauseMenu : MonoBehaviour
     void Update()
     {
         // check if P is pressed so game can pause
-        PauseClicked();
+        if (!(GameOverMenu.GAME_OVER_ACTIVE))
+        {
+            PauseClicked();
+        }
+            
     }
 
     void PauseClicked()
