@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 3849731f87957fe4ca8e47a1c235c5a2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -389,7 +389,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 3849731f87957fe4ca8e47a1c235c5a2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -606,11 +606,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8469714873708703523}
     m_Modifications:
-    - target: {fileID: 6025450052801750684, guid: c0a8870c494f68a46b1aace5494931b9,
-        type: 3}
-      propertyPath: m_Name
-      value: PowerDownSound
-      objectReference: {fileID: 0}
     - target: {fileID: 3507110604359069547, guid: c0a8870c494f68a46b1aace5494931b9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -666,6 +661,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6025450052801750684, guid: c0a8870c494f68a46b1aace5494931b9,
+        type: 3}
+      propertyPath: m_Name
+      value: PowerDownSound
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0a8870c494f68a46b1aace5494931b9, type: 3}
 --- !u!82 &8870945142316766236 stripped
@@ -687,11 +687,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8469714873708703523}
     m_Modifications:
-    - target: {fileID: 8637773548530383639, guid: ee6a3494b6c7e814e84ff0c4496da278,
-        type: 3}
-      propertyPath: m_Name
-      value: ShortShootSound
-      objectReference: {fileID: 0}
     - target: {fileID: 4238868382828405517, guid: ee6a3494b6c7e814e84ff0c4496da278,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -746,6 +741,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8637773548530383639, guid: ee6a3494b6c7e814e84ff0c4496da278,
+        type: 3}
+      propertyPath: m_Name
+      value: ShortShootSound
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6a3494b6c7e814e84ff0c4496da278, type: 3}
