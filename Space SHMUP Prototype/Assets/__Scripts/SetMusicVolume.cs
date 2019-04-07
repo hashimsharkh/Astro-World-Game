@@ -13,8 +13,14 @@ public class SetMusicVolume : MonoBehaviour
         myMusic.volume = _volume;
     }
 
+    void Update()
+    {
+        myMusic.volume = _volume;
+    }
+
     static public void zeroVolume()
     {
-        _volume = 0f;
+        _volume = 0.0f;
     }
+
 }
