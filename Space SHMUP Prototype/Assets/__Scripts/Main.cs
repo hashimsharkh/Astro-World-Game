@@ -33,6 +33,8 @@ public class Main : MonoBehaviour
     public PowerUpDefinition[] powerUpDefinitions;
     public GameObject prefabPowerUp;
 
+    [Serializefield]
+    public Gameobject[] powerUpIcon;
     //Array with all power ups that can drop
     public PowerUpType[] powerUpFrequency = new PowerUpType[]
     {
@@ -106,6 +108,13 @@ public class Main : MonoBehaviour
             index++;
         }
     }*/
+
+     public void SpawnPowerUpIcons()
+    {
+        if(Hero.shouldSpawn())
+
+
+    }
     public void SpawnHero()
     {
         GameObject _hero = Instantiate<GameObject>(prefabHeros[MainMenu.chosenHero]);
