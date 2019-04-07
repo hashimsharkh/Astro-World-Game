@@ -57,6 +57,7 @@ public class LevelProgression : MonoBehaviour
         {
             Enemy.ChangeSpeed(); //makes enemies faster every two levels
         }
+        Main.spawnUFO++; //increment for the start of spawning UFOs
         Main.SpawnFaster(); //makes more enemies spawn
     }
     public static void ResetSlider()
