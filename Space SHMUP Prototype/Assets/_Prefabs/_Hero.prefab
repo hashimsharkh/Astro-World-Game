@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6828813583262748571}
   - component: {fileID: 1860543638977438334}
   m_Layer: 0
-  m_Name: LaserRocketSound
+  m_Name: LaserSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -515,7 +515,6 @@ GameObject:
   - component: {fileID: 8469714873708703532}
   - component: {fileID: 8469714873708703522}
   - component: {fileID: 8469714873708703521}
-  - component: {fileID: 7733193326597699198}
   m_Layer: 8
   m_Name: _Hero
   m_TagString: Hero
@@ -582,13 +581,14 @@ MonoBehaviour:
   rollMult: -45
   pitchMult: 30
   gameRestartDelay: 2
+  weapons: []
   _shieldLevel: 4
   shootingSound1: {fileID: 8300000, guid: 5af221bb43f4aef4aaec36efa4cb2540, type: 3}
   shootingSound2: {fileID: 8300000, guid: 3d82ec190b9a31349ab937843dcdb4dc, type: 3}
-  shootingSound3: {fileID: 8300000, guid: 5af221bb43f4aef4aaec36efa4cb2540, type: 3}
+  shootingSound3: {fileID: 8300000, guid: 844926d0f70578d43a65cea868550241, type: 3}
   shootingSource1: {fileID: 4178232081684576100}
   shootingSource2: {fileID: 2733909564773394226}
-  shootingSource3: {fileID: 4178232081684576100}
+  shootingSource3: {fileID: 1860543638977438334}
   destroySound1: {fileID: 8300000, guid: cfc58d38c90feea4193dd04a46b6730e, type: 3}
   destroySource1: {fileID: 293440737021518431}
 --- !u!54 &8469714873708703521
@@ -607,20 +607,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
---- !u!114 &7733193326597699198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8469714873708703520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 324a0bc773be82d4d8ff58e00eae0882, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fadeOutTexture: {fileID: 2800000, guid: 16fe961f69e834ee58da3c7a14d05a3d, type: 3}
-  fadeSpeed: 0.8
 --- !u!1 &8469714873890558373
 GameObject:
   m_ObjectHideFlags: 0

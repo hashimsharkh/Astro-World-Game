@@ -8,11 +8,22 @@ public class MainMenu : MonoBehaviour
 {
     static public int chosenHero; //chosen hero from options menu
     public Dropdown dropdown; //options of heros
+    public Image background; //holds background image
+    private float _backgroundSpeed = 0.001f; //controls speed of background
+    
 
-    void Start()
+   void Start()
     {
         chosenHero = 0; //default ship is the first 
         Enemy.speed = 10f;
+    }
+
+    void Update()
+    {
+        RectTransform _rectTransform = background.GetComponent<RectTransform>();
+        _rectTransform.Rotate(new Vector3(0, 0, 45) * _backgroundSpeed);
+        
+        
     }
     public void PlayGame() //button for starting the game
     {

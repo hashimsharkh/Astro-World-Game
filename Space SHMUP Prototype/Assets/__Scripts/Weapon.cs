@@ -79,7 +79,7 @@ public class Weapon : MonoBehaviour
             _weaponChange++;
             if (_weaponChange % 3 == 0)
                 SetWeaponType(WeaponType.spread); // if there is no remainder when divided by 3,spread is active
-            else if (_weaponChange % 3 == 1 || (_weaponChange % 3 == 2 && LevelProgression.getCurLevel() < 1))
+            else if (_weaponChange % 3 == 1 || (_weaponChange % 3 == 2 && LevelProgression.getCurLevel() < 3))
                 SetWeaponType(WeaponType.blaster); // if the remainder when divided by 3 is 2 then use blaster
             else
             {
