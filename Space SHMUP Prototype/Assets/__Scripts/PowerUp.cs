@@ -107,10 +107,12 @@ public class PowerUp : MonoBehaviour
         {
             Color c = _cubeRend.material.color;
             c.a = 1f - u;
+            _cubeRend.material.color = c;
 
+           
             //Fade the letter too just not as much
             c = letter.color;
-            c.a = 1f - (u * 0.5f);
+            c.a = 1f - (u *  0.5f);
             letter.color = c;
         }
 
