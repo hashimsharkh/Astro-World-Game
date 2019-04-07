@@ -31,6 +31,12 @@ public class GameOverMenu : MonoBehaviour
 
     public void Restart()
     {
+        //reset the score when game is over
+        ScoreCounter.ResetScore();
+        //reset enemies for speed and spawning rate and UFO spawning
+        Enemy.ResetSpeed();
+        Main.enemySpawnPerSecond = .5f;
+        Main.spawnUFO = 1; //reset count for level of the ufos
         SceneManager.LoadScene("_Main_Menu"); //reload main menu when restart
         GAME_OVER_ACTIVE = false;
     }

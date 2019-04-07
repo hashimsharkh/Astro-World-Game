@@ -267,7 +267,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: cd8002f70c22e4840bffd510c84d3c10, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -391,7 +391,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: cd8002f70c22e4840bffd510c84d3c10, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -482,7 +482,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: cd8002f70c22e4840bffd510c84d3c10, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -573,7 +573,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: cd8002f70c22e4840bffd510c84d3c10, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -917,15 +917,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc6af97b22de26e42b628482cbf5e6b4, type: 3}
---- !u!4 &5905248801054602404 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4442466264707375099, guid: dc6af97b22de26e42b628482cbf5e6b4,
-    type: 3}
-  m_PrefabInstance: {fileID: 7806259846577335135}
-  m_PrefabAsset: {fileID: 0}
 --- !u!82 &1597112597314284453 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 8826899734361473274, guid: dc6af97b22de26e42b628482cbf5e6b4,
+    type: 3}
+  m_PrefabInstance: {fileID: 7806259846577335135}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5905248801054602404 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4442466264707375099, guid: dc6af97b22de26e42b628482cbf5e6b4,
     type: 3}
   m_PrefabInstance: {fileID: 7806259846577335135}
   m_PrefabAsset: {fileID: 0}
