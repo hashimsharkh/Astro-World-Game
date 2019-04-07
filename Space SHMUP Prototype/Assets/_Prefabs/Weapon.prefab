@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51ef47624d87a453c9400e8516e2cea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionPrefab: {fileID: 100002, guid: 6ecf76dc4f268d340b2666896a954bcc, type: 3}
+  explosionClip: {fileID: 8300000, guid: 2d0fbc4fb0c6b6446bf25f176eb6a5ab, type: 3}
   _weaponType: 4
   def:
     type: 2

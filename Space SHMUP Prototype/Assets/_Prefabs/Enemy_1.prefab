@@ -163,6 +163,7 @@ MonoBehaviour:
   health: 2
   score: 100
   showDamageDuration: 0.1
+  powerUpDropChance: 1
   originalColors: []
   materials: []
   showingDamage: 0
@@ -180,7 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b100086dc262a8419a79945d65f62e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: -2.5
+  radius: -6
   keepOnScreen: 0
   isOnScreen: 1
   camWidth: 0

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public enum PowerUpType
 {
@@ -27,18 +28,27 @@ public class Main : MonoBehaviour
     //weaponDefinitions variables
     public GameObject[] prefabEnemies;
     public GameObject[] prefabHeros;
+    
     static public float enemySpawnPerSecond = 0.5f; //# of enemies per second
     public float enemyDefaultPadding = 1.5f;
     public WeaponDefinition[] weaponDefinitions;
     public PowerUpDefinition[] powerUpDefinitions;
     public GameObject prefabPowerUp;
+    private Vector3[] positions= new Vector3[]{ new Vector3( 11, 1, 0) };//positions of power up icons
+    [SerializeField]
+    public GameObject[] powerUpIcon;//powerup icons in an array
+    [SerializeField]
+    public GameObject Canvas;//Canvas on hierarchy
+
+   
+    private Image _radialTimer;//to show progress of powerUp icon
 
     //Array with all power ups that can drop
     public PowerUpType[] powerUpFrequency = new PowerUpType[]
     {
         PowerUpType.doublePoints,
         PowerUpType.invincibility,
-        PowerUpType.slowTime,
+        //,PowerUpType.slowTime,
         PowerUpType.nuke
      };
 
@@ -106,6 +116,28 @@ public class Main : MonoBehaviour
             index++;
         }
     }*/
+
+     public void SpawnPowerUpIcons()
+    {
+
+        GameObject _powerUp = Instantiate(powerUpIcon[0], Camera.main.ViewportToWorldPoint(positions[0]), Quaternion.identity) as GameObject;
+        _powerUp.transform.SetParent(Canvas.transform);
+        _radialTimer = GameObject.Find("RadialTimer").GetComponent<Image>();
+        Destroy(_powerUp, 7f);//Destroy after 7 seconds
+
+
+    }
+    void Update()
+    {
+        if (Hero.shouldSpawn())
+        {
+            SpawnPowerUpIcons();
+            Hero.SetDoublePoints(false);
+        }
+        if(_radialTimer!=null)
+            //Reduce fill amount over 30 secondsx    
+            _radialTimer.fillAmount -= 1.0f / 7f * Time.deltaTime;
+    }
     public void SpawnHero()
     {
         GameObject _hero = Instantiate<GameObject>(prefabHeros[MainMenu.chosenHero]);

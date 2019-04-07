@@ -101,16 +101,22 @@ public class PowerUp : MonoBehaviour
             Destroy(this.gameObject);
             return;
         }
-
+         
         //use u to determine the alpha value of the Cube and letter
         if (u > 0)
         {
-            Color c = _cubeRend.material.color;
-            c.a = 1f - u;
-
+            Color c;//temporary variable
+            //If double point is not the powerup then fade cube
+            if (_cubeRend.material.color != null)
+            {
+                 c = _cubeRend.material.color;//store material color
+                c.a = 1f - u;//reduce alpha value of color variable(makes it transparent)
+                _cubeRend.material.color = c;//assign it to the cube
+            }
+           
             //Fade the letter too just not as much
             c = letter.color;
-            c.a = 1f - (u * 0.5f);
+            c.a = 1f - (u *  0.5f);
             letter.color = c;
         }
 
@@ -126,12 +132,12 @@ public class PowerUp : MonoBehaviour
     public void SetType(PowerUpType powerUpType)
     {
         //Grab the WeaponDefinition from main
-        PowerUpDefinition def = Main.GetPowerUpDefinition(powerUpType);
+        PowerUpDefinition _def = Main.GetPowerUpDefinition(powerUpType);
         //Set the color of the Cube Child 
-        _cubeRend.material.color = def.color;
+        _cubeRend.material.color = _def.color;
 
-        letter.color = def.letterColor; //We could colarize the letter too
-        letter.text = def.letter;//Set the letter that is shown
+        letter.color = _def.letterColor; //We could colarize the letter too
+        letter.text = _def.letter;//Set the letter that is shown
         this.powerUpType = powerUpType;//Finally actually set the type
 
     }
