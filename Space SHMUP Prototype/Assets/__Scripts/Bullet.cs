@@ -18,7 +18,6 @@ public class Bullet : MonoBehaviour
         if (_bndCheck != null && _bndCheck.offDown) // if bullet is out of bounds, destroy object
         {
             Destroy(gameObject);
-            print("destroyed");
         }
 
     }
