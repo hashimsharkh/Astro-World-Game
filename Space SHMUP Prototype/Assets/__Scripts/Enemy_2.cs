@@ -6,9 +6,9 @@ public class Enemy_2 : Enemy
 { 
     [Header("Set in Inspector: Enemy_2")]
     
-    public float waveFrequency = 2;
-    public float waveWidth = 4;
-    public float waveRotY = 45; //rotation of wave in the y direction
+    public float waveFrequency = 2f;
+    public float waveWidth = 4f;
+    public float waveRotY = 45f; //rotation of wave in the y direction
 
     private float _initialPosition;
     private float _birthTime; //stores time of instatiation 

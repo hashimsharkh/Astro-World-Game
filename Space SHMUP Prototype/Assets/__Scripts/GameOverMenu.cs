@@ -13,19 +13,19 @@ public class GameOverMenu : MonoBehaviour
 
     void Start()
     {
-        gameOverSource.Play();
+        gameOverSource.Play(); //play game over sound
         GAME_OVER_ACTIVE = true; //set that the game over menu is active
     }
     void Update()
     {
         scoreText.text = "YOUR SCORE IS: " + ScoreCounter.CURR_SCORE; //update score text with current score
-        if(LevelProgression.GetCurLevel() > 5)
+        if(LevelProgression.GetCurLevel() > 10)
         {
-            gameOverText.text = "GAME OVER. YOU WIN!"; //player wins at level 5
+            gameOverText.text = "GAME OVER. YOU WIN!"; //player wins at level 10
         }
         else
         {
-            gameOverText.text = "GAME OVER. YOU LOSE."; //player loses if less than level 5
+            gameOverText.text = "GAME OVER. YOU LOSE."; //player loses if less than level 10
         }
     }
 
@@ -35,8 +35,8 @@ public class GameOverMenu : MonoBehaviour
         ScoreCounter.ResetScore();
         //reset enemies for speed and spawning rate and UFO spawning
         Enemy.ResetSpeed();
-        Main.enemySpawnPerSecond = .5f;
-        Main.spawnUFO = 1; //reset count for level of the ufos
+        Main.ENEMY_SPAWN_PER_SEC = .5f;
+        Main.SPAWN_UFO = 1; //reset count for level of the ufos
         SceneManager.LoadScene("_Main_Menu"); //reload main menu when restart
         GAME_OVER_ACTIVE = false;
     }

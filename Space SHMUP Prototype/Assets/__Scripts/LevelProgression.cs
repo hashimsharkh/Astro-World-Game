@@ -11,7 +11,8 @@ public class LevelProgression : MonoBehaviour
     public Text level; //text displaying current level
     public Slider slider; //the progress bar
     static private float _counter; //a counter to hold values for the progress bar
-    public Text levelText;
+    public Text levelText; //display level during transition
+    public Text levelFeaturesText; //display new feature during transition
 
     //Getter function to return current level
     public static int GetCurLevel()
@@ -20,11 +21,13 @@ public class LevelProgression : MonoBehaviour
     }
     // Start is called before the first frame update
     void Start()
-    {//presets
+    {
+        //presets
         _curLevel = 1; //set level to 1 at start
         _nextLevel = false; 
-        level.text = "Level "+_curLevel;
+        level.text = "Level "+_curLevel; //level is the current level
         _counter = 0f;
+        levelFeaturesText.enabled = false; //disable any features
     }
 
     // Update is called once per frame
@@ -33,22 +36,31 @@ public class LevelProgression : MonoBehaviour
         if (_nextLevel == true) //if a change level is requested
         {
             _curLevel++; //increase the level
-            levelText.enabled = true;
-            levelText.text = "LEVEL " + _curLevel;
-            Invoke("DisableText", 3f);
+            levelText.enabled = true; //enable transition
+            levelText.text = "LEVEL " + _curLevel; //display level
+            Invoke("DisableText", 3f); //disable text after 3 seconds
             _nextLevel = false; //reset the condition
             level.text = "Level " + _curLevel; //update text
             if(_curLevel > 10)
             {
-                SceneManager.LoadScene("_Game_Over_Menu");
+                SceneManager.LoadScene("_Game_Over_Menu"); //call game over if reaches level 10
+            }
+            if (_curLevel == 3)
+            {
+                //display features then disappear after 3 seconds
+                levelFeaturesText.enabled = true;
+                Invoke("DisableText", 3f);
             }
         }
+        
         slider.value = _counter; //keeps slider updated in real time
         
     }
     void DisableText()
     {
+        //disable transition text
         levelText.enabled = false;
+        levelFeaturesText.enabled = false;
     }
     public static void IncLevel() //increases the level by one
     {
@@ -57,7 +69,7 @@ public class LevelProgression : MonoBehaviour
         {
             Enemy.ChangeSpeed(); //makes enemies faster every two levels
         }
-        Main.spawnUFO++; //increment for the start of spawning UFOs
+        Main.SPAWN_UFO++; //increment for the start of spawning UFOs
         Main.SpawnFaster(); //makes more enemies spawn
     }
     public static void ResetSlider()

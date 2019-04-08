@@ -15,13 +15,14 @@ public class Hero : MonoBehaviour
     public float pitchMult = 30;
     public float gameRestartDelay = 2f;//Restart delay of 2 seconds used after hero ship is destroyed
     public Weapon[] weapons;
+
     [Header("Set Dynamically")]
     [SerializeField]
     private float _shieldLevel = 1; // default shield level is 1
     public static bool invincibility = false;//invincibility is a variable that will be used to determine if ship is invincible
     public static bool nuke = false;//shows nuke power up is active
-    public static bool doublePointsActive = false,invincibilityActive = false,slowDownActive = false;// show that power up is active
-    private static bool _doublePoints = true,_invincibility=true,_slowDown=true,_nuke = false;//Used to instantiate power up icons
+    public static bool doublePointsActive = false, invincibilityActive = false, slowDownActive = false, nukeActive = false;// show that power up is active
+    private static bool _doublePoints = true,_invincibility=true,_slowDown=true,_nuke = true;//Used to instantiate power up icons
     private static bool _enemySlow;//Used to instantiate power up icons
     private float _currentEnemySpeed;
     private float _timer = 0;
@@ -31,15 +32,15 @@ public class Hero : MonoBehaviour
     public WeaponFireDelegate fireDelegate;
 
     [Header("Audio Effects")]
-    public AudioSource shootingSource1;
-    public AudioSource shootingSource2;
-    public AudioSource shootingSource3;
-    public AudioSource destroySource1;
-    public AudioSource powerDownSource;
+    public AudioSource shootingSource1; //audio source for the first weapon
+    public AudioSource shootingSource2; //audio source for the second weapon
+    public AudioSource shootingSource3; //audio source for the third weapon
+    public AudioSource destroySource1; //audio source when enemies are destroyed
+    public AudioSource powerDownSource; //audio source when shield level decreases 
 
     void Start()
     {
-        Time.timeScale = 1f;
+        Time.timeScale = 1f; //make screen go at regular time
     }
     void Awake()
     {
@@ -57,7 +58,7 @@ public class Hero : MonoBehaviour
         float _yPos = Input.GetAxis("Vertical");
         float _xPos = Input.GetAxis("Horizontal");
 
-        //change position of x and y 
+        //change position of x and y
         Vector3 _pos = transform.position;
         _pos.y = _pos.y + (velocity *_yPos * Time.deltaTime);
         _pos.x += velocity * _xPos * Time.deltaTime;
@@ -74,7 +75,7 @@ public class Hero : MonoBehaviour
             _timer = 0;
             PowerUp.multiplier = 1;
             invincibility = false;
-            Enemy.speed = _currentEnemySpeed;
+            Enemy.SPEED = _currentEnemySpeed;
             _enemySlow = false;
             slowDownActive = false;
             _slowDown = true;
@@ -82,6 +83,8 @@ public class Hero : MonoBehaviour
             _doublePoints = true;
             invincibilityActive = false;
             _invincibility = true;
+            nukeActive = false;
+            _nuke = true;
 
         }
         //call fireDelegate() if the delegate is not empty
@@ -91,17 +94,17 @@ public class Hero : MonoBehaviour
         }
         if (!_enemySlow)
         {
-            _currentEnemySpeed = Enemy.speed;
+            _currentEnemySpeed = Enemy.SPEED;
         }
     }
-    
+
 
     void OnTriggerEnter(Collider other)
     {
         Transform _rootTransform = other.gameObject.transform.root;
         GameObject _gameObjectRoot = _rootTransform.gameObject;
-        
-        //Make sure it is not the same triggering go as last time 
+
+        //Make sure it is not the same triggering go as last time
         //if it is it will be ignored as a duplicate and function wil; exit
         if (_gameObjectRoot == _lastTriggerGo)
             return;
@@ -119,7 +122,7 @@ public class Hero : MonoBehaviour
                 Destroy(_gameObjectRoot); //And destroy the enemy
             }
         }
-        else if (_gameObjectRoot.tag == "PowerUp") 
+        else if (_gameObjectRoot.tag == "PowerUp")
             AbsorbPowerUp(_gameObjectRoot);
 
         else
@@ -141,34 +144,38 @@ public class Hero : MonoBehaviour
                 //these variables show that double points is active
                 PowerUp.multiplier = 2;
                 doublePointsActive = true ;
-                
+
                 break;
 
             case PowerUpType.invincibility:
                 //Invincibility is true
                 invincibility = true;
                 invincibilityActive = true;
-                
+
                 break;
 
             case PowerUpType.nuke:
+                nukeActive = true;
+                //make nuke power up true
                 _nuke = true;
                 nuke = true;
+
                 break;
 
             case PowerUpType.slowTime:
-                Enemy.speed = 2f;
+                //make enemy speed slower
+                Enemy.SPEED = 2f;
                 _enemySlow = true;
                 slowDownActive = true;
                 break;
         }
-  
+
         //Destroy the powerup
         if(_powerUp!=null)
             _powerUp.AbsorbedBy(this.gameObject);
 
     }
-   
+
     //shieldLevel property
     public float shieldLevel
     {
@@ -181,36 +188,39 @@ public class Hero : MonoBehaviour
             _shieldLevel = Mathf.Min(value, 4);//Ensures that _shieldLevel is never higher than 4
             if (value < 0)
             {
-                
+
                 Destroy(this.gameObject);//If value passed is less than 0,_Hero is destroyed
-                Time.timeScale = 0f;
-                SetMusicVolume.zeroVolume(); //stops the game volume
+                Time.timeScale = 0f; //freeze game
+                SetMusicVolume.ZeroVolume(); //stops the game volume
+                //make game over screen appear on top of main scene
                 SceneManager.LoadScene("_Game_Over_Menu", LoadSceneMode.Additive);
-                //Main.SINGLETON.DelayedRestart(gameRestartDelay);//Tell Main.S to restart the game after a delay
+
             }
         }
     }
 
-
-    
     //Check if powerups have been picked up
     public static bool ShouldSpawnDoublePoints()
     {
+        //check if double points is picked up
         return _doublePoints;
     }
 
     public static bool ShouldSpawnInvincibility()
     {
+        //check if invincibility is picked up
         return _invincibility;
     }
 
     public static bool ShouldSpawnNuke()
     {
+        //check if nuke is picked up
         return _nuke;
     }
 
     public static bool ShouldSpawnSlowDown()
     {
+        //check if slow down is picked up
         return _slowDown;
     }
 
@@ -218,21 +228,25 @@ public class Hero : MonoBehaviour
     //Setter functions
     public static void SetDoublePoints(bool value)
     {
-        _doublePoints = value;        
+        //set double points
+        _doublePoints = value;
     }
 
     public static void SetInvincibility(bool value)
     {
+        //set invicibility
         _invincibility = value;
     }
 
     public static void SetSlowDown(bool value)
     {
+        //set slow down
         _slowDown = value;
     }
 
     public static void SetNuke(bool value)
     {
+        //set nuke
         _nuke = value;
     }
 }

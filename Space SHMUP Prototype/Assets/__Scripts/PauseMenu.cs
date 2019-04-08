@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public static bool GAME_IS_PAUSED = false;
-    public GameObject PauseMenuUI;
+    public static bool GAME_IS_PAUSED = false; //determine if game is paused
+    public GameObject PauseMenuUI; //store pause menu options
 
 
     // Update is called once per frame
