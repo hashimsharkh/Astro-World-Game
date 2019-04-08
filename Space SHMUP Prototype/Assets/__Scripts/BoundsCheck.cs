@@ -5,16 +5,18 @@ using UnityEngine;
 public class BoundsCheck : MonoBehaviour
 {
     [Header("Set in Inspector")]
-    public float radius = 4f;
-    public bool keepOnScreen = true;
+    public float radius = 4f; //determines radius of object
+    public bool keepOnScreen = true; //boolean that determines whether object needs to stay on screen
 
     [Header("Set Dynamically")]
-    public bool isOnScreen = true;
-    public float camWidth;
-    public float camHeight;
+    public bool isOnScreen = true; //determine if object is on screen
+    public float camWidth; //stores camera width
+    public float camHeight; //store camera height
 
     [HideInInspector]
-    public bool offRight, offLeft, offUp, offDown;
+    //determines if object is off the screen in the right, left, up, or down directions
+    public bool offRight, offLeft, offUp, offDown; 
+   
 
     void Awake()
     {
@@ -32,38 +34,44 @@ public class BoundsCheck : MonoBehaviour
 
         if (_pos.x > camWidth - radius)
         {
+            //object is off the right side
             _pos.x = camWidth - radius;
             offRight = true;
         }
 
         if (_pos.x < -camWidth + radius)
         {
+            //object is off the left side
             _pos.x = -camWidth + radius;
             offLeft = true;
         }
 
         if (_pos.y > camHeight - radius)
         {
+            //object is off the top
             _pos.y = camHeight - radius;
             offUp = true;
         }
 
         if (_pos.y < -camHeight + radius)
         {
+            //object is off the bottom
             _pos.y = -camHeight + radius;
             offDown = true;
         }
 
+        //determine if object is off the screen in any direction
         isOnScreen = !(offRight || offLeft || offUp || offDown);
 
         if (keepOnScreen && !isOnScreen)
         {
+            // return object to screen position
             transform.position = _pos;
             isOnScreen = true;
             offRight = offLeft = offUp = offDown = false;
         }
 
-
+        //make object original position
         transform.position = _pos;
 
     }

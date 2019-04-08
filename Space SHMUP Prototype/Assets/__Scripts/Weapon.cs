@@ -19,7 +19,7 @@ public enum WeaponType
 [System.Serializable]
 public class WeaponDefinition
 {
-    public WeaponType type = WeaponType.none;
+    public WeaponType type = WeaponType.none; //initial weapon type
     public string letter; //letter to show up on power-up
     public Color color = Color.white; //coler of collar and power-up
     public GameObject projectilePrefab; //prefab for projectiles
@@ -32,7 +32,8 @@ public class WeaponDefinition
 
 public class Weapon : MonoBehaviour
 {
-    static public Transform PROJECTILE_ANCHOR;
+    static public Transform PROJECTILE_ANCHOR; //transform the weapon
+
     [Header("Set In Inspector")]
     [SerializeField]
     public GameObject explosionPrefab;//prefab for explosion effect;
@@ -40,10 +41,10 @@ public class Weapon : MonoBehaviour
     [Header("Set Dynamically")]
     [SerializeField]
     private WeaponType _weaponType = WeaponType.none;
-    public WeaponDefinition def;
-    public GameObject collar;
+    public WeaponDefinition def; //weapon definition
+    public GameObject collar; //stores weapon collar
     public float lastShotTime; //time last shot was fired
-    private Renderer _collarRend;
+    private Renderer _collarRend; //stores collar renderer
     private int _weaponChange = 0; //default weapon is spread
     public AudioSource explosionSound;
 
@@ -52,6 +53,7 @@ public class Weapon : MonoBehaviour
 
     void Start()
     {
+        //find collar and renderer
         collar = transform.Find("Collar").gameObject;
         _collarRend = collar.GetComponent<Renderer>();
         SetWeaponType(_weaponType); //call for deafault _weaponType WeaponType.none
@@ -60,7 +62,7 @@ public class Weapon : MonoBehaviour
             GameObject _gameobject = new GameObject("_ProjectileAnchor");
             PROJECTILE_ANCHOR = _gameobject.transform;
         }
-
+        //attach to game object
         GameObject _rootGameObject = transform.root.gameObject;
         if (_rootGameObject.GetComponent<Hero>() != null)
         {
@@ -169,17 +171,17 @@ public class Weapon : MonoBehaviour
                 Hero.SINGLETON.shootingSource1.Play();
                 break;
 
-            case WeaponType.spread:
+            case WeaponType.spread: //spread weapon properties
                 _projectile = MakeProjectile();
                 _projectile.rigidBody.velocity = _velocity;
                 Hero.SINGLETON.shootingSource2.Play();
                 break;
-            case WeaponType.laser:
+            case WeaponType.laser: //laser weapon properties
                 _projectile = MakeProjectile();
                 _projectile.rigidBody.velocity = _velocity;
                 Hero.SINGLETON.shootingSource3.Play();
                 break;
-            case WeaponType.destroyer:
+            case WeaponType.destroyer: //destroyer weapon properties
                 DestroyAllEnemies();
                 break;
 

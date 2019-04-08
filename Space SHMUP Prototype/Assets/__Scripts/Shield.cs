@@ -5,10 +5,10 @@ using UnityEngine;
 public class Shield : MonoBehaviour
 {
     [Header("Set in inspector")]
-    public float rotationsPerSecond = 0.1f;
+    public float rotationsPerSecond = 0.1f; //store rotation value
 
     [Header("Set Dynamically")]
-    public int levelShown = 0;
+    public int levelShown = 0; //store current level
 
     //this non public variable will appear in the inspector and will no be accessed outside the shield class
     private Material _mat;

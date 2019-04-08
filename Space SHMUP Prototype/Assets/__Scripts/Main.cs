@@ -28,23 +28,22 @@ public class Main : MonoBehaviour
     public GameObject[] prefabEnemies;
     public GameObject[] prefabHeros;
     
-    static public float enemySpawnPerSecond = 0.5f; //# of enemies per second
-    public float enemyDefaultPadding = 1.5f;
-    public WeaponDefinition[] weaponDefinitions;
-    public PowerUpDefinition[] powerUpDefinitions;
-    public GameObject prefabPowerUp;
+    static public float ENEMY_SPAWN_PER_SEC = 0.5f; //# of enemies per second
+    public float enemyDefaultPadding = 1.5f; //enemy padding
+    public WeaponDefinition[] weaponDefinitions; //store weapons
+    public PowerUpDefinition[] powerUpDefinitions; //store power ups
+    public GameObject prefabPowerUp; //store power up prefab
     private GameObject _powerUp,_powerUp1,_powerUp2,_powerUp3;//powerUp prefab icon
-    private Vector3[] positions= new Vector3[]{ new Vector3( 11, 1, 0),new Vector3(9.5f,1,0), new Vector3(8f,1,0), new Vector3(6.5f, 1, 0) };//positions of power up icons
+    private Vector3[] _positions= new Vector3[]{ new Vector3( 11, 1, 0),new Vector3(9.5f,1,0), new Vector3(8f,1,0), new Vector3(6.5f, 1, 0) };//positions of power up icons
 
     [SerializeField]
     public GameObject[] powerUpIcon;//powerup icons in an array
 
     [SerializeField]
     public GameObject Canvas;//Canvas on hierarchy
-    public Text levelText;
-    static public int spawnUFO=1;
-
-   
+    public Text levelText; //display first level
+    static public int SPAWN_UFO = 1; 
+       
     private Image _radialTimer,_radialTimer1,_radialTimer2;//to show progress of powerUp icon
 
     //Array with all power ups that can drop
@@ -54,9 +53,9 @@ public class Main : MonoBehaviour
         PowerUpType.invincibility,
         PowerUpType.slowTime,
         PowerUpType.nuke
-     };
+    };
 
-    private BoundsCheck _bndCheck;
+    private BoundsCheck _bndCheck; //check if object is off the screen
 
     public void ShipDestroyed(Enemy e)
     {
@@ -66,7 +65,7 @@ public class Main : MonoBehaviour
             //Get a random number to be able to pick from the possibilites in powerUpFrequency
             int _randomIndex = Random.Range(0, powerUpFrequency.Length);
 
-            PowerUpType powerUpType = powerUpFrequency[_randomIndex];
+            PowerUpType powerUpType = powerUpFrequency[_randomIndex]; //get power up randomly
 
             GameObject go = Instantiate(prefabPowerUp) as GameObject;
 
@@ -90,8 +89,8 @@ public class Main : MonoBehaviour
         //calling spawn enemy after rocket is created
         SINGLETON = this;
         _bndCheck = GetComponent<BoundsCheck>();
-        Invoke("DisableText", 3f);
-        Invoke("SpawnEnemy", 1.5f / enemySpawnPerSecond);
+        Invoke("DisableText", 3f); //disable text after 3 seconds
+        Invoke("SpawnEnemy", 1.5f / ENEMY_SPAWN_PER_SEC); //begin spawning enemies
         //creating a dictionary with WeaponType as the key
         WEAP_DICT = new Dictionary<WeaponType, WeaponDefinition>();
         foreach (WeaponDefinition def in weaponDefinitions)
@@ -108,7 +107,7 @@ public class Main : MonoBehaviour
 
     void DisableText()
     {
-        levelText.enabled = false;
+        levelText.enabled = false; //disable level text
     }
     /*public void FixedUpdate()
     {
@@ -129,7 +128,7 @@ public class Main : MonoBehaviour
         //Spawn power up icons 
         if (Hero.ShouldSpawnDoublePoints())
         {
-            _powerUp = Instantiate(powerUpIcon[0], Camera.main.ViewportToWorldPoint(positions[0]), Quaternion.identity) as GameObject;
+            _powerUp = Instantiate(powerUpIcon[0], Camera.main.ViewportToWorldPoint(_positions[0]), Quaternion.identity) as GameObject;
             _powerUp.transform.SetParent(Canvas.transform);
             _radialTimer = GameObject.Find("RadialTimer").GetComponent<Image>();
 
@@ -144,9 +143,10 @@ public class Main : MonoBehaviour
 
     public void SpawnInvincibilityIcon()
     {
+        //spawn invincibility icons
         if (Hero.ShouldSpawnInvincibility())
         {
-            _powerUp1 = Instantiate(powerUpIcon[1], Camera.main.ViewportToWorldPoint(positions[1]), Quaternion.identity) as GameObject;
+            _powerUp1 = Instantiate(powerUpIcon[1], Camera.main.ViewportToWorldPoint(_positions[1]), Quaternion.identity) as GameObject;
             _powerUp1.transform.SetParent(Canvas.transform);
             _radialTimer1 = GameObject.Find("RadialTimer1").GetComponent<Image>();
 
@@ -158,9 +158,10 @@ public class Main : MonoBehaviour
 
     public void SpawnSlowDownIcon()
     {
+        //spawn slow down icons
         if (Hero.ShouldSpawnSlowDown())
         {
-            _powerUp2 = Instantiate(powerUpIcon[2], Camera.main.ViewportToWorldPoint(positions[2]), Quaternion.identity) as GameObject;
+            _powerUp2 = Instantiate(powerUpIcon[2], Camera.main.ViewportToWorldPoint(_positions[2]), Quaternion.identity) as GameObject;
             _powerUp2.transform.SetParent(Canvas.transform);
             _radialTimer2 = GameObject.Find("RadialTimer2").GetComponent<Image>();
 
@@ -171,9 +172,10 @@ public class Main : MonoBehaviour
     }
     public void SpawnNukeIcon()
     {
+        //spawn nuke icon
         if (Hero.ShouldSpawnNuke())
         { 
-            _powerUp3 = Instantiate(powerUpIcon[3], Camera.main.ViewportToWorldPoint(positions[3]), Quaternion.identity) as GameObject;
+            _powerUp3 = Instantiate(powerUpIcon[3], Camera.main.ViewportToWorldPoint(_positions[3]), Quaternion.identity) as GameObject;
             _powerUp3.transform.SetParent(Canvas.transform);
 
             Hero.SetNuke(false);
@@ -260,14 +262,15 @@ public class Main : MonoBehaviour
     }
     public void SpawnHero()
     {
-        GameObject _hero = Instantiate<GameObject>(prefabHeros[MainMenu.chosenHero]);
+        GameObject _hero = Instantiate<GameObject>(prefabHeros[MainMenu.CHOSEN_HERO]); 
+        //spawn a hero if not default
     }
 
     public void SpawnEnemy()
     {
         //instatiate random enemy type
         int _index;
-        if (spawnUFO < 3 ) { _index = Random.Range(0, prefabEnemies.Length-1); } //if less than level 3, dont spawn UFOs
+        if (SPAWN_UFO < 3 ) { _index = Random.Range(0, prefabEnemies.Length-1); } //if less than level 3, dont spawn UFOs
         else { _index = Random.Range(0, prefabEnemies.Length); } //spawn UFOs if level is at least 3
         GameObject _enemy = Instantiate<GameObject>(prefabEnemies[_index]); //spawn the enemy
 
@@ -284,7 +287,7 @@ public class Main : MonoBehaviour
         else { _pos.y = 400;  }
         _enemy.transform.position = _pos;
 
-        Invoke("SpawnEnemy", 1.5f / enemySpawnPerSecond);
+        Invoke("SpawnEnemy", 1.5f / ENEMY_SPAWN_PER_SEC);
     }
 
     public void DelayedRestart(float delay)
@@ -299,8 +302,8 @@ public class Main : MonoBehaviour
         ScoreCounter.ResetScore();
         //reset enemies for speed and spawning rate and UFO spawning
         Enemy.ResetSpeed();
-        enemySpawnPerSecond = .5f;
-        spawnUFO = 1; //reset count for level of the ufos
+        ENEMY_SPAWN_PER_SEC = .5f;
+        SPAWN_UFO = 1; //reset count for level of the ufos
         //Reload _Scene_0 to restart the game
         SceneManager.LoadScene("_Scene_0");
     }
@@ -328,7 +331,7 @@ public class Main : MonoBehaviour
     }
     static public void SpawnFaster() //makes enemies spawn faster when level changes
     {
-        Main.enemySpawnPerSecond += .5f;
+        Main.ENEMY_SPAWN_PER_SEC += .5f;
     }
 
     //flashingShip is a formula which will help in making the ship flash and will be called in awake as GetComponent

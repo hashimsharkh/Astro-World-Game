@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    private BoundsCheck _bndCheck;
-    private Renderer _rend;
+    private BoundsCheck _bndCheck; //check if object is out of bounds of screen 
+    private Renderer _rend; //renderer
 
     [Header("Set Dynamically")]
-    public Rigidbody rigidBody;
+    public Rigidbody rigidBody; //rigid body object
 
     [SerializeField]
-    private WeaponType _weaponType;
+    private WeaponType _weaponType; //store weapon type
 
     //This public property masks the field _weaponType and takes action when it is set 
     public WeaponType weaponType

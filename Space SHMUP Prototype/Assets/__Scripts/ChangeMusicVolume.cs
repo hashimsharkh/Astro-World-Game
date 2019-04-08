@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ChangeMusicVolume : MonoBehaviour
 {
-    public Slider volume;
+    public Slider volume; //stores volume level
     private static float _val; //value for audio source
     public AudioSource myMusic; //music clip
 
@@ -13,7 +13,7 @@ public class ChangeMusicVolume : MonoBehaviour
     void Update()
     {
         myMusic.volume = volume.value; //sets music volume
-        _val = volume.value;
+        _val = volume.value; //make audio to volume level
     }
     static public float VolumeValue()
     {

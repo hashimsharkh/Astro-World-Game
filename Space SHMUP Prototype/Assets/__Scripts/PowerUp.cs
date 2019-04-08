@@ -27,7 +27,7 @@ public class PowerUp : MonoBehaviour
 
     [Header("Set Dynamically")]
     public PowerUpType powerUpType; //The type of the powerup
-    public WeaponType type;
+    public WeaponType type; //type of weapon
     public GameObject cube; //Reference to the Cube child
     public TextMesh letter; //Reference to the text mesh
 
@@ -77,12 +77,6 @@ public class PowerUp : MonoBehaviour
         birthTime = Time.time;//Time.time is the birth of the powerup
 
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
 
     // Update is called once per frame
     void Update()

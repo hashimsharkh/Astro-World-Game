@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-
-    private BoundsCheck _bndCheck;
+    private BoundsCheck _bndCheck; //determine if object is off the screen
 
     void Awake()
     {

@@ -27,8 +27,8 @@ public class UFO : Enemy
     public override void Move()
     {
        
-    // move object in sine wave in y direction to give floating effect
-    Vector3 _tempPos = pos;
+        // move object in sine wave in y direction to give floating effect
+        Vector3 _tempPos = pos;
         float _age = Time.time - _birthTime; //how long the UFO has been in the game for
         float _theta = Mathf.PI * _age / waveFrequency; 
         float _sin = Mathf.Sin(_theta); //create the sine wave size
@@ -42,7 +42,7 @@ public class UFO : Enemy
             transform.Rotate(new Vector3(0, -30, 0) * Time.deltaTime);
 
             // move towards the right
-            _tempPos.x += speed * Time.deltaTime;
+            _tempPos.x += SPEED * Time.deltaTime;
             pos = _tempPos;
         }
 
@@ -53,7 +53,7 @@ public class UFO : Enemy
             transform.Rotate(new Vector3(0, 30, 0) * Time.deltaTime);
 
             // move towards the left
-            _tempPos.x -= speed * Time.deltaTime;
+            _tempPos.x -= SPEED * Time.deltaTime;
             pos = _tempPos;
         }
 

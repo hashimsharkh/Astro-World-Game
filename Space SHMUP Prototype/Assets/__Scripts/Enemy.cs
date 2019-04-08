@@ -5,26 +5,26 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [Header("Set in Inspector: Enemy")]
-    static public float speed = 10f;
-    public float fireRate = 0.3f;
-    public float health = 1f;
-    public int score = 50;
-    public float showDamageDuration = 0.1f;
+    static public float SPEED = 10f; //stores speed of enemies
+    public float fireRate = 0.3f; //store rate of fire
+    public float health = 1f; //stores enemy health
+    public int score = 50; //stores enemy points given
+    public float showDamageDuration = 0.1f; //stores damage duration
     public float powerUpDropChance = 1f;//chance to drop a power-up
 
-    private BoundsCheck _bndCheck;
+    private BoundsCheck _bndCheck; //check if object is off screen
 
    [Header("Set Dynamically: Enemy")]    
-    public Color[] originalColors;
-    public Material[] materials;
+    public Color[] originalColors; //stores colours
+    public Material[] materials; //stores materials
     // All the Materials of this & its children  
-    public bool showingDamage = false;
+    public bool showingDamage = false; //stores if enemy shows damage or not
     public float damageDoneTime; // Time to stop showing damage   
-    public bool notifiedOfDestruction = false;
+    public bool notifiedOfDestruction = false; //stores if enemy showed damage
 
     void Awake()
     {
-        _bndCheck = GetComponent<BoundsCheck>();
+        _bndCheck = GetComponent<BoundsCheck>(); //check if object is off screen
 
         // Get materials and colors for this GameObject and its children        
         materials = Utils.GetAllMaterials(gameObject);
@@ -110,7 +110,7 @@ public class Enemy : MonoBehaviour
     public virtual void Move()
     {
         Vector3 _tempPos = pos;
-        _tempPos.y -= speed * Time.deltaTime;
+        _tempPos.y -= SPEED * Time.deltaTime;
         pos = _tempPos;
     }
 
@@ -136,11 +136,11 @@ public class Enemy : MonoBehaviour
     }
     static public void ChangeSpeed() //when level changes, makes enemies faster
     {
-        Enemy.speed += 5f; //makes enemies 1.5x faster
+        Enemy.SPEED += 5f; //makes enemies 1.5x faster
     }
     static public void ResetSpeed() //reset enemies speed for level 1 on restart
     {
-        Enemy.speed = 10f;
+        Enemy.SPEED = 10f;
     }
 }
 
