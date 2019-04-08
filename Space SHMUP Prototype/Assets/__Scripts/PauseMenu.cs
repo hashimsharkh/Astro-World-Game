@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public static bool GAME_IS_PAUSED = false; //determine if game is paused
+    private static bool _GAME_IS_PAUSED = false; //determine if game is paused
     public GameObject PauseMenuUI; //store pause menu options
 
 
@@ -26,7 +26,7 @@ public class PauseMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             // if game is already paused and P is clicked, resume game
-            if (GAME_IS_PAUSED)
+            if (_GAME_IS_PAUSED)
             {
                 Resume();
             }
@@ -44,7 +44,7 @@ public class PauseMenu : MonoBehaviour
         PauseMenuUI.SetActive(false);
         //un freezes time
         Time.timeScale = 1f;
-        GAME_IS_PAUSED = false;
+        _GAME_IS_PAUSED = false;
 
     }
 
@@ -54,7 +54,7 @@ public class PauseMenu : MonoBehaviour
         PauseMenuUI.SetActive(true);
         // freezes time
         Time.timeScale = 0f;
-        GAME_IS_PAUSED = true;
+        _GAME_IS_PAUSED = true;
     }
 
     // quits game and restarts it
