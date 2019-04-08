@@ -34,8 +34,8 @@ public class Main : MonoBehaviour
     public WeaponDefinition[] weaponDefinitions;
     public PowerUpDefinition[] powerUpDefinitions;
     public GameObject prefabPowerUp;
-    private GameObject _powerUp;//powerUp icon
-    private Vector3[] positions= new Vector3[]{ new Vector3( 11, 1, 0) };//positions of power up icons
+    private GameObject _powerUp,_powerUp1,_powerUp2,_powerUp3;//powerUp prefab icon
+    private Vector3[] positions= new Vector3[]{ new Vector3( 11, 1, 0),new Vector3(9.5f,1,0), new Vector3(8f,1,0), new Vector3(6.5f, 1, 0) };//positions of power up icons
     [SerializeField]
     public GameObject[] powerUpIcon;//powerup icons in an array
     [SerializeField]
@@ -44,7 +44,7 @@ public class Main : MonoBehaviour
     static public int spawnUFO=1;
 
    
-    private Image _radialTimer;//to show progress of powerUp icon
+    private Image _radialTimer,_radialTimer1,_radialTimer2;//to show progress of powerUp icon
 
     //Array with all power ups that can drop
     public PowerUpType[] powerUpFrequency = new PowerUpType[]
@@ -122,12 +122,13 @@ public class Main : MonoBehaviour
         {
             foreach (Material material in _material)
                 material.color = _colors[index % 2];
-            index++;
+             ++;
         }
     }*/
 
-     public void SpawnPowerUpIcons()
+     public void SpawnDoublePointIcon()
     {
+        //Spawn power up icons 
         if (Hero.shouldSpawnDoublePoints())
         {
             _powerUp = Instantiate(powerUpIcon[0], Camera.main.ViewportToWorldPoint(positions[0]), Quaternion.identity) as GameObject;
@@ -139,11 +140,53 @@ public class Main : MonoBehaviour
             Hero.doublePointsActive = true;
         }
 
+
+
+    }
+
+    public void SpawnInvincibilityIcon()
+    {
+        if (Hero.shouldSpawnInvincibility())
+        {
+            _powerUp1 = Instantiate(powerUpIcon[1], Camera.main.ViewportToWorldPoint(positions[1]), Quaternion.identity) as GameObject;
+            _powerUp1.transform.SetParent(Canvas.transform);
+            _radialTimer1 = GameObject.Find("RadialTimer1").GetComponent<Image>();
+
+
+            Hero.SetInvincibility(false);
+            Hero.invincibilityActive = true;
+        }
+    }
+
+    public void SpawnSlowDownIcon()
+    {
+        if (Hero.shouldSpawnSlowDown())
+        {
+            _powerUp2 = Instantiate(powerUpIcon[2], Camera.main.ViewportToWorldPoint(positions[2]), Quaternion.identity) as GameObject;
+            _powerUp2.transform.SetParent(Canvas.transform);
+            _radialTimer2 = GameObject.Find("RadialTimer2").GetComponent<Image>();
+
+
+            Hero.SetSlowDown(false);
+            Hero.slowDownActive = true;
+        }
+    }
+    public void SpawnNukeIcon()
+    {
+        if (Hero.shouldSpawnNuke())
+        { 
+            _powerUp3 = Instantiate(powerUpIcon[3], Camera.main.ViewportToWorldPoint(positions[3]), Quaternion.identity) as GameObject;
+            _powerUp3.transform.SetParent(Canvas.transform);
+
+            Hero.SetNuke(false);
+        }
     }
     void Update()
     {
+        //Double point power up icon radial timer
         if (Hero.doublePointsActive && Hero.shouldSpawnDoublePoints())
-        {  SpawnPowerUpIcons();
+        {
+            SpawnDoublePointIcon();
 
         }
         if (Hero.doublePointsActive)
@@ -157,10 +200,65 @@ public class Main : MonoBehaviour
             _radialTimer.fillAmount -= 1.0f / 7f * Time.deltaTime;
 
         }
-        if(_radialTimer.fillAmount<=0f)
+        if((_radialTimer!=null) && _radialTimer.fillAmount<=0f)
         {
             Destroy(_powerUp);//Destroy 
         }
+
+
+        //Invincibility power up icon
+        if (Hero.invincibilityActive && Hero.shouldSpawnInvincibility())
+        {
+            SpawnInvincibilityIcon();
+
+        }
+        if (Hero.invincibilityActive)
+        {
+            _radialTimer1.fillAmount = 1f;
+            Hero.invincibilityActive = false;
+        }
+
+        if (_radialTimer1 != null)
+        {
+            //Reduce fill amount over 30 seconds   
+            _radialTimer1.fillAmount -= 1.0f / 7f * Time.deltaTime;
+
+        }
+        if ((_radialTimer1 != null) && _radialTimer1.fillAmount <= 0f)
+        {
+            Destroy(_powerUp1);//Destroy 
+        }
+
+
+        //Slowing down radial timer and power up icon spawn
+
+        if (Hero.slowDownActive && Hero.shouldSpawnSlowDown())
+        {
+            SpawnSlowDownIcon();
+
+        }
+        if (Hero.slowDownActive)
+        {
+            _radialTimer2.fillAmount = 1f;
+            Hero.slowDownActive = false;
+        }
+
+        if (_radialTimer2 != null)
+        {
+            //Reduce fill amount over 30 seconds   
+            _radialTimer2.fillAmount -= 1.0f / 7f * Time.deltaTime;
+
+        }
+        if ((_radialTimer2 != null) && _radialTimer2.fillAmount <= 0f)
+        {
+            Destroy(_powerUp2);//Destroy 
+        }
+
+        //Spawn nuke powerup
+        SpawnNukeIcon();
+
+        if (_powerUp3 != null && !Hero.nuke)
+            Destroy(_powerUp3);
     }
     public void SpawnHero()
     {

@@ -20,9 +20,9 @@ public class Hero : MonoBehaviour
     private float _shieldLevel = 1; // default shield level is 1
     public static bool invincibility = false;//invincibility is a variable that will be used to determine if ship is invincible
     public static bool nuke = false;//shows nuke power up is active
-    public static bool doublePointsActive = false;//double points show that power up is active
-    private static bool _doublePoints = true;//Double points power up icon
-    private static bool _enemySlow = false;
+    public static bool doublePointsActive = false,invincibilityActive = false,slowDownActive = false;// show that power up is active
+    private static bool _doublePoints = true,_invincibility=true,_slowDown=true,_nuke = false;//Used to instantiate power up icons
+    private static bool _enemySlow;//Used to instantiate power up icons
     private float _currentEnemySpeed;
     private float _timer = 0;
     //This variable holds a reference to the last triggering GameObject
@@ -66,15 +66,23 @@ public class Hero : MonoBehaviour
         //change rotation of object when it is moving
         transform.rotation = Quaternion.Euler(_yPos * pitchMult, _xPos * rollMult, 0);
 
-        _timer += Time.deltaTime;
+        _timer += Time.deltaTime;//find how many seconds passed by from beginning of frame
+
+        //if more than 7 seconds have passed revert everything to normal settings
         if (_timer > 7f)
         {
             _timer = 0;
             PowerUp.multiplier = 1;
             invincibility = false;
             Enemy.speed = _currentEnemySpeed;
+            _enemySlow = false;
+            slowDownActive = false;
+            _slowDown = true;
             doublePointsActive = false;
             _doublePoints = true;
+            invincibilityActive = false;
+            _invincibility = true;
+
         }
         //call fireDelegate() if the delegate is not empty
         if (Input.GetAxis("Jump") == 1 && fireDelegate != null)
@@ -139,14 +147,19 @@ public class Hero : MonoBehaviour
             case PowerUpType.invincibility:
                 //Invincibility is true
                 invincibility = true;
+                invincibilityActive = true;
+                
                 break;
 
             case PowerUpType.nuke:
+                _nuke = true;
                 nuke = true;
                 break;
 
             case PowerUpType.slowTime:
                 Enemy.speed = 2f;
+                _enemySlow = true;
+                slowDownActive = true;
                 break;
         }
   
@@ -177,15 +190,48 @@ public class Hero : MonoBehaviour
         }
     }
 
-    //Check if double points is active
+
+    
+    //Check if powerups have been picked up
     public static bool shouldSpawnDoublePoints()
     {
         return _doublePoints;
     }
-    
+
+    public static bool shouldSpawnInvincibility()
+    {
+        return _invincibility;
+    }
+
+    public static bool shouldSpawnNuke()
+    {
+        return _nuke;
+    }
+
+    public static bool shouldSpawnSlowDown()
+    {
+        return _slowDown;
+    }
+
+
+    //Setter functions
     public static void SetDoublePoints(bool value)
     {
         _doublePoints = value;        
     }
 
+    public static void SetInvincibility(bool value)
+    {
+        _invincibility = value;
+    }
+
+    public static void SetSlowDown(bool value)
+    {
+        _slowDown = value;
+    }
+
+    public static void SetNuke(bool value)
+    {
+        _nuke = value;
+    }
 }

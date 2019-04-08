@@ -1863,9 +1863,12 @@ MonoBehaviour:
     type: 3}
   powerUpIcon:
   - {fileID: 1642759142322372286, guid: d35eaa7c724b11645b808a99a3bcc893, type: 3}
+  - {fileID: 1642759142322372286, guid: b84d7cd251546574d8c2d01f74e4061a, type: 3}
+  - {fileID: 1642759142322372286, guid: 0899f83ecc5f94d4ebf18287aa5b0582, type: 3}
+  - {fileID: 1642759142322372286, guid: 9c6e8fe861458da41a001eee17b1cda0, type: 3}
   Canvas: {fileID: 658016440}
   levelText: {fileID: 1030931832}
-  powerUpFrequency: 01000000
+  powerUpFrequency: 02000000
 --- !u!114 &1106936997
 MonoBehaviour:
   m_ObjectHideFlags: 0
