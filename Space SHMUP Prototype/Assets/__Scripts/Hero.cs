@@ -20,8 +20,8 @@ public class Hero : MonoBehaviour
     private float _shieldLevel = 1; // default shield level is 1
     public static bool invincibility = false;//invincibility is a variable that will be used to determine if ship is invincible
     public static bool nuke = false;//shows nuke power up is active
-    public static bool doublePointsActive = false,invincibilityActive = false,slowDownActive = false;// show that power up is active
-    private static bool _doublePoints = true,_invincibility=true,_slowDown=true,_nuke = false;//Used to instantiate power up icons
+    public static bool doublePointsActive = false, invincibilityActive = false, slowDownActive = false, nukeActive = false;// show that power up is active
+    private static bool _doublePoints = true,_invincibility=true,_slowDown=true,_nuke = true;//Used to instantiate power up icons
     private static bool _enemySlow;//Used to instantiate power up icons
     private float _currentEnemySpeed;
     private float _timer = 0;
@@ -82,6 +82,8 @@ public class Hero : MonoBehaviour
             _doublePoints = true;
             invincibilityActive = false;
             _invincibility = true;
+            nukeActive = false;
+            _nuke = true;
 
         }
         //call fireDelegate() if the delegate is not empty
@@ -152,8 +154,9 @@ public class Hero : MonoBehaviour
                 break;
 
             case PowerUpType.nuke:
-                _nuke = true;
+                nukeActive = true;
                 nuke = true;
+
                 break;
 
             case PowerUpType.slowTime:
