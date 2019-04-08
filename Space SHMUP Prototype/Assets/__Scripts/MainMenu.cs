@@ -52,6 +52,7 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("_Scene_0");
         instructionsText.enabled = false;
         FIRST_TIME++;
+        MAIN_MENU_ACTIVE = false; //main menu is not active
     }
 
     public void QuitGame() //quits the application
