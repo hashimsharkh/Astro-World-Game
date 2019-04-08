@@ -194,22 +194,22 @@ public class Hero : MonoBehaviour
 
     
     //Check if powerups have been picked up
-    public static bool shouldSpawnDoublePoints()
+    public static bool ShouldSpawnDoublePoints()
     {
         return _doublePoints;
     }
 
-    public static bool shouldSpawnInvincibility()
+    public static bool ShouldSpawnInvincibility()
     {
         return _invincibility;
     }
 
-    public static bool shouldSpawnNuke()
+    public static bool ShouldSpawnNuke()
     {
         return _nuke;
     }
 
-    public static bool shouldSpawnSlowDown()
+    public static bool ShouldSpawnSlowDown()
     {
         return _slowDown;
     }

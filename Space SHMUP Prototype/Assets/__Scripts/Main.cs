@@ -56,7 +56,7 @@ public class Main : MonoBehaviour
 
     private BoundsCheck _bndCheck;
 
-    public void shipDestroyed(Enemy e)
+    public void ShipDestroyed(Enemy e)
     {
         if (Random.value <= e.powerUpDropChance)
         {
@@ -128,7 +128,7 @@ public class Main : MonoBehaviour
      public void SpawnDoublePointIcon()
     {
         //Spawn power up icons 
-        if (Hero.shouldSpawnDoublePoints())
+        if (Hero.ShouldSpawnDoublePoints())
         {
             _powerUp = Instantiate(powerUpIcon[0], Camera.main.ViewportToWorldPoint(positions[0]), Quaternion.identity) as GameObject;
             _powerUp.transform.SetParent(Canvas.transform);
@@ -145,7 +145,7 @@ public class Main : MonoBehaviour
 
     public void SpawnInvincibilityIcon()
     {
-        if (Hero.shouldSpawnInvincibility())
+        if (Hero.ShouldSpawnInvincibility())
         {
             _powerUp1 = Instantiate(powerUpIcon[1], Camera.main.ViewportToWorldPoint(positions[1]), Quaternion.identity) as GameObject;
             _powerUp1.transform.SetParent(Canvas.transform);
@@ -159,7 +159,7 @@ public class Main : MonoBehaviour
 
     public void SpawnSlowDownIcon()
     {
-        if (Hero.shouldSpawnSlowDown())
+        if (Hero.ShouldSpawnSlowDown())
         {
             _powerUp2 = Instantiate(powerUpIcon[2], Camera.main.ViewportToWorldPoint(positions[2]), Quaternion.identity) as GameObject;
             _powerUp2.transform.SetParent(Canvas.transform);
@@ -172,7 +172,7 @@ public class Main : MonoBehaviour
     }
     public void SpawnNukeIcon()
     {
-        if (Hero.shouldSpawnNuke())
+        if (Hero.ShouldSpawnNuke())
         { 
             _powerUp3 = Instantiate(powerUpIcon[3], Camera.main.ViewportToWorldPoint(positions[3]), Quaternion.identity) as GameObject;
             _powerUp3.transform.SetParent(Canvas.transform);
@@ -206,7 +206,7 @@ public class Main : MonoBehaviour
 
 
         //Invincibility power up icon
-        if (Hero.invincibilityActive && Hero.shouldSpawnInvincibility())
+        if (Hero.invincibilityActive && Hero.ShouldSpawnInvincibility())
         {
             SpawnInvincibilityIcon();
 
@@ -231,7 +231,7 @@ public class Main : MonoBehaviour
 
         //Slowing down radial timer and power up icon spawn
 
-        if (Hero.slowDownActive && Hero.shouldSpawnSlowDown())
+        if (Hero.slowDownActive && Hero.ShouldSpawnSlowDown())
         {
             SpawnSlowDownIcon();
 
