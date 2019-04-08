@@ -8,7 +8,7 @@ public class UFO : Enemy
     public float waveWidth = 2f; // wdith of wave 
     private float _initialPosition; //initial position of ship
     private float _birthTime; //stores time of instatiation
-    bool _moveRight = true; //to help direct if the UFO is going left or right
+    private bool _moveRight = true; //to help direct if the UFO is going left or right
     public GameObject bulletPrefab; //prefab that the UFO will drop
     public float timeBetweenBullets = 2f; // time between when the UFO will drop bullets
 
