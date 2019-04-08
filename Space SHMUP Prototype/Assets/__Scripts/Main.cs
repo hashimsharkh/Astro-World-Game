@@ -22,7 +22,6 @@ public class Main : MonoBehaviour
     private Material[] _material;
     private Color[] _colors = new Color[] { Color.cyan, Color.black };
     private Color[] _originalColors;
-    private int index = 0;
 
     [Header("Set in Inspector")]
     //weaponDefinitions variables
