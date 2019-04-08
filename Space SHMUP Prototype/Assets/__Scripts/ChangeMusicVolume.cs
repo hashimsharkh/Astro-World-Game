@@ -6,17 +6,17 @@ using UnityEngine.UI;
 public class ChangeMusicVolume : MonoBehaviour
 {
     public Slider volume;
-    private static float val; //value for audio source
-    public AudioSource myMusic;
+    private static float _val; //value for audio source
+    public AudioSource myMusic; //music clip
 
     // Update is called once per frame
     void Update()
     {
-        myMusic.volume = volume.value;
-        val = volume.value;
+        myMusic.volume = volume.value; //sets music volume
+        _val = volume.value;
     }
     static public float VolumeValue()
     {
-        return val;
+        return _val; //returns the float value for volume of music
     }
 }

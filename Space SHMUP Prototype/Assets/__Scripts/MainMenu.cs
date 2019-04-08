@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour
     private float _backgroundSpeed = 0.001f; //controls speed of background
     public Text instructionsText;
     public GameObject mainMenuUI;
-    private static int FIRST_TIME = 1; // determine whether game is being played for the first time
+    private static int _FIRST_TIME = 1; // determine whether game is being played for the first time
     public static bool MAIN_MENU_ACTIVE; //check if main menu is active
 
     void Awake()
@@ -34,7 +34,7 @@ public class MainMenu : MonoBehaviour
     }
     public void PlayGame() //button for starting the game
     {
-        if (FIRST_TIME == 1)
+        if (_FIRST_TIME == 1)
         {
             instructionsText.enabled = true;
             Invoke("DisplayScene", 5f);
@@ -51,7 +51,7 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("_Scene_0");
         instructionsText.enabled = false;
-        FIRST_TIME++;
+        _FIRST_TIME++;
         MAIN_MENU_ACTIVE = false; //main menu is not active
     }
 
