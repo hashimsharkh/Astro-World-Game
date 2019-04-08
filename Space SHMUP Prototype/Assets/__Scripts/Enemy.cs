@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     static public float speed = 10f;
     public float fireRate = 0.3f;
     public float health = 1f;
-    public int score = 100;
+    public int score = 50;
     public float showDamageDuration = 0.1f;
     public float powerUpDropChance = 1f;//chance to drop a power-up
 
