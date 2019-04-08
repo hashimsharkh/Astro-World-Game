@@ -34,7 +34,7 @@ public class Main : MonoBehaviour
     public PowerUpDefinition[] powerUpDefinitions;
     public GameObject prefabPowerUp;
     private GameObject _powerUp,_powerUp1,_powerUp2,_powerUp3;//powerUp prefab icon
-    private Vector3[] positions= new Vector3[]{ new Vector3( 11, 1, 0),new Vector3(9.5f,1,0), new Vector3(8f,1,0), new Vector3(6.5f, 1, 0) };//positions of power up icons
+    private Vector3[] positions= new Vector3[]{ new Vector3( 9, 1, 0),new Vector3(7.5f,1,0), new Vector3(6f,1,0), new Vector3(4.5f, 1, 0) };//positions of power up icons
     [SerializeField]
     public GameObject[] powerUpIcon;//powerup icons in an array
     [SerializeField]
