@@ -75,12 +75,12 @@ public class Weapon : MonoBehaviour
     {
         //If nuke powerup is activated user has the chance to press space bar to destroy everything around him/her to save himself/herself
         //Then resets to previous weapon being used
-        if(Hero.nuke)
+        if(Hero.NUKE)
         {
             SetWeaponType(WeaponType.destroyer);
             if(Input.GetKeyDown(KeyCode.Space))
             {
-                Hero.nuke = false;
+                Hero.NUKE = false;
                 //Instantiating a big explosion effect
                 GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
                 

@@ -20,10 +20,10 @@ public class Hero : MonoBehaviour
     [SerializeField]
     private float _shieldLevel = 1; // default shield level is 1
     public static bool invincibility = false;//invincibility is a variable that will be used to determine if ship is invincible
-    public static bool nuke = false;//shows nuke power up is active
-    public static bool doublePointsActive = false, invincibilityActive = false, slowDownActive = false, nukeActive = false;// show that power up is active
-    private static bool _doublePoints = true,_invincibility=true,_slowDown=true,_nuke = true;//Used to instantiate power up icons
-    private static bool _enemySlow;//Used to instantiate power up icons
+    public static bool NUKE = false;//shows nuke power up is active
+    public static bool DOUBLE_POINTS_ACTIVE = false, INVINCIBILITY_ACTIVE = false, SLOW_DOWN_ACTIVE = false, NUKE_ACTIVE = false;// show that power up is active
+    private static bool _DOUBLE_POINTS = true,_INVINCIBILITY=true,_SLOW_DOWN,_NUKE = true;//Used to instantiate power up icons
+    private static bool _ENEMY_SLOW;//Used to instantiate power up icons
     private float _currentEnemySpeed;
     private float _timer = 0;
     //This variable holds a reference to the last triggering GameObject
@@ -76,15 +76,15 @@ public class Hero : MonoBehaviour
             PowerUp.multiplier = 1;
             invincibility = false;
             Enemy.SPEED = _currentEnemySpeed;
-            _enemySlow = false;
-            slowDownActive = false;
-            _slowDown = true;
-            doublePointsActive = false;
-            _doublePoints = true;
-            invincibilityActive = false;
-            _invincibility = true;
-            nukeActive = false;
-            _nuke = true;
+            _ENEMY_SLOW = false;
+            SLOW_DOWN_ACTIVE = false;
+            _SLOW_DOWN = true;
+            DOUBLE_POINTS_ACTIVE = false;
+            _DOUBLE_POINTS = true;
+            INVINCIBILITY_ACTIVE = false;
+            _INVINCIBILITY = true;
+            NUKE_ACTIVE = false;
+            _NUKE = true;
 
         }
         //call fireDelegate() if the delegate is not empty
@@ -92,7 +92,7 @@ public class Hero : MonoBehaviour
         {
             fireDelegate();
         }
-        if (!_enemySlow)
+        if (!_ENEMY_SLOW)
         {
             _currentEnemySpeed = Enemy.SPEED;
         }
@@ -143,30 +143,30 @@ public class Hero : MonoBehaviour
             case PowerUpType.doublePoints:
                 //these variables show that double points is active
                 PowerUp.multiplier = 2;
-                doublePointsActive = true ;
+                DOUBLE_POINTS_ACTIVE = true ;
 
                 break;
 
             case PowerUpType.invincibility:
                 //Invincibility is true
                 invincibility = true;
-                invincibilityActive = true;
+                INVINCIBILITY_ACTIVE = true;
 
                 break;
 
             case PowerUpType.nuke:
-                nukeActive = true;
+                NUKE_ACTIVE = true;
                 //make nuke power up true
-                _nuke = true;
-                nuke = true;
+                _NUKE = true;
+                NUKE = true;
 
                 break;
 
             case PowerUpType.slowTime:
                 //make enemy speed slower
                 Enemy.SPEED = 2f;
-                _enemySlow = true;
-                slowDownActive = true;
+                _ENEMY_SLOW = true;
+                SLOW_DOWN_ACTIVE = true;
                 break;
         }
 
@@ -203,25 +203,25 @@ public class Hero : MonoBehaviour
     public static bool ShouldSpawnDoublePoints()
     {
         //check if double points is picked up
-        return _doublePoints;
+        return _DOUBLE_POINTS;
     }
 
     public static bool ShouldSpawnInvincibility()
     {
         //check if invincibility is picked up
-        return _invincibility;
+        return _INVINCIBILITY;
     }
 
     public static bool ShouldSpawnNuke()
     {
         //check if nuke is picked up
-        return _nuke;
+        return _NUKE;
     }
 
     public static bool ShouldSpawnSlowDown()
     {
         //check if slow down is picked up
-        return _slowDown;
+        return _SLOW_DOWN;
     }
 
 
@@ -229,24 +229,24 @@ public class Hero : MonoBehaviour
     public static void SetDoublePoints(bool value)
     {
         //set double points
-        _doublePoints = value;
+        _DOUBLE_POINTS = value;
     }
 
     public static void SetInvincibility(bool value)
     {
         //set invicibility
-        _invincibility = value;
+        _INVINCIBILITY = value;
     }
 
     public static void SetSlowDown(bool value)
     {
         //set slow down
-        _slowDown = value;
+        _SLOW_DOWN = value;
     }
 
     public static void SetNuke(bool value)
     {
         //set nuke
-        _nuke = value;
+        _NUKE = value;
     }
 }
