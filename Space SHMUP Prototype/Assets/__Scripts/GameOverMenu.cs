@@ -19,7 +19,7 @@ public class GameOverMenu : MonoBehaviour
     void Update()
     {
         scoreText.text = "YOUR SCORE IS: " + ScoreCounter.CURR_SCORE; //update score text with current score
-        if(LevelProgression.getCurLevel() > 5)
+        if(LevelProgression.GetCurLevel() > 10)
         {
             gameOverText.text = "GAME OVER. YOU WIN!"; //player wins at level 5
         }
