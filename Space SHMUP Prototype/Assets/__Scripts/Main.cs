@@ -183,7 +183,7 @@ public class Main : MonoBehaviour
     void Update()
     {
         //Double point power up icon radial timer
-        if (Hero.doublePointsActive && Hero.shouldSpawnDoublePoints())
+        if (Hero.doublePointsActive && Hero.ShouldSpawnDoublePoints())
         {
             SpawnDoublePointIcon();
 
