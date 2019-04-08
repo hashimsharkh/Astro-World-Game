@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class UFO : Enemy
 {
-    public float waveFrequency = 1; //frequency of the wave path the ship will follow
-    public float waveWidth = 2; // wdith of wave 
+    public float waveFrequency = 1f; //frequency of the wave path the ship will follow
+    public float waveWidth = 2f; // wdith of wave 
     private float _initialPosition; //initial position of ship
     private float _birthTime; //stores time of instatiation
     bool _moveRight = true; //to help direct if the UFO is going left or right
