@@ -267,7 +267,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cd8002f70c22e4840bffd510c84d3c10, type: 2}
+  - {fileID: 2100000, guid: 8b52c4a2cbd2a8248b7c6e782e73497e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -391,7 +391,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cd8002f70c22e4840bffd510c84d3c10, type: 2}
+  - {fileID: 2100000, guid: d58bf68b17f9a4240aaeb5c200c9a12c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -482,7 +482,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cd8002f70c22e4840bffd510c84d3c10, type: 2}
+  - {fileID: 2100000, guid: 8b52c4a2cbd2a8248b7c6e782e73497e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -573,7 +573,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cd8002f70c22e4840bffd510c84d3c10, type: 2}
+  - {fileID: 2100000, guid: d58bf68b17f9a4240aaeb5c200c9a12c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -613,6 +613,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7750032055663368696}
     m_Modifications:
+    - target: {fileID: 8637773548530383639, guid: ee6a3494b6c7e814e84ff0c4496da278,
+        type: 3}
+      propertyPath: m_Name
+      value: ShortShootSound
+      objectReference: {fileID: 0}
     - target: {fileID: 4238868382828405517, guid: ee6a3494b6c7e814e84ff0c4496da278,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -667,11 +672,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8637773548530383639, guid: ee6a3494b6c7e814e84ff0c4496da278,
-        type: 3}
-      propertyPath: m_Name
-      value: ShortShootSound
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6a3494b6c7e814e84ff0c4496da278, type: 3}
@@ -765,6 +765,16 @@ PrefabInstance:
       propertyPath: def.projectilePrefab
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8535265814605344627, guid: bf817b88e4ef942ecaf2cfcff6ebe798,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d58bf68b17f9a4240aaeb5c200c9a12c, type: 2}
+    - target: {fileID: 8535265814861823581, guid: bf817b88e4ef942ecaf2cfcff6ebe798,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d58bf68b17f9a4240aaeb5c200c9a12c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf817b88e4ef942ecaf2cfcff6ebe798, type: 3}
 --- !u!4 &9133075683539214941 stripped
@@ -855,6 +865,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7750032055663368696}
     m_Modifications:
+    - target: {fileID: 4498543485088952550, guid: dc6af97b22de26e42b628482cbf5e6b4,
+        type: 3}
+      propertyPath: m_Name
+      value: DoubleShootSound
+      objectReference: {fileID: 0}
     - target: {fileID: 4442466264707375099, guid: dc6af97b22de26e42b628482cbf5e6b4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -910,22 +925,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4498543485088952550, guid: dc6af97b22de26e42b628482cbf5e6b4,
-        type: 3}
-      propertyPath: m_Name
-      value: DoubleShootSound
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc6af97b22de26e42b628482cbf5e6b4, type: 3}
---- !u!82 &1597112597314284453 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 8826899734361473274, guid: dc6af97b22de26e42b628482cbf5e6b4,
-    type: 3}
-  m_PrefabInstance: {fileID: 7806259846577335135}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5905248801054602404 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4442466264707375099, guid: dc6af97b22de26e42b628482cbf5e6b4,
+    type: 3}
+  m_PrefabInstance: {fileID: 7806259846577335135}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1597112597314284453 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8826899734361473274, guid: dc6af97b22de26e42b628482cbf5e6b4,
     type: 3}
   m_PrefabInstance: {fileID: 7806259846577335135}
   m_PrefabAsset: {fileID: 0}
@@ -936,6 +946,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7750032055663368696}
     m_Modifications:
+    - target: {fileID: 6025450052801750684, guid: c0a8870c494f68a46b1aace5494931b9,
+        type: 3}
+      propertyPath: m_Name
+      value: PowerDownSound
+      objectReference: {fileID: 0}
     - target: {fileID: 3507110604359069547, guid: c0a8870c494f68a46b1aace5494931b9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -990,11 +1005,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6025450052801750684, guid: c0a8870c494f68a46b1aace5494931b9,
-        type: 3}
-      propertyPath: m_Name
-      value: PowerDownSound
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0a8870c494f68a46b1aace5494931b9, type: 3}
@@ -1098,6 +1108,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7750032055663368696}
     m_Modifications:
+    - target: {fileID: 7691820400536537172, guid: 82e91e8579eb1d340953288b813c315a,
+        type: 3}
+      propertyPath: m_Name
+      value: LaserSound
+      objectReference: {fileID: 0}
     - target: {fileID: 928079218413743247, guid: 82e91e8579eb1d340953288b813c315a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1152,11 +1167,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7691820400536537172, guid: 82e91e8579eb1d340953288b813c315a,
-        type: 3}
-      propertyPath: m_Name
-      value: LaserSound
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82e91e8579eb1d340953288b813c315a, type: 3}

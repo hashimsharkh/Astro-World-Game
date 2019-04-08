@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 5953a6e817e87be4195c31da8fdce334, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -256,7 +256,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 5953a6e817e87be4195c31da8fdce334, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -347,7 +347,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 5953a6e817e87be4195c31da8fdce334, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -439,7 +439,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 5953a6e817e87be4195c31da8fdce334, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -562,7 +562,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 5953a6e817e87be4195c31da8fdce334, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -850,6 +850,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4620020185030764675, guid: ccd891b27a5ef1c44ba4935cb4e6e9fc,
         type: 3}
+    - target: {fileID: 8535265814605344627, guid: bf817b88e4ef942ecaf2cfcff6ebe798,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5953a6e817e87be4195c31da8fdce334, type: 2}
+    - target: {fileID: 8535265814861823581, guid: bf817b88e4ef942ecaf2cfcff6ebe798,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5953a6e817e87be4195c31da8fdce334, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf817b88e4ef942ecaf2cfcff6ebe798, type: 3}
 --- !u!4 &5850212374496960278 stripped
@@ -865,6 +875,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7729204509872554711}
     m_Modifications:
+    - target: {fileID: 6025450052801750684, guid: c0a8870c494f68a46b1aace5494931b9,
+        type: 3}
+      propertyPath: m_Name
+      value: PowerDownSound
+      objectReference: {fileID: 0}
     - target: {fileID: 3507110604359069547, guid: c0a8870c494f68a46b1aace5494931b9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -919,11 +934,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6025450052801750684, guid: c0a8870c494f68a46b1aace5494931b9,
-        type: 3}
-      propertyPath: m_Name
-      value: PowerDownSound
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0a8870c494f68a46b1aace5494931b9, type: 3}
@@ -1027,6 +1037,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7729204509872554711}
     m_Modifications:
+    - target: {fileID: 7691820400536537172, guid: 82e91e8579eb1d340953288b813c315a,
+        type: 3}
+      propertyPath: m_Name
+      value: LaserSound
+      objectReference: {fileID: 0}
     - target: {fileID: 928079218413743247, guid: 82e91e8579eb1d340953288b813c315a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1082,11 +1097,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7691820400536537172, guid: 82e91e8579eb1d340953288b813c315a,
-        type: 3}
-      propertyPath: m_Name
-      value: LaserSound
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82e91e8579eb1d340953288b813c315a, type: 3}
 --- !u!82 &8950378356330544057 stripped
@@ -1108,6 +1118,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7729204509872554711}
     m_Modifications:
+    - target: {fileID: 8637773548530383639, guid: ee6a3494b6c7e814e84ff0c4496da278,
+        type: 3}
+      propertyPath: m_Name
+      value: ShortShootSound
+      objectReference: {fileID: 0}
     - target: {fileID: 4238868382828405517, guid: ee6a3494b6c7e814e84ff0c4496da278,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1163,11 +1178,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8637773548530383639, guid: ee6a3494b6c7e814e84ff0c4496da278,
-        type: 3}
-      propertyPath: m_Name
-      value: ShortShootSound
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6a3494b6c7e814e84ff0c4496da278, type: 3}
 --- !u!4 &8786977287712416135 stripped
@@ -1189,6 +1199,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7729204509872554711}
     m_Modifications:
+    - target: {fileID: 4498543485088952550, guid: dc6af97b22de26e42b628482cbf5e6b4,
+        type: 3}
+      propertyPath: m_Name
+      value: DoubleShootSound
+      objectReference: {fileID: 0}
     - target: {fileID: 4442466264707375099, guid: dc6af97b22de26e42b628482cbf5e6b4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1243,11 +1258,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4498543485088952550, guid: dc6af97b22de26e42b628482cbf5e6b4,
-        type: 3}
-      propertyPath: m_Name
-      value: DoubleShootSound
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc6af97b22de26e42b628482cbf5e6b4, type: 3}
