@@ -27,14 +27,14 @@ public class Main : MonoBehaviour
     //weaponDefinitions variables
     public GameObject[] prefabEnemies;
     public GameObject[] prefabHeros;
-    
+
     static public float ENEMY_SPAWN_PER_SEC = 0.5f; //# of enemies per second
     public float enemyDefaultPadding = 1.5f; //enemy padding
     public WeaponDefinition[] weaponDefinitions; //store weapons
     public PowerUpDefinition[] powerUpDefinitions; //store power ups
     public GameObject prefabPowerUp; //store power up prefab
-    private GameObject _powerUp,_powerUp1,_powerUp2,_powerUp3;//powerUp prefab icon
-    private Vector3[] _positions= new Vector3[]{ new Vector3( 11, 1, 0),new Vector3(9.5f,1,0), new Vector3(8f,1,0), new Vector3(6.5f, 1, 0) };//positions of power up icons
+    private GameObject _powerUp, _powerUp1, _powerUp2, _powerUp3;//powerUp prefab icon
+    private Vector3[] _positions = new Vector3[] { new Vector3(11, 1, 0), new Vector3(9.5f, 1, 0), new Vector3(8f, 1, 0), new Vector3(6.5f, 1, 0) };//positions of power up icons
 
     [SerializeField]
     public GameObject[] powerUpIcon;//powerup icons in an array
@@ -42,9 +42,9 @@ public class Main : MonoBehaviour
     [SerializeField]
     public GameObject Canvas;//Canvas on hierarchy
     public Text levelText; //display first level
-    static public int SPAWN_UFO = 1; 
-       
-    private Image _radialTimer,_radialTimer1,_radialTimer2;//to show progress of powerUp icon
+    static public int SPAWN_UFO = 1;
+
+    private Image _radialTimer, _radialTimer1, _radialTimer2;//to show progress of powerUp icon
 
     //Array with all power ups that can drop
     public PowerUpType[] powerUpFrequency = new PowerUpType[]
@@ -85,7 +85,7 @@ public class Main : MonoBehaviour
         SINGLETON = this;
         //spawn in the selected hero
         SpawnHero();
-      
+
         //calling spawn enemy after rocket is created
         SINGLETON = this;
         _bndCheck = GetComponent<BoundsCheck>();
@@ -97,7 +97,7 @@ public class Main : MonoBehaviour
         {
             WEAP_DICT[def.type] = def;
         }
- 
+
 
         //Creating a dictionary with poweruptype as the key
         POWERUP_DICT = new Dictionary<PowerUpType, PowerUpDefinition>();
@@ -109,21 +109,9 @@ public class Main : MonoBehaviour
     {
         levelText.enabled = false; //disable level text
     }
-    /*public void FixedUpdate()
-    {
-        //Make color of ship flash if invincibility powerup is picked up
-        for (int i = 0; i < _material.Length; i++)
-            _material[i].color = _originalColors[i];
 
-        if (Hero.invincibility)
-        {
-            foreach (Material material in _material)
-                material.color = _colors[index % 2];
-             ++;
-        }
-    }*/
 
-     public void SpawnDoublePointIcon()
+    public void SpawnDoublePointIcon()
     {
         //Spawn power up icons 
         if (Hero.ShouldSpawnDoublePoints())
@@ -134,7 +122,7 @@ public class Main : MonoBehaviour
 
 
             Hero.SetDoublePoints(false);
-            Hero.doublePointsActive = true;
+            Hero.DOUBLE_POINTS_ACTIVE = true;
         }
 
 
@@ -152,7 +140,7 @@ public class Main : MonoBehaviour
 
 
             Hero.SetInvincibility(false);
-            Hero.invincibilityActive = true;
+            Hero.INVINCIBILITY_ACTIVE = true;
         }
     }
 
@@ -167,33 +155,33 @@ public class Main : MonoBehaviour
 
 
             Hero.SetSlowDown(false);
-            Hero.slowDownActive = true;
+            Hero.SLOW_DOWN_ACTIVE = true;
         }
     }
     public void SpawnNukeIcon()
     {
         //spawn nuke icon
         if (Hero.ShouldSpawnNuke())
-        { 
+        {
             _powerUp3 = Instantiate(powerUpIcon[3], Camera.main.ViewportToWorldPoint(_positions[3]), Quaternion.identity) as GameObject;
             _powerUp3.transform.SetParent(Canvas.transform);
 
             Hero.SetNuke(false);
-            Hero.nukeActive = true;
+            Hero.NUKE_ACTIVE = true;
         }
     }
     void Update()
     {
         //Double point power up icon radial timer
-        if (Hero.doublePointsActive && Hero.ShouldSpawnDoublePoints())
+        if (Hero.DOUBLE_POINTS_ACTIVE && Hero.ShouldSpawnDoublePoints())
         {
             SpawnDoublePointIcon();
 
         }
-        if (Hero.doublePointsActive)
+        if (Hero.DOUBLE_POINTS_ACTIVE)
         {
             _radialTimer.fillAmount = 1f;
-            Hero.doublePointsActive = false;
+            Hero.DOUBLE_POINTS_ACTIVE = false;
         }
         if (_radialTimer != null)
         {
@@ -201,22 +189,22 @@ public class Main : MonoBehaviour
             _radialTimer.fillAmount -= 1.0f / 7f * Time.deltaTime;
 
         }
-        if((_radialTimer!=null) && _radialTimer.fillAmount<=0f)
+        if ((_radialTimer != null) && _radialTimer.fillAmount <= 0f)
         {
             Destroy(_powerUp);//Destroy 
         }
 
 
         //Invincibility power up icon
-        if (Hero.invincibilityActive && Hero.ShouldSpawnInvincibility())
+        if (Hero.INVINCIBILITY_ACTIVE && Hero.ShouldSpawnInvincibility())
         {
             SpawnInvincibilityIcon();
 
         }
-        if (Hero.invincibilityActive)
+        if (Hero.INVINCIBILITY_ACTIVE)
         {
             _radialTimer1.fillAmount = 1f;
-            Hero.invincibilityActive = false;
+            Hero.INVINCIBILITY_ACTIVE = false;
         }
 
         if (_radialTimer1 != null)
@@ -233,15 +221,15 @@ public class Main : MonoBehaviour
 
         //Slowing down radial timer and power up icon spawn
 
-        if (Hero.slowDownActive && Hero.ShouldSpawnSlowDown())
+        if (Hero.SLOW_DOWN_ACTIVE && Hero.ShouldSpawnSlowDown())
         {
             SpawnSlowDownIcon();
 
         }
-        if (Hero.slowDownActive)
+        if (Hero.SLOW_DOWN_ACTIVE)
         {
             _radialTimer2.fillAmount = 1f;
-            Hero.slowDownActive = false;
+            Hero.SLOW_DOWN_ACTIVE = false;
         }
 
         if (_radialTimer2 != null)
@@ -256,16 +244,16 @@ public class Main : MonoBehaviour
         }
 
         //Spawn nuke powerup
-        if (Hero.nukeActive && Hero.ShouldSpawnNuke())
+        if (Hero.NUKE_ACTIVE && Hero.ShouldSpawnNuke())
         {
             SpawnNukeIcon();
         }
-        if (_powerUp3 != null && !Hero.nuke)
+        if (_powerUp3 != null && !Hero.NUKE)
             Destroy(_powerUp3);
     }
     public void SpawnHero()
     {
-        GameObject _hero = Instantiate<GameObject>(prefabHeros[MainMenu.CHOSEN_HERO]); 
+        GameObject _hero = Instantiate<GameObject>(prefabHeros[MainMenu.CHOSEN_HERO]);
         //spawn a hero if not default
     }
 
@@ -273,7 +261,7 @@ public class Main : MonoBehaviour
     {
         //instatiate random enemy type
         int _index;
-        if (SPAWN_UFO < 3 ) { _index = Random.Range(0, prefabEnemies.Length-1); } //if less than level 3, dont spawn UFOs
+        if (SPAWN_UFO < 3) { _index = Random.Range(0, prefabEnemies.Length - 1); } //if less than level 3, dont spawn UFOs
         else { _index = Random.Range(0, prefabEnemies.Length); } //spawn UFOs if level is at least 3
         GameObject _enemy = Instantiate<GameObject>(prefabEnemies[_index]); //spawn the enemy
 
@@ -287,7 +275,7 @@ public class Main : MonoBehaviour
         float _xMax = _bndCheck.camWidth - _enemyPadding;
         _pos.x = Random.Range(_xMin, _xMax);
         if (_index != 1) { _pos.y = _bndCheck.camHeight + _enemyPadding; }
-        else { _pos.y = 400;  }
+        else { _pos.y = 400; }
         _enemy.transform.position = _pos;
 
         Invoke("SpawnEnemy", 1.5f / ENEMY_SPAWN_PER_SEC);
@@ -336,97 +324,4 @@ public class Main : MonoBehaviour
     {
         Main.ENEMY_SPAWN_PER_SEC += .5f;
     }
-
-    //flashingShip is a formula which will help in making the ship flash and will be called in awake as GetComponent
-    //is an expensive method on our processor
-   /* public void flashingShip()
-    {
-        //variables which will be used to change color of ship(game objects and materials
-        GameObject _barrel;
-        GameObject _collar;
-        GameObject _cube;
-        GameObject _wing;
-        GameObject _cube1;
-        GameObject _cube2;
-        GameObject _quad;
-        GameObject _quad1;
-        GameObject _quad2;
-
-        Material _barr;//barr is barrel
-        Material _cub;//cub is cube
-        Material _cub1;
-        Material _cub2;
-        Material _coll;//coll is collar
-        Material _wings;//wings is wing
-        Material _q;//q stands for quad
-        Material _q1;
-        Material _q2;
-
-
-
-
-        if (MainMenu.chosenHero == 0)
-        {
-            //Find the child game objects of hero and their renderers
-            _barrel = prefabHeros[0].transform.Find("Weapon/Barrel").gameObject;
-            _collar = prefabHeros[0].transform.Find("Weapon/Collar").gameObject;
-            _cube = prefabHeros[0].transform.Find("Cockpit/Cube").gameObject;
-            _wing = prefabHeros[0].transform.Find("Wing").gameObject;
-            //find materials of the children
-            _barr = _barrel.GetComponent<Renderer>().material;
-            _coll = _collar.GetComponent<Renderer>().material;
-            _cub = _cube.GetComponent<Renderer>().material;
-            _wings = _wing.GetComponent<Renderer>().material;
-
-            //find the colors of these children so they are not changed
-            _originalColors = new Color[] { _barr.color, _coll.color, _cub.color, _wings.color };
-
-            //assign the materials to the _material array
-            _material = new Material[] { _barr, _coll, _cub, _wings };
-        }
-        else if (MainMenu.chosenHero == 1)
-        {
-            //Find the child game objects of hero and their renderers
-            _barrel = prefabHeros[1].transform.Find("Weapon/Barrel").gameObject;
-            _collar = prefabHeros[1].transform.Find("Weapon/Collar").gameObject;
-            _cube = prefabHeros[1].transform.Find("Cockpit/Cube").gameObject;
-            _cube1 = prefabHeros[1].transform.Find("Cockpit/Cube(1)").gameObject;
-            _cube2 = prefabHeros[1].transform.Find("Cockpit/Cube(2)").gameObject;
-            _wing = prefabHeros[1].transform.Find("Wing").gameObject;
-
-            _barr = _barrel.GetComponent<Renderer>().material;
-            _coll = _collar.GetComponent<Renderer>().material;
-            _cub = _cube.GetComponent<Renderer>().material;
-            _cub1 = _cube1.GetComponent<Renderer>().material;
-            _cub2 = _cube2.GetComponent<Renderer>().material;
-            _wings = _wing.GetComponent<Renderer>().material;
-
-            //find the colors of these children so they are not changed
-            _originalColors = new Color[] { _barr.color, _coll.color, _cub.color, _cub1.color, _cub2.color, _wings.color };
-            //assign the materials to the _material array
-            _material = new Material[] { _barr, _coll, _cub, _cub1, _cub2, _wings };
-        }
-        else
-        {
-            //Find the child game objects of hero and their renderers
-            _barrel = prefabHeros[2].transform.Find("Weapon/Barrel").gameObject;
-            _collar = prefabHeros[2].transform.Find("Weapon/Collar").gameObject;
-            _cube = prefabHeros[2].transform.Find("Cockpit/Cube").gameObject;
-            _quad = prefabHeros[2].transform.Find("Wing/Quad").gameObject;
-            _quad1 = prefabHeros[2].transform.Find("Wing/Quad(1)").gameObject;
-            _quad2 = prefabHeros[2].transform.Find("Wing/Quad(2)").gameObject;
-
-            _barr = _barrel.GetComponent<Renderer>().material;
-            _coll = _collar.GetComponent<Renderer>().material;
-            _cub = _cube.GetComponent<Renderer>().material;
-            _q = _quad.GetComponent<Renderer>().material;
-            _q1 = _quad1.GetComponent<Renderer>().material;
-            _q2 = _quad2.GetComponent<Renderer>().material;
-
-            //find the colors of these children so they are not changed
-            _originalColors = new Color[] { _barr.color, _coll.color, _cub.color, _q.color, _q1.color, _q2.color };
-            //assign the materials to the _material array
-            _material = new Material[] { _barr, _coll, _cub, _q, _q1, _q2 };
-        }
-    }*/
 }
