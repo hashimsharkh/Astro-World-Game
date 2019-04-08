@@ -12,6 +12,7 @@ public class LevelProgression : MonoBehaviour
     public Slider slider; //the progress bar
     static private float _counter; //a counter to hold values for the progress bar
     public Text levelText;
+    public Text levelFeaturesText; 
 
     //Getter function to return current level
     public static int getCurLevel()
@@ -25,6 +26,7 @@ public class LevelProgression : MonoBehaviour
         _nextLevel = false; 
         level.text = "Level "+_curLevel;
         _counter = 0f;
+        levelFeaturesText.enabled = false;
     }
 
     // Update is called once per frame
@@ -42,13 +44,20 @@ public class LevelProgression : MonoBehaviour
             {
                 SceneManager.LoadScene("_Game_Over_Menu");
             }
+            if (_curLevel == 3)
+            {
+                levelFeaturesText.enabled = true;
+                Invoke("DisableText", 3f);
+            }
         }
+        
         slider.value = _counter; //keeps slider updated in real time
         
     }
     void DisableText()
     {
         levelText.enabled = false;
+        levelFeaturesText.enabled = false;
     }
     public static void IncLevel() //increases the level by one
     {

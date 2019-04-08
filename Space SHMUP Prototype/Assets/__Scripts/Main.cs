@@ -35,8 +35,10 @@ public class Main : MonoBehaviour
     public GameObject prefabPowerUp;
     private GameObject _powerUp,_powerUp1,_powerUp2,_powerUp3;//powerUp prefab icon
     private Vector3[] positions= new Vector3[]{ new Vector3( 11, 1, 0),new Vector3(9.5f,1,0), new Vector3(8f,1,0), new Vector3(6.5f, 1, 0) };//positions of power up icons
+
     [SerializeField]
     public GameObject[] powerUpIcon;//powerup icons in an array
+
     [SerializeField]
     public GameObject Canvas;//Canvas on hierarchy
     public Text levelText;
@@ -96,10 +98,7 @@ public class Main : MonoBehaviour
         {
             WEAP_DICT[def.type] = def;
         }
-
-        //Gets components to help the ship flash to show effect of invincibility powerup
-        //flashingShip();
-
+ 
 
         //Creating a dictionary with poweruptype as the key
         POWERUP_DICT = new Dictionary<PowerUpType, PowerUpDefinition>();
