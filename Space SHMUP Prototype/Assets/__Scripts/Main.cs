@@ -22,7 +22,6 @@ public class Main : MonoBehaviour
     private Material[] _material;
     private Color[] _colors = new Color[] { Color.cyan, Color.black };
     private Color[] _originalColors;
-    private int index = 0;
 
     [Header("Set in Inspector")]
     //weaponDefinitions variables
@@ -282,7 +281,8 @@ public class Main : MonoBehaviour
         float _xMin = -_bndCheck.camWidth + _enemyPadding;
         float _xMax = _bndCheck.camWidth - _enemyPadding;
         _pos.x = Random.Range(_xMin, _xMax);
-        _pos.y = _bndCheck.camHeight + _enemyPadding;
+        if (_index != 1) { _pos.y = _bndCheck.camHeight + _enemyPadding; }
+        else { _pos.y = 400;  }
         _enemy.transform.position = _pos;
 
         Invoke("SpawnEnemy", 1.5f / enemySpawnPerSecond);

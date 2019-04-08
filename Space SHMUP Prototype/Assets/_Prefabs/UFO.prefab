@@ -593,7 +593,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireRate: 0.3
   health: 19
-  score: 200
+  score: 150
   showDamageDuration: 0.1
   powerUpDropChance: 1
   originalColors: []

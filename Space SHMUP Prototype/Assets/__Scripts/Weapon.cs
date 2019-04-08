@@ -72,7 +72,7 @@ public class Weapon : MonoBehaviour
     void Update()
     {
         //If nuke powerup is activated user has the chance to press space bar to destroy everything around him/her to save himself/herself
-        //Then resets to default weapon in hero class
+        //Then resets to previous weapon being used
         if(Hero.nuke)
         {
             SetWeaponType(WeaponType.destroyer);
@@ -221,7 +221,7 @@ public class Weapon : MonoBehaviour
 
         foreach(GameObject enemy in enemyArray)
         {
-            ScoreCounter.UpdateScore(this.gameObject.name);
+            ScoreCounter.UpdateScore(enemy.name);
             Destroy(enemy);
         }
     }

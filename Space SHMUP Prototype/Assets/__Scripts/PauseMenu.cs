@@ -12,8 +12,12 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // check if P is pressed so game can pause
-        PauseClicked();
+        //ensure that the game cannot be pasued on the main menu or game over menu
+        if (!(GameOverMenu.GAME_OVER_ACTIVE && MainMenu.MAIN_MENU_ACTIVE))
+        {
+            PauseClicked();
+        }
+            
     }
 
     void PauseClicked()
@@ -57,6 +61,6 @@ public class PauseMenu : MonoBehaviour
     public void QuitGame()
     {
         //returns to main menu
-        SceneManager.LoadScene("_Main_Menu");
+        SceneManager.LoadScene("_Game_Over_Menu");
     }
 }

@@ -17,12 +17,12 @@ public class Enemy_1 : Enemy
         if (_initialPos < 0)
         {
             _moveRight = true;
-            _vec = new Vector3(.2f, -.2f, 0); //the .2 controls the speed of the enemy
+            _vec = new Vector3(.2f, 0, 0); //the .2 controls the speed of the enemy
         }
         else
         {
             _moveRight = false;
-            _vec = new Vector3(-.2f, -.2f, 0);
+            _vec = new Vector3(-.2f, 0, 0);
         }
         _rigidBody = GetComponent<Rigidbody>();
     }
@@ -36,6 +36,7 @@ public class Enemy_1 : Enemy
         {
             transform.position = _rigidBody.position + _vec;
         }
+        base.Move();
     }
 
 
