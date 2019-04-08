@@ -15,7 +15,7 @@ public class LevelProgression : MonoBehaviour
     public Text levelFeaturesText; 
 
     //Getter function to return current level
-    public static int getCurLevel()
+    public static int GetCurLevel()
     {
         return _curLevel;
     }

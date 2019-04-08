@@ -70,7 +70,7 @@ public class Enemy : MonoBehaviour
                     //Immediately before this enemy is destroyed , it notifies the Main singleton by calling ShipDestroyed()
                     //this only happens once for each enemy ship which is enforced by the nothifiedOfDestruction bool
                     if (!notifiedOfDestruction)
-                        Main.SINGLETON.shipDestroyed(this);
+                        Main.SINGLETON.ShipDestroyed(this);
 
                     notifiedOfDestruction = true;
 
