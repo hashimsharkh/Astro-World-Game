@@ -5,7 +5,7 @@ using UnityEngine;
 public class UFO : Enemy
 {
     public float waveFrequency = 1; //frequency of the wave path the ship will follow
-    public float waveWidth = 2; // wdith of wave 
+    public float waveWidth = 2; // wdith of wave
     private float _initialPosition; //initial position of ship
     private float _birthTime; //stores time of instatiation
     bool _moveRight = true; //to help direct if the UFO is going left or right
@@ -14,23 +14,23 @@ public class UFO : Enemy
 
     void Start()
     {
-        //get starting position 
+        //get starting position
         _initialPosition = pos.x;
         //get time of instantiation of UFO
         _birthTime = Time.time;
-        //drop bullet prefabs at the time interval 
+        //drop bullet prefabs at the time interval
         Invoke("DropBullet", timeBetweenBullets);
-       
+
     }
 
     //overriding move function in parent class Enemy
     public override void Move()
     {
-       
+
         // move object in sine wave in y direction to give floating effect
         Vector3 _tempPos = pos;
         float _age = Time.time - _birthTime; //how long the UFO has been in the game for
-        float _theta = Mathf.PI * _age / waveFrequency; 
+        float _theta = Mathf.PI * _age / waveFrequency;
         float _sin = Mathf.Sin(_theta); //create the sine wave size
         _tempPos.y = _initialPosition + waveWidth * _sin; //set the UFO to move in a sine wave along the Y axis
         pos = _tempPos; //set the new position to the sine position
@@ -62,7 +62,7 @@ public class UFO : Enemy
             {
                 _moveRight = false;
             }
-            
+
         // if hit left bound, move right
         if (_tempPos.x <= -25)
             {
@@ -73,7 +73,7 @@ public class UFO : Enemy
     //function to drop bullets from UFO
     void DropBullet()
     {
-        //instantiate bullet prefabs 
+        //instantiate bullet prefabs
         GameObject bullet = Instantiate<GameObject>(bulletPrefab);
         //have the bullet prefab come from the UFO
         bullet.transform.position = transform.position;

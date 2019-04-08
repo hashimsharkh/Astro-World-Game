@@ -179,6 +179,7 @@ public class Main : MonoBehaviour
             _powerUp3.transform.SetParent(Canvas.transform);
 
             Hero.SetNuke(false);
+            Hero.nukeActive = true;
         }
     }
     void Update()
@@ -255,8 +256,10 @@ public class Main : MonoBehaviour
         }
 
         //Spawn nuke powerup
-        SpawnNukeIcon();
-
+        if (Hero.nukeActive && Hero.ShouldSpawnNuke())
+        {
+            SpawnNukeIcon();
+        }
         if (_powerUp3 != null && !Hero.nuke)
             Destroy(_powerUp3);
     }

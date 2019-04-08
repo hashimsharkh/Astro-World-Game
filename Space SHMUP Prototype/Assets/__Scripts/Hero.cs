@@ -21,8 +21,8 @@ public class Hero : MonoBehaviour
     private float _shieldLevel = 1; // default shield level is 1
     public static bool invincibility = false;//invincibility is a variable that will be used to determine if ship is invincible
     public static bool nuke = false;//shows nuke power up is active
-    public static bool doublePointsActive = false,invincibilityActive = false,slowDownActive = false;// show that power up is active
-    private static bool _doublePoints = true,_invincibility=true,_slowDown=true,_nuke = false;//Used to instantiate power up icons
+    public static bool doublePointsActive = false, invincibilityActive = false, slowDownActive = false, nukeActive = false;// show that power up is active
+    private static bool _doublePoints = true,_invincibility=true,_slowDown=true,_nuke = true;//Used to instantiate power up icons
     private static bool _enemySlow;//Used to instantiate power up icons
     private float _currentEnemySpeed;
     private float _timer = 0;
@@ -58,7 +58,7 @@ public class Hero : MonoBehaviour
         float _yPos = Input.GetAxis("Vertical");
         float _xPos = Input.GetAxis("Horizontal");
 
-        //change position of x and y 
+        //change position of x and y
         Vector3 _pos = transform.position;
         _pos.y = _pos.y + (velocity *_yPos * Time.deltaTime);
         _pos.x += velocity * _xPos * Time.deltaTime;
@@ -83,6 +83,8 @@ public class Hero : MonoBehaviour
             _doublePoints = true;
             invincibilityActive = false;
             _invincibility = true;
+            nukeActive = false;
+            _nuke = true;
 
         }
         //call fireDelegate() if the delegate is not empty
@@ -95,14 +97,14 @@ public class Hero : MonoBehaviour
             _currentEnemySpeed = Enemy.SPEED;
         }
     }
-    
+
 
     void OnTriggerEnter(Collider other)
     {
         Transform _rootTransform = other.gameObject.transform.root;
         GameObject _gameObjectRoot = _rootTransform.gameObject;
-        
-        //Make sure it is not the same triggering go as last time 
+
+        //Make sure it is not the same triggering go as last time
         //if it is it will be ignored as a duplicate and function wil; exit
         if (_gameObjectRoot == _lastTriggerGo)
             return;
@@ -120,7 +122,7 @@ public class Hero : MonoBehaviour
                 Destroy(_gameObjectRoot); //And destroy the enemy
             }
         }
-        else if (_gameObjectRoot.tag == "PowerUp") 
+        else if (_gameObjectRoot.tag == "PowerUp")
             AbsorbPowerUp(_gameObjectRoot);
 
         else
@@ -142,20 +144,22 @@ public class Hero : MonoBehaviour
                 //these variables show that double points is active
                 PowerUp.multiplier = 2;
                 doublePointsActive = true ;
-                
+
                 break;
 
             case PowerUpType.invincibility:
                 //Invincibility is true
                 invincibility = true;
                 invincibilityActive = true;
-                
+
                 break;
 
             case PowerUpType.nuke:
+                nukeActive = true;
                 //make nuke power up true
                 _nuke = true;
                 nuke = true;
+
                 break;
 
             case PowerUpType.slowTime:
@@ -165,13 +169,13 @@ public class Hero : MonoBehaviour
                 slowDownActive = true;
                 break;
         }
-  
+
         //Destroy the powerup
         if(_powerUp!=null)
             _powerUp.AbsorbedBy(this.gameObject);
 
     }
-   
+
     //shieldLevel property
     public float shieldLevel
     {
@@ -184,7 +188,7 @@ public class Hero : MonoBehaviour
             _shieldLevel = Mathf.Min(value, 4);//Ensures that _shieldLevel is never higher than 4
             if (value < 0)
             {
-                
+
                 Destroy(this.gameObject);//If value passed is less than 0,_Hero is destroyed
                 Time.timeScale = 0f; //freeze game
                 SetMusicVolume.ZeroVolume(); //stops the game volume
@@ -225,7 +229,7 @@ public class Hero : MonoBehaviour
     public static void SetDoublePoints(bool value)
     {
         //set double points
-        _doublePoints = value;        
+        _doublePoints = value;
     }
 
     public static void SetInvincibility(bool value)
