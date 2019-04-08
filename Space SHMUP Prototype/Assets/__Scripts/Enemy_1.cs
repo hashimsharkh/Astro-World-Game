@@ -8,6 +8,7 @@ public class Enemy_1 : Enemy
     private float _initialPos; //used to find side the enemy is on
     private bool _moveRight; //determines side for movement
     private Rigidbody _rigidBody; //used to control movement
+     
 
     void Start()
     {

@@ -9,7 +9,7 @@ public enum PowerUpType
     none, //no powerup
     doublePoints, //doubles points
     nuke, //nuke which will destroy all enemies on screen
-    slowTime, //slows time 
+    slowTime, //slows time
     invincibility //gives invincibility to user
 }
 public class Main : MonoBehaviour
@@ -33,8 +33,8 @@ public class Main : MonoBehaviour
     public WeaponDefinition[] weaponDefinitions; //store weapons
     public PowerUpDefinition[] powerUpDefinitions; //store power ups
     public GameObject prefabPowerUp; //store power up prefab
-    private GameObject _powerUp, _powerUp1, _powerUp2, _powerUp3;//powerUp prefab icon
-    private Vector3[] _positions = new Vector3[] { new Vector3(11, 1, 0), new Vector3(9.5f, 1, 0), new Vector3(8f, 1, 0), new Vector3(6.5f, 1, 0) };//positions of power up icons
+    private GameObject _powerUp,_powerUp1,_powerUp2,_powerUp3;//powerUp prefab icon
+    private Vector3[] _positions= new Vector3[]{ new Vector3( 9, 1, 0),new Vector3(7.5f,1,0), new Vector3(6f,1,0), new Vector3(4.5f, 1, 0) };//positions of power up icons
 
     [SerializeField]
     public GameObject[] powerUpIcon;//powerup icons in an array
@@ -113,7 +113,7 @@ public class Main : MonoBehaviour
 
     public void SpawnDoublePointIcon()
     {
-        //Spawn power up icons 
+        //Spawn power up icons
         if (Hero.ShouldSpawnDoublePoints())
         {
             _powerUp = Instantiate(powerUpIcon[0], Camera.main.ViewportToWorldPoint(_positions[0]), Quaternion.identity) as GameObject;
@@ -185,13 +185,13 @@ public class Main : MonoBehaviour
         }
         if (_radialTimer != null)
         {
-            //Reduce fill amount over 30 seconds   
+            //Reduce fill amount over 30 seconds
             _radialTimer.fillAmount -= 1.0f / 7f * Time.deltaTime;
 
         }
         if ((_radialTimer != null) && _radialTimer.fillAmount <= 0f)
         {
-            Destroy(_powerUp);//Destroy 
+            Destroy(_powerUp);//Destroy
         }
 
 
@@ -209,13 +209,13 @@ public class Main : MonoBehaviour
 
         if (_radialTimer1 != null)
         {
-            //Reduce fill amount over 30 seconds   
+            //Reduce fill amount over 30 seconds
             _radialTimer1.fillAmount -= 1.0f / 7f * Time.deltaTime;
 
         }
         if ((_radialTimer1 != null) && _radialTimer1.fillAmount <= 0f)
         {
-            Destroy(_powerUp1);//Destroy 
+            Destroy(_powerUp1);//Destroy
         }
 
 
@@ -234,13 +234,13 @@ public class Main : MonoBehaviour
 
         if (_radialTimer2 != null)
         {
-            //Reduce fill amount over 30 seconds   
+            //Reduce fill amount over 30 seconds
             _radialTimer2.fillAmount -= 1.0f / 7f * Time.deltaTime;
 
         }
         if ((_radialTimer2 != null) && _radialTimer2.fillAmount <= 0f)
         {
-            Destroy(_powerUp2);//Destroy 
+            Destroy(_powerUp2);//Destroy
         }
 
         //Spawn nuke powerup
