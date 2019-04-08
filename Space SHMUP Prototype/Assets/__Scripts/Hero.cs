@@ -32,11 +32,11 @@ public class Hero : MonoBehaviour
     public WeaponFireDelegate fireDelegate;
 
     [Header("Audio Effects")]
-    public AudioSource shootingSource1;
-    public AudioSource shootingSource2;
-    public AudioSource shootingSource3;
-    public AudioSource destroySource1;
-    public AudioSource powerDownSource;
+    public AudioSource shootingSource1; //audio source for the first weapon
+    public AudioSource shootingSource2; //audio source for the second weapon
+    public AudioSource shootingSource3; //audio source for the third weapon
+    public AudioSource destroySource1; //audio source when enemies are destroyed
+    public AudioSource powerDownSource; //audio source when shield level decreases 
 
     void Start()
     {
